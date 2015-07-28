@@ -1,21 +1,5 @@
 
 $(function() {
-
-    /* This Code is a single example of an API call and it should be burned immediately! */
-
-    $.ajax("/clients", {
-        method: "GET",
-        dataType: "json"
-    }).done(function(data) {
-        console.log(data);
-    });
-
-});
-
-
-
-
-$(function() {
     $(document).ready(function() {
         // minimum search length needed to start looking for matches.
         var minSearchLength = 1;
@@ -30,29 +14,36 @@ $(function() {
 
         // event handlers
         $("#searchForm #searchField").keyup(function() {
-            var userString = $("#searchForm #searchField").val();
-            if (userString.length >= minSearchLength) {
-                var numResults = populateResults(userString);
-                // If "results" is empty, activate the "add new client" button.
-                if (numResults > 0) {
-                    // We've found some results, but we may still have to add a
-                    // new client (maybe a person with the same name as an
-                    // existing client). The "add new client" button will be
-                    // activated, but with a caveat.
-                    $("#addNewClient").text(caveatText);
+            $.ajax("/clients", {
+                method: "GET",
+                dataType: "json"
+            }).done(function(data) {
+                var userString = $("#searchForm #searchField").val();
+                if (userString.length >= minSearchLength) {
+                    //this calls search() inside itself
+                    var dataLength = data.length;
+                    var numResults = populateResults(userString, dataLength, data);
+                    // If "results" is empty, activate the "add new client" button.
+                    if (numResults > 0) {
+                        // We've found some results, but we may still have to add a
+                        // new client (maybe a person with the same name as an
+                        // existing client). The "add new client" button will be
+                        // activated, but with a caveat.
+                        $("#addNewClient").text(caveatText);
+                    }
+                    else {
+                        // No need for the caveat.
+                        $("#addNewClient").text(noCaveatText);
+                    }
+                    // If we're over the minimum length, we may add a new client.
+                    $("#searchForm #addNewClient").prop("disabled", false);
                 }
-                else {
-                    // No need for the caveat.
+                else if (userString.length == 0) {
+                    $("#searchForm #results").empty();
                     $("#addNewClient").text(noCaveatText);
+                    $("#searchForm #addNewClient").prop("disabled", true);
                 }
-                // If we're over the minimum length, we may add a new client.
-                $("#searchForm #addNewClient").prop("disabled", false);
-            }
-            else if (userString.length == 0) {
-                $("#searchForm #results").empty();
-                $("#addNewClient").text(noCaveatText);
-                $("#searchForm #addNewClient").prop("disabled", true);
-            }
+            });
         });
         $("#searchForm #results").on("click", ".hit", function(e) {
             switchToIntake($(e.currentTarget).data("entity-index"));
@@ -74,8 +65,13 @@ $(function() {
     var caveatText = "None Of The Above -- Add New Client";
     var noCaveatText = "Add New Client";
 
-    function populateResults(userString) {
-        var newHits = search(userString);
+    /*
+     * Takes a user-entered string and returns the number of matching
+     * entries.  Along the way it fills in the result divs.
+    */
+    
+    function populateResults(userString, data_length, dataset) {
+        var newHits = search(userString, data_length, dataset);
         // Create an array to hold indices of all the latest hits. If an
         // old hit isn't found in here, it gets removed.
         var newHitIndices = [];
@@ -116,12 +112,12 @@ $(function() {
     }
 
     function Hit(entity) {
-        this.entityIndex = entity.index;
+        this.entityIndex = entity.personalId;
         this.removeMe = false; // Used when comparing to already-matched records.
         this.picture = entity.picture;
         this.firstName = entity.firstName;
         this.lastName = entity.lastName;
-        this.gender = entity.gender ? entity.gender.substr(0,1).toUpperCase() : "";
+//        this.gender = entity.gender ? entity.gender.substr(0,1).toUpperCase() : "";
         this.DOB = entity.DOB ? getFormattedDOB(entity.DOB) : "";
         this.age = entity.DOB ? getYearsOld(entity.DOB) : "";
     }
@@ -142,7 +138,7 @@ $(function() {
 
     HitFactory.prototype.getHit = function(entity) {
         var hit = null;
-        var entityIndex = entity.index;
+        var entityIndex = entity.personalId;
         if (this.hits.hasOwnProperty(entityIndex)) {
             hit = this.hits[entityIndex];
         }
@@ -154,7 +150,7 @@ $(function() {
     }
 
     HitFactory.prototype.killHit = function(entity) {
-        var entityIndex = entity.index;
+        var entityIndex = entity.personalId;
         if (this.hits.hasOwnProperty(entityIndex)) {
             delete this.hits[entityIndex];
         }
@@ -168,7 +164,12 @@ $(function() {
         return hitList;
     }
 
-    function search(userString) {
+    /*
+     * Takes a user-entered string and returns the set of matching
+     * clients, as "hit" objects.
+     */
+    
+    function search(userString, data_length, dataset) {
         // First Trim any non-alphanumerics from the ends of the user's input.
         userString = userString.replace(/^[^\w]+/i, "").replace(/[^\w]+$/i, "");
 
@@ -186,7 +187,6 @@ $(function() {
         // already instantiated one with the requested index.
         var hitFactory = new HitFactory();
 
-        var sampleDataLength = sampleData.length;
         var entity = null;
         var result = null;
         var matchLength = 0;
@@ -196,9 +196,8 @@ $(function() {
         var userRegexes = $.map(userSubstrings, function(userSubstring) { return new RegExp("^" + userSubstring, "i"); });
         // This is the list of "matching terms" we will try to match to user input.
         var matchingTerms = ["firstName", "lastName"];
-
-        for (var i=0; i<sampleDataLength; i++) {
-            entity = sampleData[i];
+        for (var i=0; i<data_length; i++) {
+            entity = dataset[i];
             // Make a copies of "userRegexes" and "matchingTerms" that we can
             // alter as we search.
             var userRegexesCopy = userRegexes.slice(0);
@@ -218,7 +217,6 @@ $(function() {
                             hit = hitFactory.getHit(entity);
                             hit[matchingTermsCopy[j]] = "<span class='marked'>" + entity[matchingTermsCopy[j]].substr(0, matchLength) + "</span>" + entity[matchingTermsCopy[j]].substr(matchLength);
                             matchFound = true;
-
                             // Remove this matching term from consideration when
                             // processing other user search terms by splicing it out
                             // of our copy of matching terms.
@@ -238,6 +236,7 @@ $(function() {
                     break;
                 }
             }
+            
         }
         return hitFactory.allTheHits();
     }
@@ -291,7 +290,7 @@ $(function() {
         }
         else {
             for (var i=0; i<sampleDataLength; i++) {
-                if (sampleData[i]["index"] == entityIndex) {
+                if (sampleData[i]["personalId"] == entityIndex) {
                     entity = sampleData[i];
                 }
             }
@@ -299,7 +298,7 @@ $(function() {
 
         // Put the entity index into a hidden field. This gets used later by
         // various handlers.
-        $("#intakeForm #entityIndex").val(entity.index);
+        $("#intakeForm #entityIndex").val(entity.personalId);
 
         // Fill in the picture
         $("#intakeForm #picture").append($("<img src=\"img/" + entity.picture + "\">"));
