@@ -43,20 +43,21 @@ $(function() {
                     $("#addNewClient").text(noCaveatText);
                     $("#searchForm #addNewClient").prop("disabled", true);
                 }
+                $("#searchForm #results").on("click", ".hit", function(e) {
+                    switchToIntake($(e.currentTarget).data("entity-index"), dataLength, data);
+                });
+                $("#searchForm #addNewClient").click(function() {
+                    switchToIntake(-1, dataLength, data);
+                });
+                $("#intakeForm #backToResults").click(function() {
+                    switchToSearch(true);
+                });
+                $("#intakeForm #saveChanges").click(function() {
+                    saveChanges();
+                    switchToSearch(false);
+                });
+
             });
-        });
-        $("#searchForm #results").on("click", ".hit", function(e) {
-            switchToIntake($(e.currentTarget).data("entity-index"));
-        });
-        $("#searchForm #addNewClient").click(function() {
-            switchToIntake(-1);
-        });
-        $("#intakeForm #backToResults").click(function() {
-            switchToSearch(true);
-        });
-        $("#intakeForm #saveChanges").click(function() {
-            saveChanges();
-            switchToSearch(false);
         });
 
         switchToSearch(false);
@@ -117,9 +118,9 @@ $(function() {
         this.picture = entity.picture;
         this.firstName = entity.firstName;
         this.lastName = entity.lastName;
-//        this.gender = entity.gender ? entity.gender.substr(0,1).toUpperCase() : "";
-        this.DOB = entity.DOB ? getFormattedDOB(entity.DOB) : "";
-        this.age = entity.DOB ? getYearsOld(entity.DOB) : "";
+        this.gender = entity.gender;
+        this.dob = entity.dob ? getFormattedDOB(entity.dob) : "";
+        this.age = entity.dob ? getYearsOld(entity.dob) : "";
     }
 
     function getFormattedDOB(date) {
@@ -247,7 +248,7 @@ $(function() {
         var text = $("<div class='text'></div>");
         var fullName = $("<div class='summaryElement'><span>" + hit.firstName + " " + hit.lastName + "</span></div>");
         var clear = $("<div class='clear'></div>");
-        var dob = $("<div class='summaryElement'><span class='label'>DOB: </span><span>" + hit.DOB + "</span></div>");
+        var dob = $("<div class='summaryElement'><span class='label'>DOB: </span><span>" + hit.dob + "</span></div>");
         var age = $("<div class='summaryElement'><span class='label'>age: </span><span>" + hit.age + "</span></div>");
         summaryDiv.append(picture);
         text.append(fullName);
@@ -270,7 +271,7 @@ $(function() {
         $("#intake").css("display", "none");
     }
 
-    function switchToIntake(entityIndex) {
+    function switchToIntake(entityIndex, data_length, dataset) {
         document.getElementById("intakeForm").reset();
         $("#intakeForm #picture").empty();
 
@@ -282,16 +283,16 @@ $(function() {
             entity.picture = "unknown.png";
             entity.firstName = $("#searchForm #firstName").val();
             entity.lastName = $("#searchForm #lastName").val();
-            entity.DOB = "";
+            entity.dob = "";
             entity.gender = "";
             entity.ethnicity = "";
             entity.race = "";
             sampleData.push(entity);
         }
         else {
-            for (var i=0; i<sampleDataLength; i++) {
-                if (sampleData[i]["personalId"] == entityIndex) {
-                    entity = sampleData[i];
+            for (var i=0; i < data_length; i++) {
+                if (dataset[i]["personalId"] == entityIndex) {
+                    entity = dataset[i];
                 }
             }
         }
@@ -303,7 +304,7 @@ $(function() {
         // Fill in the picture
         $("#intakeForm #picture").append($("<img src=\"img/" + entity.picture + "\">"));
         // Fill in the readonly DOB and age
-        refreshIntakeFormDOB(entity.DOB);
+        refreshIntakeFormDOB(entity.dob);
 
         // Fill in inputs fields
         for (prop in entity) {
@@ -315,7 +316,7 @@ $(function() {
                     }
                     else if (elem.is("select")) {
                         elem.children("option").each(function() {
-                            if($(this).val().toLowerCase() == entity[prop].toLowerCase()) {
+                            if ($(this).val() == entity[prop]) {
                                 $(this).attr("selected", true);
                             }
                         });
@@ -332,7 +333,7 @@ $(function() {
         var entityIndex = $("#intakeForm #entityIndex").val();
         var entity = sampleData[entityIndex];
         var DOB = this.getMoment().format('YYYY-MM-DD');
-        entity.DOB = DOB;
+        entity.dob = DOB;
         refreshIntakeFormDOB(DOB);
     }
 
