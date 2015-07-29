@@ -38,13 +38,13 @@ html(lang="en")
             div#topLabels
               div.label.pct50 First name
               div.label.pct50 Last name
-            div#picture
+            div#pictureFrame
             div#intakeSummary
               input.pct50#firstName(name='firstName', type='text', placeholder='first name')
               input.pct50#lastName(name='lastName', type='text', placeholder='last name')
               div.pct67
                 div.label DOB:
-                div#DOB
+                div#formattedDOB
               div.pct33#datepicker
                 img(src='img/Farm-Fresh_calendar_view_month.png')
           div.label.pct100 SSN
@@ -84,7 +84,11 @@ html(lang="en")
                 option(value='Client doesn\'t know') Client doesn't know
                 option(value='Client Refused') Client Refused
                 option(value='Data not collected') Data not collected
-          input#entityIndex(name='entityIndex', type='hidden')
+          input#index(name='index', type='hidden')
+          input#picture(name='picture', type='hidden')
+          input#DOB(name='DOB', type='hidden')
           div.buttonBox
             button#backToResults(type='button') Back to Results
+            button#revertChanges(type='button') Revert Changes
+            button#cancel(type='button') Cancel
             button#saveChanges(type='button') Save Changes

@@ -8,7 +8,13 @@ $(function() {
       field: $('#datepicker')[0],
       yearRange: [1900, thisYear],
       maxDate: rightNow.toDate(),
-      onSelect: assignDOB
+      onSelect: assignDOB,
+      onOpen: function() {
+        // Remove the style showing the previously selected date and
+        // move the view to today.
+        $(this.el).find(".is-selected").removeClass("is-selected");
+        this.gotoToday();
+      }
     });
 
     // event handlers
@@ -43,19 +49,36 @@ $(function() {
     $("#searchForm #addNewClient").click(function() {
       switchToIntake(-1);
     });
+    $("#intakeForm input").keyup(function() {
+      checkForChanges();
+    });
     $("#intakeForm #backToResults").click(function() {
       switchToSearch(true);
     });
+    $("#intakeForm #revertChanges").click(function() {
+      revertChanges();
+    });
+    $("#intakeForm #cancel").click(function() {
+      cancel();
+    });
     $("#intakeForm #saveChanges").click(function() {
       saveChanges();
-      switchToSearch(false);
     });
 
     switchToSearch(false);
   });
 
+  // This is the list of all the properties that define an entity.
+  var propertyList = ["index", "picture", "firstName", "lastName", "SSN", "DOB", "gender", "ethnicity", "race"];
+  var propertyListLength = propertyList.length;
+
+  // These are the properties we will try to match to user input.
+  var matchingTerms = ["firstName", "lastName"];
+
   var caveatText = "None Of The Above -- Add New Client";
   var noCaveatText = "Add New Client";
+  var revertText = "Revert Changes";
+  var backText = "Back to Results";
 
   function populateResults(userString) {
     var newHits = search(userString);
@@ -63,7 +86,7 @@ $(function() {
     // old hit isn't found in here, it gets removed.
     var newHitIndices = [];
     for (var i=0; i<newHits.length; i++) {
-      newHitIndices.push(newHits[i].entityIndex);
+      newHitIndices.push(newHits[i].index);
     }
     var oldHits = $("#searchForm #results .hit");
     oldHits.each(function() {
@@ -71,7 +94,7 @@ $(function() {
       // they're DOM elements (of class "hit").
       var oldHitIndex = $(this).data("entity-index");
       for (var i=newHits.length-1; i>=0; i--) {
-        if (oldHitIndex == newHits[i]["entityIndex"]) {
+        if (oldHitIndex == newHits[i].index) {
           // There is already a <div> in the results field that
           // matches the one just returned; replace it with an
           // updated version (like a longer match string).
@@ -98,15 +121,25 @@ $(function() {
     return $("#searchForm #results > .hit").length;
   }
 
+  function Entity() {
+    // Start by setting all values to the empty string.
+    for (var i=0; i<propertyListLength; i++) {
+      this[propertyList[i]] = "";
+    }
+    // Set some default values.
+    this.index = -1;
+    this.picture = "unknown.png";
+    // Use the names stored in the search form as default vals.
+    // Usually they'll be overwritten, but not if this is a new client.
+    this.firstName = $("#searchForm #firstName").val();
+    this.lastName = $("#searchForm #lastName").val();
+  }
+
   function Hit(entity) {
-    this.entityIndex = entity.index;
+    for (var i=0; i<propertyListLength; i++) {
+      this[propertyList[i]] = entity[propertyList[i]];
+    }
     this.removeMe = false; // Used when comparing to already-matched records.
-    this.picture = entity.picture;
-    this.firstName = entity.firstName;
-    this.lastName = entity.lastName;
-    this.gender = entity.gender ? entity.gender.substr(0,1).toUpperCase() : "";
-    this.DOB = entity.DOB ? getFormattedDOB(entity.DOB) : "";
-    this.age = entity.DOB ? getYearsOld(entity.DOB) : "";
   }
 
   function getFormattedDOB(date) {
@@ -125,28 +158,26 @@ $(function() {
 
   HitFactory.prototype.getHit = function(entity) {
     var hit = null;
-    var entityIndex = entity.index;
-    if (this.hits.hasOwnProperty(entityIndex)) {
-      hit = this.hits[entityIndex];
+    if (this.hits.hasOwnProperty(entity.index)) {
+      hit = this.hits[entity.index];
     }
     else {
       hit = new Hit(entity);
-      this.hits[entityIndex] = hit;
+      this.hits[entity.index] = hit;
     }
     return hit;
   }
 
   HitFactory.prototype.killHit = function(entity) {
-    var entityIndex = entity.index;
-    if (this.hits.hasOwnProperty(entityIndex)) {
-      delete this.hits[entityIndex];
+    if (this.hits.hasOwnProperty(entity.index)) {
+      delete this.hits[entity.index];
     }
   }
 
   HitFactory.prototype.allTheHits = function() {
     var hitList = [];
-    for (entityIndex in this.hits) {
-      hitList.push(this.hits[entityIndex]);
+    for (index in this.hits) {
+      hitList.push(this.hits[index]);
     }
     return hitList;
   }
@@ -169,7 +200,6 @@ $(function() {
     // already instantiated one with the requested index.
     var hitFactory = new HitFactory();
 
-    var sampleDataLength = sampleData.length;
     var entity = null;
     var result = null;
     var matchLength = 0;
@@ -177,9 +207,9 @@ $(function() {
 
     // Turn the user's input into a list of regexes that will try to match against our matching terms.
     var userRegexes = $.map(userSubstrings, function(userSubstring) { return new RegExp("^" + userSubstring, "i"); });
-    // This is the list of "matching terms" we will try to match to user input.
-    var matchingTerms = ["firstName", "lastName"];
 
+    // sample data imported from lib/sampleData.js
+    var sampleDataLength = sampleData.length;
     for (var i=0; i<sampleDataLength; i++) {
       entity = sampleData[i];
       // Make a copies of "userRegexes" and "matchingTerms" that we can
@@ -231,15 +261,15 @@ $(function() {
     var text = $("<div class='text'></div>");
     var fullName = $("<div class='summaryElement'><span>" + hit.firstName + " " + hit.lastName + "</span></div>");
     var clear = $("<div class='clear'></div>");
-    var dob = $("<div class='summaryElement'><span class='label'>DOB: </span><span>" + hit.DOB + "</span></div>");
-    var age = $("<div class='summaryElement'><span class='label'>age: </span><span>" + hit.age + "</span></div>");
+    var dob = $("<div class='summaryElement'><span class='label'>DOB: </span><span>" + getFormattedDOB(hit.DOB) + "</span></div>");
+    var age = $("<div class='summaryElement'><span class='label'>age: </span><span>" + getYearsOld(hit.DOB) + "</span></div>");
     summaryDiv.append(picture);
     text.append(fullName);
     text.append(clear);
     text.append(dob);
     text.append(age);
     summaryDiv.append(text);
-    summaryDiv.data("entity-index", hit.entityIndex);
+    summaryDiv.data("entity-index", hit.index);
     return summaryDiv;
   }
 
@@ -254,42 +284,28 @@ $(function() {
     $("#intake").css("display", "none");
   }
 
-  function switchToIntake(entityIndex) {
-    document.getElementById("intakeForm").reset();
-    $("#intakeForm #picture").empty();
+  function switchToIntake(index) {
+    // Reset all form fields.
+    $("#intakeForm input[type='input']").val("");
+    $("#intakeForm select option:first-of-type").prop("selected", true);
+    $("#intakeForm #pictureFrame").empty();
 
-    var sampleDataLength = sampleData.length;
     var entity = null;
-    if (entityIndex < 0) { // New client
-      entity = {};
-      entity.index = sampleDataLength;
-      entity.picture = "unknown.png";
-      entity.firstName = $("#searchForm #firstName").val();
-      entity.lastName = $("#searchForm #lastName").val();
-      entity.DOB = "";
-      entity.gender = "";
-      entity.ethnicity = "";
-      entity.race = "";
-      sampleData.push(entity);
+
+    if (index < 0) { // New client
+      entity = new Entity();
     }
     else {
+      // sample data imported from lib/sampleData.js
+      var sampleDataLength = sampleData.length;
       for (var i=0; i<sampleDataLength; i++) {
-        if (sampleData[i]["index"] == entityIndex) {
+        if (sampleData[i]["index"] == index) {
           entity = sampleData[i];
         }
       }
     }
 
-    // Put the entity index into a hidden field. This gets used later by
-    // various handlers.
-    $("#intakeForm #entityIndex").val(entity.index);
-
-    // Fill in the picture
-    $("#intakeForm #picture").append($("<img src=\"img/" + entity.picture + "\">"));
-    // Fill in the readonly DOB and age
-    refreshIntakeFormDOB(entity.DOB);
-
-    // Fill in inputs fields
+    // Fill in input fields
     for (prop in entity) {
       if (entity[prop] !== null) {
         elem = $("#intakeForm #"+prop);
@@ -307,39 +323,124 @@ $(function() {
         }
       }
     }
+    console.log("at this time index is: " + $("#intakeForm #index").val());
+
+    // Fill in the picture
+    $("#intakeForm #pictureFrame").append($("<img src=\"img/" + entity.picture + "\">"));
+
+    // Fill in the readonly DOB and age
+    refreshFormattedDOB();
+
+    if (index < 0) {
+      $("#intakeForm #backToResults").css("display", "none");
+      $("#intakeForm #revertChanges").css("display", "none");
+      $("#intakeForm #cancel").css("display", "inline-block");
+      $("#intakeForm #saveChanges").prop("disabled", false);
+    }
+    else {
+      $("#intakeForm #backToResults").css("display", "inline-block");
+      $("#intakeForm #revertChanges").css("display", "none");
+      $("#intakeForm #cancel").css("display", "none");
+      $("#intakeForm #saveChanges").prop("disabled", true);
+    }
 
     $("#search").css("display", "none");
     $("#intake").css("display", "block");
   }
 
   function assignDOB() {
-    var entityIndex = $("#intakeForm #entityIndex").val();
-    var entity = sampleData[entityIndex];
+    var index = $("#intakeForm #index").val();
+    var entity = sampleData[index];
+    // "this" refers to the pikaday object
     var DOB = this.getMoment().format('YYYY-MM-DD');
-    entity.DOB = DOB;
-    refreshIntakeFormDOB(DOB);
+    // Put the DOB in the ISO 8601 format into the hidden DOB
+    // field. This is what corresponds to DOB in the client
+    // database. What the user sees on the screen is formatted for
+    // user-friendliness and is set up in "refreshFormattedDOB".
+    $("#intakeForm #DOB").val(DOB);
+    refreshFormattedDOB();
+    checkForChanges();
   }
 
-  function refreshIntakeFormDOB(DOB) {
-    if (DOB) {
-      $("#intakeForm #DOB").html(getFormattedDOB(DOB) + "&nbsp;&nbsp(age "+ getYearsOld(DOB) + ")");    
+  function refreshFormattedDOB() {
+    var DOB = $("#intakeForm #DOB").val();
+    if (DOB && DOB.length > 0) {
+      $("#intakeForm #formattedDOB").html(getFormattedDOB(DOB) + "&nbsp;&nbsp(age "+ getYearsOld(DOB) + ")");
     }
     else {
-      $("#intakeForm #DOB").html("&nbsp;");
+      $("#intakeForm #formattedDOB").html("&nbsp;");
     }
+  }
+
+  function getEntityFromInputValues() {
+    var entity = {};
+    for (var i=0; i<propertyListLength; i++) {
+      entity[propertyList[i]] = $("#intakeForm #" + propertyList[i]).val();
+    }
+    return entity;    
+  }
+
+  function checkForChanges() {
+    var index = $("#intakeForm #index").val();
+    var origEntity = index < 0 ? new Entity() : sampleData[index];
+    var newEntity = getEntityFromInputValues();
+
+    for (prop in newEntity) {
+      if (newEntity[prop].toString() !== origEntity[prop].toString()) {
+        // The user has made a change
+        if (index >= 0) { //  i.e., if this is not a new client
+          $("#intakeForm #backToResults").css("display", "none");
+          $("#intakeForm #revertChanges").css("display", "inline-block");
+        }
+        $("#intakeForm #saveChanges").prop("disabled", false);
+        return;
+      }
+    }
+    if (index >= 0) {  // again, if this is not a new client
+      $("#intakeForm #backToResults").css("display", "inline-block");
+      $("#intakeForm #revertChanges").css("display", "none");
+    }
+    $("#intakeForm #saveChanges").prop("disabled", true);
+  }
+
+  function cancel() {
+    if (confirm("The new client will not be entered into the database. Are you sure?")) {
+      switchToSearch(false);
+    }
+  }
+
+  function revertChanges() {
+    var newEntity = getEntityFromInputValues();
+    var origEntity = sampleData[newEntity.index];
+    for (prop in newEntity) {
+      $("#intakeForm #" + prop).val(origEntity[prop]);
+    }
+    refreshFormattedDOB();
+    $("#intakeForm #backToResults").css("display", "inline-block");
+    $("#intakeForm #revertChanges").css("display", "none");
+    $("#intakeForm #cancel").css("display", "none");
+    $("#intakeForm #saveChanges").prop("disabled", true);
   }
 
   function saveChanges() {
-    var propertyList = ["firstName", "lastName", "SSN", "gender", "ethnicity", "race"];
-    var propertyListLength = propertyList.length;
+    var index = $("#intakeForm #index").val();
+    var origEntity = null;
+    if (index < 0) {
+      origEntity = new Entity();
+      // Note this is a terrible way to determine a unique ID, but
+      // presumably a new unique ID will be sent from the server in the
+      // real app.
+      $("#intakeForm #index").val(sampleData.length); // This will be read in again just a few lines down.
+      sampleData.push(origEntity);
+    }
+    else {
+      origEntity = sampleData[index];
+    }
 
-    // Assign the values to the entity that have been entered in input
-    // boxes. Other values (e.g., "DOB") have already been assigned to
-    // the entity objet.
-    var entityIndex = $("#intakeForm #entityIndex").val();
-    var entity = sampleData[entityIndex];
-    for (var i=0; i<propertyListLength; i++) {
-      entity[propertyList[i]] = $("#intakeForm #" + propertyList[i]).val();
-    }       
+    var newEntity = getEntityFromInputValues();
+    for (prop in newEntity) {
+      origEntity[prop] = newEntity[prop];
+    }
+    switchToSearch(false);
   }
 });
