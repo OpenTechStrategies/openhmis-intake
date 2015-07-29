@@ -207,7 +207,9 @@ $(function() {
                 var userRegex = userRegexesCopy.shift();
                 var matchFound = false;
                 for (var j=0; j < matchingTermsCopy.length; ) {
-                    result = entity[matchingTermsCopy[j]].match(userRegex);
+                    if (entity[matchingTermsCopy[j]] !== null){
+                        result = entity[matchingTermsCopy[j]].match(userRegex);
+                    }
                     if (result !== null) {
                         // We found a match. Figure out how long it is.
                         matchLength = result[0].length;
