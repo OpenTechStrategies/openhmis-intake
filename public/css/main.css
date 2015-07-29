@@ -33,11 +33,11 @@ body {
   margin-top: -15px;
 }
 
-#intakeForm #picture {
+#intakeForm #pictureFrame {
   float: left;
 }
 
-#intakeForm #picture img {
+#intakeForm #pictureFrame img {
   width: 75px;
   height: 76px;
 }
@@ -46,7 +46,7 @@ body {
   margin-left: 75px;
 }
 
-#intakeForm #DOB {
+#intakeForm #formattedDOB {
   margin-top: 6px;
   padding: .2em .6em .3em 0em;
   display: inline-block;
@@ -111,7 +111,7 @@ body {
   margin-top: 15px;
 }
 
-#searchForm button:disabled {
+button:disabled {
   color: #ccc;
 }
 
