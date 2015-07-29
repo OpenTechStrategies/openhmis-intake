@@ -6,4 +6,5 @@ module.exports = function(app) {
   app.route('/clients').post(client.addClient);
   app.route('/clients').get(client.getClients);
   app.route('/clients/:id').get(client.getClient);
+  app.route('/clients/:id').put(client.editClient);
 };

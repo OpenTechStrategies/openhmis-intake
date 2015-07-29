@@ -114,3 +114,34 @@ exports.getClient = function(req, res) {
 
 };
 
+exports.editClient = function(req, res) {
+
+  // Eventually we need authentication
+
+  // Put together the data
+  // An object of options to indicate where to put to
+  var put_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/services/clients/' + req.body.personalId,
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': put_data.length
+      }
+  };
+
+    
+  // Set up the request
+  var put_req = http.request(put_options, function(res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+          console.log('Response: ' + chunk);
+      });
+  });
+
+  // put the data
+  put_req.write(req.body);
+  put_req.end()
+
+};

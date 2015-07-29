@@ -347,16 +347,21 @@ $(function() {
     }
 
     function saveChanges() {
-        var propertyList = ["firstName", "lastName", "SSN", "gender", "ethnicity", "race"];
-        var propertyListLength = propertyList.length;
-
-        // Assign the values to the entity that have been entered in input
-        // boxes. Other values (e.g., "DOB") have already been assigned to
-        // the entity objet.
         var entityIndex = $("#intakeForm #entityIndex").val();
-        var entity = sampleData[entityIndex];
-        for (var i=0; i<propertyListLength; i++) {
-            entity[propertyList[i]] = $("#intakeForm #" + propertyList[i]).val();
-        }
+        var client = {};
+        client['personalId'] = entityIndex;
+        client['firstName'] = $("#intakeForm #firstName").val();
+        client['lastName'] = $("#intakeForm #lastName").val();
+        // these need to be interpreted before I send them (we need to
+        // save ints, not strings)
+//        client['dob'] = $("#intakeForm #DOB").val();
+//        client['ethnicity'] = $("#intakeForm #ethnicity").val();
+//        client['race'] = $("#intakeForm #race").val();
+//        var json_data =  JSON.stringify(client);
+        $.ajax("/clients/" + entityIndex, {
+            method: "PUT",
+            data: client,
+            always:  console.log("finished put")
+        });
     }
 });
