@@ -28,7 +28,7 @@ exports.addClient = function(req, res) {
   var post_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/services/clients/',
+      path: '/openhmis/clients/addClient',
       method: 'POST',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -47,37 +47,5 @@ exports.addClient = function(req, res) {
   // post the data
   post_req.write(post_data);
   post_req.end()
-
-};
-
-exports.getClients = function(req, res) {
-
-  // Eventually we need authentication
-
-  // An object of options to indicate where to post to
-  var get_options = {
-      host: config.api.host,
-      port: config.api.port,
-      path: '/openhmis/services/clients/',
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-      }
-  };
-
-  // Set up the request
-  var get_req = http.request(get_options, function(res_get) {
-      res_get.setEncoding('utf8');
-      var data = []
-      res_get.on('data', function (chunk) {
-          data.push(chunk);
-      });
-      res_get.on('end', function() {
-        res.send(data.join(''));
-      });
-  });
-
-  // post the data
-  get_req.end()
 
 };
