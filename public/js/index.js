@@ -314,7 +314,12 @@ $(function() {
                 elem = $("#intakeForm #"+prop);
                 if (elem !== null) {
                     if (elem.is("input")) {
-                        elem.val(entity[prop]);
+                        if (elem.attr("type") == "checkbox" && entity[prop] == true) {
+                            elem.prop("checked", true);
+                        }
+                        else {
+                            elem.val(entity[prop]);
+                        }
                     }
                     else if (elem.is("select")) {
                         elem.children("option").each(function() {
@@ -351,32 +356,31 @@ $(function() {
         var entityIndex = $("#intakeForm #entityIndex").val();
         // set race.  By default all are false, except "raceNone."
         var client = {};
-        client['amIndAKNative'] = 99;
-        client['asian'] = 99;
-        client['blackAfAmerican'] = 99;
-        client['nativeHIOtherPacific'] = 99;
-        client['white'] = 99;
-        client['raceNone'] = 99;
-        if ($("#race5").is(":checked") == true){
-            console.log("asian");
-            client['asian'] = 5;
-            client['raceNone'] = 99;
+        client['amIndAKNative'] = 0;
+        client['asian'] = 0;
+        client['blackAfAmerican'] = 0;
+        client['nativeHIOtherPacific'] = 0;
+        client['white'] = 0;
+        client['raceNone'] = 1;
+        if ($("#asian").is(":checked") == true){
+            client['asian'] = 1;
+            client['raceNone'] = 0;
         }
-        if ($("#race6").is(":checked") == true){
-            client['blackAfAmerican'] = 6;
-            client['raceNone'] = 99;
+        if ($("#blackAfAmerican").is(":checked") == true){
+            client['blackAfAmerican'] = 1;
+            client['raceNone'] = 0;
         }
-        if ($("#race7").is(":checked") == true){
-            client['amIndAKNative'] = 7;
-            client['raceNone'] = 99;
+        if ($("#amIndAKNative").is(":checked") == true){
+            client['amIndAKNative'] = 1;
+            client['raceNone'] = 0;
         }
-        if ($("#race8").is(":checked") == true){
-            client['white'] = 8;
-            client['raceNone'] = 99;
+        if ($("#white").is(":checked") == true){
+            client['white'] = 1;
+            client['raceNone'] = 0;
         }
-        if ($("#race9").is(":checked") == true){
-            client['nativeHIOtherPacific'] = 9;
-            client['raceNone'] = 99;
+        if ($("#nativeHIOtherPacific").is(":checked") == true){
+            client['nativeHIOtherPacific'] = 1;
+            client['raceNone'] = 0;
         }
         client['personalId'] = entityIndex;
         client['firstName'] = $("#intakeForm #firstName").val();

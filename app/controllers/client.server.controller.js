@@ -131,7 +131,7 @@ exports.editClient = function(req, res) {
         ssn: req.body.ssn,
         dob: req.body.dob,
         gender: req.body.gender,
-        ethnicity: req.body.ethnicity
+        ethnicity: req.body.ethnicity,
         amIndAKNative: req.body.amIndAKNative,
         asian: req.body.asian,
         blackAfAmerican: req.body.blackAfAmerican,

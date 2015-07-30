@@ -73,45 +73,27 @@ html(lang="en")
                 option(value='9') Client Refused
                 option(value='99') Data not collected
           .label.pct100 race
-          div.pct50
+          div.pct100
             label
-            input#race5(name='race[]' value='5' type='checkbox' )
+            input.race#asian(name='race[]' value='5' type='checkbox' )
             | Asian
             br
             label
-            input#race6(name='race[]' value='6' type='checkbox' )
+            input.race#blackAfAmerican(name='race[]' value='6' type='checkbox' )
             | Black or African American
             br
             label
-            input#race7(name='race[]' value='7' type='checkbox' )
+            input.race#amIndAKNative(name='race[]' value='7' type='checkbox' )
             | American Indian or Alaska Native
             br
             label
-            input#race8(name='race[]' value='8' type='checkbox' )
+            input.race#white(name='race[]' value='8' type='checkbox' )
             | White
             br
             label
-            input#race9(name='race[]' value='9' type='checkbox' )
+            input.race#nativeHIOtherPacific(name='race[]' value='9' type='checkbox' )
             | Native Hawaiian or Other Pacific Islander
             br
-          div.pct50
-            label
-            input#race14(name='race[]' value='14' type='checkbox' )
-            | Other
-            br
-            label
-            input#race15(name='race[]' value='15' type='checkbox' )
-            | Client doesn't know
-            br
-            label
-            input#race16(name='race[]' value='16' type='checkbox' )
-            | Client refused
-            br
-            label
-            input#race99(name='race[]' value='99' type='checkbox' )
-            | Data not collected
-            br
-          label
           input#entityIndex(name='entityIndex', type='hidden')
           div.buttonBox
             button#backToResults(type='button') Back to Results
