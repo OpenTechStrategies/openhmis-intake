@@ -357,23 +357,24 @@ $(function() {
         client['nativeHIOtherPacific'] = 99;
         client['white'] = 99;
         client['raceNone'] = 99;
-        if ($("#race5").checked == true){
+        if ($("#race5").is(":checked") == true){
+            console.log("asian");
             client['asian'] = 5;
             client['raceNone'] = 99;
         }
-        if ($("#race6").checked == true){
+        if ($("#race6").is(":checked") == true){
             client['blackAfAmerican'] = 6;
             client['raceNone'] = 99;
         }
-        if ($("#race7").checked == true){
+        if ($("#race7").is(":checked") == true){
             client['amIndAKNative'] = 7;
             client['raceNone'] = 99;
         }
-        if ($("#race8").checked == true){
+        if ($("#race8").is(":checked") == true){
             client['white'] = 8;
             client['raceNone'] = 99;
         }
-        if ($("#race9").checked == true){
+        if ($("#race9").is(":checked") == true){
             client['nativeHIOtherPacific'] = 9;
             client['raceNone'] = 99;
         }
@@ -383,7 +384,7 @@ $(function() {
         client['dob'] = $("#dob_value").val();
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
-
+        client['ssn'] = $("#intakeForm #SSN").val();
         if (entityIndex != ""){
             $.ajax("/clients/" + entityIndex, {
                 method: "PUT",

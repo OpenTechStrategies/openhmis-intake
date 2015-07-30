@@ -19,6 +19,12 @@ exports.addClient = function(req, res) {
     dob: req.body.dob,
     gender: req.body.gender,
     ethnicity: req.body.ethnicity,
+    asian: req.body.asian,
+    amIndAKNative: req.body.amIndAKNative,
+    blackAfAmerican: req.body.blackAfAmerican,
+    nativeHIOtherPacific: req.body.nativeHIOtherPacific,
+    white: req.body.white,
+    raceNone: req.body.raceNone
   }
 
   // Put together the data
@@ -126,12 +132,12 @@ exports.editClient = function(req, res) {
         dob: req.body.dob,
         gender: req.body.gender,
         ethnicity: req.body.ethnicity
-//        amIndAKNative: req.body.amIndAKNative,
-//        asian: req.body.asian,
-//        blackAfAmerican: req.body.blackAfAmerican,
-//        nativeHIOtherPacific: req.body.nativeHIOtherPacific,
-//        white: req.body.white,
-//        raceNone: req.body.raceNone
+        amIndAKNative: req.body.amIndAKNative,
+        asian: req.body.asian,
+        blackAfAmerican: req.body.blackAfAmerican,
+        nativeHIOtherPacific: req.body.nativeHIOtherPacific,
+        white: req.body.white,
+        raceNone: req.body.raceNone
     }
 
     // Put together the data
@@ -153,7 +159,7 @@ exports.editClient = function(req, res) {
   var put_req = http.request(put_options, function(res) {
       res.setEncoding('utf8');
       res.on('data', function (chunk) {
-          console.log('Response: ' + chunk);
+          console.log('DEBUG: Response: ' + chunk);
       });
   });
 
