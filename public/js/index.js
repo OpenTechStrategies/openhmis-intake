@@ -333,15 +333,14 @@ $(function() {
 
     function assignDOB() {
         var entityIndex = $("#intakeForm #entityIndex").val();
-        var entity = sampleData[entityIndex];
         var DOB = this.getMoment().format('YYYY-MM-DD');
-        entity.dob = DOB;
         refreshIntakeFormDOB(DOB);
     }
 
     function refreshIntakeFormDOB(DOB) {
         if (DOB) {
             $("#intakeForm #DOB").html(getFormattedDOB(DOB) + "&nbsp;&nbsp(age "+ getYearsOld(DOB) + ")");
+            $("#dob_value").val(DOB);
         }
         else {
             $("#intakeForm #DOB").html("&nbsp;");
@@ -350,16 +349,41 @@ $(function() {
 
     function saveChanges() {
         var entityIndex = $("#intakeForm #entityIndex").val();
+        // set race.  By default all are false, except "raceNone."
         var client = {};
+        client['amIndAKNative'] = 99;
+        client['asian'] = 99;
+        client['blackAfAmerican'] = 99;
+        client['nativeHIOtherPacific'] = 99;
+        client['white'] = 99;
+        client['raceNone'] = 99;
+        if ($("#race5").checked == true){
+            client['asian'] = 5;
+            client['raceNone'] = 99;
+        }
+        if ($("#race6").checked == true){
+            client['blackAfAmerican'] = 6;
+            client['raceNone'] = 99;
+        }
+        if ($("#race7").checked == true){
+            client['amIndAKNative'] = 7;
+            client['raceNone'] = 99;
+        }
+        if ($("#race8").checked == true){
+            client['white'] = 8;
+            client['raceNone'] = 99;
+        }
+        if ($("#race9").checked == true){
+            client['nativeHIOtherPacific'] = 9;
+            client['raceNone'] = 99;
+        }
         client['personalId'] = entityIndex;
         client['firstName'] = $("#intakeForm #firstName").val();
         client['lastName'] = $("#intakeForm #lastName").val();
-        // these need to be interpreted before I send them (we need to
-        // save ints, not strings)
-//        client['dob'] = $("#intakeForm #DOB").val();
-//        client['ethnicity'] = $("#intakeForm #ethnicity").val();
-//        client['race'] = $("#intakeForm #race").val();
-//        var json_data =  JSON.stringify(client);
+        client['dob'] = $("#dob_value").val();
+        client['gender'] = $("#intakeForm #gender").val();
+        client['ethnicity'] = $("#intakeForm #ethnicity").val();
+
         $.ajax("/clients/" + entityIndex, {
             method: "PUT",
             data: client,

@@ -124,8 +124,14 @@ exports.editClient = function(req, res) {
         lastName: req.body.lastName,
         ssn: req.body.ssn,
         dob: req.body.dob,
-        race: req.body.race,
-        ethnicity: req.body.ethnicity,
+        gender: req.body.gender,
+        ethnicity: req.body.ethnicity
+//        amIndAKNative: req.body.amIndAKNative,
+//        asian: req.body.asian,
+//        blackAfAmerican: req.body.blackAfAmerican,
+//        nativeHIOtherPacific: req.body.nativeHIOtherPacific,
+//        white: req.body.white,
+//        raceNone: req.body.raceNone
     }
 
     // Put together the data
