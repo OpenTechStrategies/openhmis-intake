@@ -45,26 +45,26 @@ html(lang="en")
               div.pct67
                 div.label DOB:
                 div#formattedDOB
+                input#dob_value(name='dob_value', type='hidden')
               div.pct33#datepicker
                 img(src='img/Farm-Fresh_calendar_view_month.png')
           div.label.pct100 SSN
           input.pct100#SSN(name='SSN', type='text', placeholder='SSN')
           div#selectBoxes
-            .label.pct33 gender
-            .label.pct33 ethnicity
-            .label.pct33 race
-            .selectBox.pct33
+            .label.pct50 gender
+            .label.pct50 ethnicity
+            .selectBox.pct50
               select#gender(name='gender')
                 option(value='' default disabled)
-                option(value='Male') Male
-                option(value='Female') Female
-                option(value='Transgender Male to Female') Transgender Male to Female
-                option(value='Transgender Female to Male') Transgender Female to Male
-                option(value='other') Other
-                option(value='Client doesn\'t know') Client doesn't know
-                option(value='Client Refused') Client Refused
-                option(value='Data not collected') Data not collected
-            .selectBox.pct33
+                option(value='1') Male
+                option(value='0') Female
+                option(value='2') Transgender Male to Female
+                option(value='3') Transgender Female to Male
+                option(value='4') Other
+                option(value='8') Client doesn't know
+                option(value='9') Client Refused
+                option(value='99') Data not collected
+            .selectBox.pct50
               select#ethnicity(name='ethnicity')
                 option(value='' default disabled)
                 option(value='Hispanic/Latino') Hispanic/Latino
@@ -72,21 +72,32 @@ html(lang="en")
                 option(value='Client doesn\'t know') Client doesn't know
                 option(value='Client Refused') Client Refused
                 option(value='Data not collected') Data not collected
-            .selectBox.pct33
-              select#race(name='race')
-                option(value='' default disabled)
-                option(value='Asian') Asian
-                option(value='Black or African American') Black or African American
-                option(value='American Indian or Alaska Native') American Indian or Alaska Native
-                option(value='White') White
-                option(value='Native Hawaiian or Other Pacific Islander') Native Hawaiian or Other Pacific Islander
-                option(value='Other') Other
-                option(value='Client doesn\'t know') Client doesn't know
-                option(value='Client Refused') Client Refused
-                option(value='Data not collected') Data not collected
           input#index(name='index', type='hidden')
           input#picture(name='picture', type='hidden')
           input#DOB(name='DOB', type='hidden')
+          .label.pct100 race
+          div.pct100
+            label
+            input.race#asian(name='race[]' value='5' type='checkbox' )
+            | Asian
+            br
+            label
+            input.race#blackAfAmerican(name='race[]' value='6' type='checkbox' )
+            | Black or African American
+            br
+            label
+            input.race#amIndAKNative(name='race[]' value='7' type='checkbox' )
+            | American Indian or Alaska Native
+            br
+            label
+            input.race#white(name='race[]' value='8' type='checkbox' )
+            | White
+            br
+            label
+            input.race#nativeHIOtherPacific(name='race[]' value='9' type='checkbox' )
+            | Native Hawaiian or Other Pacific Islander
+            br
+          input#entityIndex(name='entityIndex', type='hidden')
           div.buttonBox
             button#backToResults(type='button') Back to Results
             button#revertChanges(type='button') Revert Changes

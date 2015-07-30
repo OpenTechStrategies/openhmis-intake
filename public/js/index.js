@@ -18,52 +18,60 @@ $(function() {
         });
 
         // event handlers
-        $("#searchForm #searchField").keyup(function() {
-            var userString = $("#searchForm #searchField").val();
-            if (userString.length >= minSearchLength) {
-                var numResults = populateResults(userString);
-                // If "results" is empty, activate the "add new client" button.
-                if (numResults > 0) {
-                    // We've found some results, but we may still have to add a
-                    // new client (maybe a person with the same name as an
-                    // existing client). The "add new client" button will be
-                    // activated, but with a caveat.
-                    $("#addNewClient").text(caveatText);
-                }
-                else {
-                    // No need for the caveat.
-                    $("#addNewClient").text(noCaveatText);
-                }
-                // If we're over the minimum length, we may add a new client.
-                $("#searchForm #addNewClient").prop("disabled", false);
-            }
-            else if (userString.length == 0) {
-                $("#searchForm #results").empty();
-                $("#addNewClient").text(noCaveatText);
-                $("#searchForm #addNewClient").prop("disabled", true);
-            }
-        });
-        $("#searchForm #results").on("click", ".hit", function(e) {
-            switchToIntake($(e.currentTarget).data("entity-index"));
-        });
-        $("#searchForm #addNewClient").click(function() {
-            switchToIntake(-1);
-        });
-        $("#intakeForm input").keyup(function() {
-            checkForChanges();
-        });
-        $("#intakeForm #backToResults").click(function() {
-            switchToSearch(true);
-        });
-        $("#intakeForm #revertChanges").click(function() {
-            revertChanges();
-        });
-        $("#intakeForm #cancel").click(function() {
-            cancel();
-        });
-        $("#intakeForm #saveChanges").click(function() {
-            saveChanges();
-        });
+            $.ajax("/clients", {
+                method: "GET",
+                dataType: "json"
+            }).done(function(data) {
+                $("#searchForm #searchField").keyup(function() {
+                    var userString = $("#searchForm #searchField").val();
+                    if (userString.length >= minSearchLength) {
+                        var dataLength = data.length;
+                        //this calls search() inside itself
+                        var numResults = populateResults(userString, dataLength, data);
+                        // If "results" is empty, activate the "add new client" button.
+                        if (numResults > 0) {
+                            // We've found some results, but we may still have to add a
+                            // new client (maybe a person with the same name as an
+                            // existing client). The "add new client" button will be
+                            // activated, but with a caveat.
+                            $("#addNewClient").text(caveatText);
+                        }
+                        else {
+                            // No need for the caveat.
+                            $("#addNewClient").text(noCaveatText);
+                        }
+                        // If we're over the minimum length, we may add a new client.
+                        $("#searchForm #addNewClient").prop("disabled", false);
+                    }
+                    else if (userString.length == 0) {
+                        $("#searchForm #results").empty();
+                        $("#addNewClient").text(noCaveatText);
+                        $("#searchForm #addNewClient").prop("disabled", true);
+                    }
+                });
+                $("#searchForm #results").on("click", ".hit", function(e) {
+                    switchToIntake($(e.currentTarget).data("entity-index"), data.length, data);
+                });
+                $("#searchForm #addNewClient").click(function() {
+                    switchToIntake(-1, data.length, data);
+                });
+                $("#intakeForm input").keyup(function(e) {
+                    checkForChanges($(e.currentTarget).data("entity-index"), data);
+                });
+                $("#intakeForm #backToResults").click(function() {
+                    switchToSearch(true);
+                });
+                $("#intakeForm #revertChanges").click(function(e) {
+                    revertChanges($(e.currentTarget).data("entity-index"), data);
+                });
+                $("#intakeForm #cancel").click(function() {
+                    cancel();
+                });
+                $("#intakeForm #saveChanges").click(function() {
+                    saveChanges();
+                });
+                switchToSearch(false);
+            });
 
         switchToSearch(false);
     });
@@ -80,8 +88,13 @@ $(function() {
     var revertText = "Revert Changes";
     var backText = "Back to Results";
 
-    function populateResults(userString) {
-        var newHits = search(userString);
+    /*
+     * Takes a user-entered string and returns the number of matching
+     * entries.  Along the way it fills in the result divs.
+    */
+    
+    function populateResults(userString, data_length, dataset) {
+        var newHits = search(userString, data_length, dataset);
         // Create an array to hold indices of all the latest hits. If an
         // old hit isn't found in here, it gets removed.
         var newHitIndices = [];
@@ -136,10 +149,14 @@ $(function() {
     }
 
     function Hit(entity) {
-        for (var i=0; i<propertyListLength; i++) {
-            this[propertyList[i]] = entity[propertyList[i]];
-        }
+        this.index = entity.personalId;
         this.removeMe = false; // Used when comparing to already-matched records.
+        this.picture = entity.picture;
+        this.firstName = entity.firstName;
+        this.lastName = entity.lastName;
+        this.gender = entity.gender;
+        this.dob = entity.dob ? getFormattedDOB(entity.dob) : "";
+        this.age = entity.dob ? getYearsOld(entity.dob) : "";
     }
 
     function getFormattedDOB(date) {
@@ -158,8 +175,8 @@ $(function() {
 
     HitFactory.prototype.getHit = function(entity) {
         var hit = null;
-        if (this.hits.hasOwnProperty(entity.index)) {
-            hit = this.hits[entity.index];
+        if (this.hits.hasOwnProperty(entity.personalId)) {
+            hit = this.hits[entity.personalId];
         }
         else {
             hit = new Hit(entity);
@@ -169,8 +186,8 @@ $(function() {
     }
 
     HitFactory.prototype.killHit = function(entity) {
-        if (this.hits.hasOwnProperty(entity.index)) {
-            delete this.hits[entity.index];
+        if (this.hits.hasOwnProperty(entity.personalId)) {
+            delete this.hits[entity.personalId];
         }
     }
 
@@ -182,7 +199,12 @@ $(function() {
         return hitList;
     }
 
-    function search(userString) {
+    /*
+     * Takes a user-entered string and returns the set of matching
+     * clients, as "hit" objects.
+     */
+    
+    function search(userString, data_length, dataset) {
         // First Trim any non-alphanumerics from the ends of the user's input.
         userString = userString.replace(/^[^\w]+/i, "").replace(/[^\w]+$/i, "");
 
@@ -207,11 +229,10 @@ $(function() {
 
         // Turn the user's input into a list of regexes that will try to match against our matching terms.
         var userRegexes = $.map(userSubstrings, function(userSubstring) { return new RegExp("^" + userSubstring, "i"); });
-
-        // sample data imported from lib/sampleData.js
-        var sampleDataLength = sampleData.length;
-        for (var i=0; i<sampleDataLength; i++) {
-            entity = sampleData[i];
+        // This is the list of "matching terms" we will try to match to user input.
+        var matchingTerms = ["firstName", "lastName"];
+        for (var i=0; i<data_length; i++) {
+            entity = dataset[i];
             // Make a copies of "userRegexes" and "matchingTerms" that we can
             // alter as we search.
             var userRegexesCopy = userRegexes.slice(0);
@@ -220,7 +241,9 @@ $(function() {
                 var userRegex = userRegexesCopy.shift();
                 var matchFound = false;
                 for (var j=0; j < matchingTermsCopy.length; ) {
-                    result = entity[matchingTermsCopy[j]].match(userRegex);
+                    if (entity[matchingTermsCopy[j]] !== null){
+                        result = entity[matchingTermsCopy[j]].match(userRegex);
+                    }
                     if (result !== null) {
                         // We found a match. Figure out how long it is.
                         matchLength = result[0].length;
@@ -231,7 +254,6 @@ $(function() {
                             hit = hitFactory.getHit(entity);
                             hit[matchingTermsCopy[j]] = "<span class='marked'>" + entity[matchingTermsCopy[j]].substr(0, matchLength) + "</span>" + entity[matchingTermsCopy[j]].substr(matchLength);
                             matchFound = true;
-
                             // Remove this matching term from consideration when
                             // processing other user search terms by splicing it out
                             // of our copy of matching terms.
@@ -251,6 +273,7 @@ $(function() {
                     break;
                 }
             }
+            
         }
         return hitFactory.allTheHits();
     }
@@ -284,38 +307,39 @@ $(function() {
         $("#intake").css("display", "none");
     }
 
-    function switchToIntake(index) {
+    function switchToIntake(personalId, data_length, dataset) {
         // Reset all form fields.
         $("#intakeForm input[type='input']").val("");
         $("#intakeForm select option:first-of-type").prop("selected", true);
         $("#intakeForm #pictureFrame").empty();
 
         var entity = null;
-
-        if (index < 0) { // New client
+        if (personalId < 0) { // New client
             entity = new Entity();
         }
         else {
-            // sample data imported from lib/sampleData.js
-            var sampleDataLength = sampleData.length;
-            for (var i=0; i<sampleDataLength; i++) {
-                if (sampleData[i]["index"] == index) {
-                    entity = sampleData[i];
+            for (var i=0; i < data_length; i++) {
+                if (dataset[i]["personalId"] == personalId) {
+                    entity = dataset[i];
                 }
             }
         }
-
         // Fill in input fields
         for (prop in entity) {
             if (entity[prop] !== null) {
                 elem = $("#intakeForm #"+prop);
                 if (elem !== null) {
                     if (elem.is("input")) {
-                        elem.val(entity[prop]);
+                        if (elem.attr("type") == "checkbox" && entity[prop] == true) {
+                            elem.prop("checked", true);
+                        }
+                        else {
+                            elem.val(entity[prop]);
+                        }
                     }
                     else if (elem.is("select")) {
                         elem.children("option").each(function() {
-                            if($(this).val().toLowerCase() == entity[prop].toLowerCase()) {
+                            if ($(this).val() == entity[prop]) {
                                 $(this).attr("selected", true);
                             }
                         });
@@ -323,7 +347,6 @@ $(function() {
                 }
             }
         }
-        console.log("at this time index is: " + $("#intakeForm #index").val());
 
         // Fill in the picture
         $("#intakeForm #pictureFrame").append($("<img src=\"img/" + entity.picture + "\">"));
@@ -349,8 +372,7 @@ $(function() {
     }
 
     function assignDOB() {
-        var index = $("#intakeForm #index").val();
-        var entity = sampleData[index];
+        var entityIndex = $("#intakeForm #entityIndex").val();
         // "this" refers to the pikaday object
         var DOB = this.getMoment().format('YYYY-MM-DD');
         // Put the DOB in the ISO 8601 format into the hidden DOB
@@ -359,13 +381,14 @@ $(function() {
         // user-friendliness and is set up in "refreshFormattedDOB".
         $("#intakeForm #DOB").val(DOB);
         refreshFormattedDOB();
-        checkForChanges();
+        checkForChanges(entityIndex);
     }
 
     function refreshFormattedDOB() {
         var DOB = $("#intakeForm #DOB").val();
         if (DOB && DOB.length > 0) {
             $("#intakeForm #formattedDOB").html(getFormattedDOB(DOB) + "&nbsp;&nbsp(age "+ getYearsOld(DOB) + ")");
+            $("#dob_value").val(DOB);
         }
         else {
             $("#intakeForm #formattedDOB").html("&nbsp;");
@@ -380,9 +403,67 @@ $(function() {
         return entity;    
     }
 
-    function checkForChanges() {
+    function saveChanges() {
+        var entityIndex = $("#intakeForm #entityIndex").val();
+        // set race.  By default all are false, except "raceNone."
+        var client = {};
+        client['amIndAKNative'] = 0;
+        client['asian'] = 0;
+        client['blackAfAmerican'] = 0;
+        client['nativeHIOtherPacific'] = 0;
+        client['white'] = 0;
+        client['raceNone'] = 1;
+        if ($("#asian").is(":checked") == true){
+            client['asian'] = 1;
+            client['raceNone'] = 0;
+        }
+        if ($("#blackAfAmerican").is(":checked") == true){
+            client['blackAfAmerican'] = 1;
+            client['raceNone'] = 0;
+        }
+        if ($("#amIndAKNative").is(":checked") == true){
+            client['amIndAKNative'] = 1;
+            client['raceNone'] = 0;
+        }
+        if ($("#white").is(":checked") == true){
+            client['white'] = 1;
+            client['raceNone'] = 0;
+        }
+        if ($("#nativeHIOtherPacific").is(":checked") == true){
+            client['nativeHIOtherPacific'] = 1;
+            client['raceNone'] = 0;
+        }
+        client['personalId'] = entityIndex;
+        client['firstName'] = $("#intakeForm #firstName").val();
+        client['lastName'] = $("#intakeForm #lastName").val();
+        client['dob'] = $("#dob_value").val();
+        client['gender'] = $("#intakeForm #gender").val();
+        client['ethnicity'] = $("#intakeForm #ethnicity").val();
+        client['ssn'] = $("#intakeForm #SSN").val();
+        if (entityIndex != ""){
+            $.ajax("/clients/" + entityIndex, {
+                method: "PUT",
+                data: client,
+                always:  console.log("finished put")
+            });
+        }
+        else{
+            $.ajax("/clients/", {
+                method: "POST",
+                data: client,
+                always:  console.log("finished post")
+            });
+        }
+    }
+
+    function checkForChanges(index, dataset) {
         var index = $("#intakeForm #index").val();
-        var origEntity = index < 0 ? new Entity() : sampleData[index];
+        dataset.forEach( function (client){
+            if (client["personalId"] == index){
+                var origEntity = client;
+            }
+        });
+        var origEntity = index < 0 ? new Entity() : dataset[index];
         var newEntity = getEntityFromInputValues();
 
         for (prop in newEntity) {
@@ -422,25 +503,4 @@ $(function() {
         $("#intakeForm #saveChanges").prop("disabled", true);
     }
 
-    function saveChanges() {
-        var index = $("#intakeForm #index").val();
-        var origEntity = null;
-        if (index < 0) {
-            origEntity = new Entity();
-            // Note this is a terrible way to determine a unique ID, but
-            // presumably a new unique ID will be sent from the server in the
-            // real app.
-            $("#intakeForm #index").val(sampleData.length); // This will be read in again just a few lines down.
-            sampleData.push(origEntity);
-        }
-        else {
-            origEntity = sampleData[index];
-        }
-
-        var newEntity = getEntityFromInputValues();
-        for (prop in newEntity) {
-            origEntity[prop] = newEntity[prop];
-        }
-        switchToSearch(false);
-    }
 });
