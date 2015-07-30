@@ -180,14 +180,14 @@ $(function() {
         }
         else {
             hit = new Hit(entity);
-            this.hits[entity.index] = hit;
+            this.hits[entity.personalId] = hit;
         }
         return hit;
     }
 
     HitFactory.prototype.killHit = function(entity) {
-        if (this.hits.hasOwnProperty(entity.personalId)) {
-            delete this.hits[entity.personalId];
+        if (this.hits.hasOwnProperty(entity.index)) {
+            delete this.hits[entity.index];
         }
     }
 
@@ -324,6 +324,12 @@ $(function() {
                 }
             }
         }
+        
+        // Put the entity index into a hidden field. This gets used later by
+        // various handlers.
+        $("#intakeForm #entityIndex").val(entity.personalId);
+        
+
         // Fill in input fields
         for (prop in entity) {
             if (entity[prop] !== null) {
