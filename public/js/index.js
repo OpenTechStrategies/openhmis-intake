@@ -13,41 +13,42 @@ $(function() {
         });
 
         // event handlers
-        $("#searchForm #searchField").keyup(function() {
             $.ajax("/clients", {
                 method: "GET",
                 dataType: "json"
             }).done(function(data) {
-                var userString = $("#searchForm #searchField").val();
-                if (userString.length >= minSearchLength) {
-                    //this calls search() inside itself
-                    var dataLength = data.length;
-                    var numResults = populateResults(userString, dataLength, data);
-                    // If "results" is empty, activate the "add new client" button.
-                    if (numResults > 0) {
-                        // We've found some results, but we may still have to add a
-                        // new client (maybe a person with the same name as an
-                        // existing client). The "add new client" button will be
-                        // activated, but with a caveat.
-                        $("#addNewClient").text(caveatText);
+                $("#searchForm #searchField").keyup(function() {
+                    var userString = $("#searchForm #searchField").val();
+                    if (userString.length >= minSearchLength) {
+                        var dataLength = data.length;
+                        //this calls search() inside itself
+                        var numResults = populateResults(userString, dataLength, data);
+                        // If "results" is empty, activate the "add new client" button.
+                        if (numResults > 0) {
+                            // We've found some results, but we may still have to add a
+                            // new client (maybe a person with the same name as an
+                            // existing client). The "add new client" button will be
+                            // activated, but with a caveat.
+                            $("#addNewClient").text(caveatText);
+                        }
+                        else {
+                            // No need for the caveat.
+                            $("#addNewClient").text(noCaveatText);
+                        }
+                        // If we're over the minimum length, we may add a new client.
+                        $("#searchForm #addNewClient").prop("disabled", false);
                     }
-                    else {
-                        // No need for the caveat.
+                    else if (userString.length == 0) {
+                        $("#searchForm #results").empty();
                         $("#addNewClient").text(noCaveatText);
+                        $("#searchForm #addNewClient").prop("disabled", true);
                     }
-                    // If we're over the minimum length, we may add a new client.
-                    $("#searchForm #addNewClient").prop("disabled", false);
-                }
-                else if (userString.length == 0) {
-                    $("#searchForm #results").empty();
-                    $("#addNewClient").text(noCaveatText);
-                    $("#searchForm #addNewClient").prop("disabled", true);
-                }
+                });
                 $("#searchForm #results").on("click", ".hit", function(e) {
-                    switchToIntake($(e.currentTarget).data("entity-index"), dataLength, data);
+                    switchToIntake($(e.currentTarget).data("entity-index"), data.length, data);
                 });
                 $("#searchForm #addNewClient").click(function() {
-                    switchToIntake(-1, dataLength, data);
+                    switchToIntake(-1, data.length, data);
                 });
                 $("#intakeForm #backToResults").click(function() {
                     switchToSearch(true);
@@ -58,7 +59,6 @@ $(function() {
                 });
 
             });
-        });
 
         switchToSearch(false);
     });
