@@ -384,10 +384,19 @@ $(function() {
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
 
-        $.ajax("/clients/" + entityIndex, {
-            method: "PUT",
-            data: client,
-            always:  console.log("finished put")
-        });
+        if (entityIndex != ""){
+            $.ajax("/clients/" + entityIndex, {
+                method: "PUT",
+                data: client,
+                always:  console.log("finished put")
+            });
+        }
+        else{
+            $.ajax("/clients/", {
+                method: "POST",
+                data: client,
+                always:  console.log("finished post")
+            });
+        }
     }
 });

@@ -13,16 +13,16 @@ exports.addClient = function(req, res) {
 
   // Build an object that we want to send
   var client = {
-    first: req.body.firstName,
-    last: req.body.lastName,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     ssn: req.body.ssn,
     dob: req.body.dob,
-    race: req.body.race,
+    gender: req.body.gender,
     ethnicity: req.body.ethnicity,
   }
 
   // Put together the data
-  var post_data = querystring.stringify(client);
+  var post_data = JSON.stringify(client);
 
   // An object of options to indicate where to post to
   var post_options = {
@@ -40,7 +40,7 @@ exports.addClient = function(req, res) {
   var post_req = http.request(post_options, function(res) {
       res.setEncoding('utf8');
       res.on('data', function (chunk) {
-          console.log('Response: ' + chunk);
+          console.log('DEBUG: Response: ' + chunk);
       });
   });
 
