@@ -56,13 +56,13 @@ $(function() {
                     switchToIntake(-1, data.length, data);
                 });
                 $("#intakeForm input").keyup(function(e) {
-                    checkForChanges($(e.currentTarget).data("entity-index"), data);
+                    checkForChanges(data);
                 });
                 $("#intakeForm #backToResults").click(function() {
                     switchToSearch(true);
                 });
                 $("#intakeForm #revertChanges").click(function(e) {
-                    revertChanges($(e.currentTarget).data("entity-index"), data);
+                    revertChanges(data);
                 });
                 $("#intakeForm #cancel").click(function() {
                     cancel();
@@ -77,7 +77,7 @@ $(function() {
     });
 
     // This is the list of all the properties that define an entity.
-    var propertyList = ["index", "picture", "firstName", "lastName", "SSN", "DOB", "gender", "ethnicity", "race"];
+    var propertyList = ["firstName", "lastName", "ssn", "DOB", "gender", "ethnicity", "race"];
     var propertyListLength = propertyList.length;
 
     // These are the properties we will try to match to user input.
@@ -140,7 +140,7 @@ $(function() {
             this[propertyList[i]] = "";
         }
         // Set some default values.
-        this.index = -1;
+        this.personalId = -1;
         this.picture = "unknown.png";
         // Use the names stored in the search form as default vals.
         // Usually they'll be overwritten, but not if this is a new client.
@@ -359,8 +359,8 @@ $(function() {
 
         // Fill in the readonly DOB and age
         refreshFormattedDOB();
-
-        if (index < 0) {
+        console.log("check for cancel:" + personalId);
+        if (personalId < 0) {
             $("#intakeForm #backToResults").css("display", "none");
             $("#intakeForm #revertChanges").css("display", "none");
             $("#intakeForm #cancel").css("display", "inline-block");
@@ -387,7 +387,8 @@ $(function() {
         // user-friendliness and is set up in "refreshFormattedDOB".
         $("#intakeForm #DOB").val(DOB);
         refreshFormattedDOB();
-        checkForChanges(entityIndex);
+        var dataset = null; //placeholder
+        checkForChanges(dataset);
     }
 
     function refreshFormattedDOB() {
@@ -403,9 +404,14 @@ $(function() {
 
     function getEntityFromInputValues() {
         var entity = {};
-        for (var i=0; i<propertyListLength; i++) {
-            entity[propertyList[i]] = $("#intakeForm #" + propertyList[i]).val();
-        }
+        var entityIndex = $("#intakeForm #entityIndex").val();
+        entity.personalId = entityIndex;
+        entity.firstName = $("#intakeForm #firstName").val();
+        entity.lastName = $("#intakeForm #lastName").val();
+        entity.ssn = $("#intakeForm #ssn").val();
+        entity.dob = $("#intakeForm #DOB").val();
+        entity.gender = $("#intakeForm #gender").val();
+        entity.ethnicity = $("#intakeForm #ethnicity").val();
         return entity;    
     }
 
@@ -445,7 +451,7 @@ $(function() {
         client['dob'] = $("#dob_value").val();
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
-        client['ssn'] = $("#intakeForm #SSN").val();
+        client['ssn'] = $("#intakeForm #ssn").val();
         if (entityIndex != ""){
             $.ajax("/clients/" + entityIndex, {
                 method: "PUT",
@@ -460,20 +466,20 @@ $(function() {
                 always:  console.log("finished post")
             });
         }
+        switchToSearch(false);
     }
 
-    function checkForChanges(index, dataset) {
-        var index = $("#intakeForm #index").val();
+    function checkForChanges(dataset) {
+        var index = $("#intakeForm #entityIndex").val();
+        var origEntity = new Entity();
         dataset.forEach( function (client){
             if (client["personalId"] == index){
-                var origEntity = client;
+                origEntity = client;
             }
         });
-        var origEntity = index < 0 ? new Entity() : dataset[index];
         var newEntity = getEntityFromInputValues();
-
         for (prop in newEntity) {
-            if (newEntity[prop].toString() !== origEntity[prop].toString()) {
+            if ((origEntity[prop] == null && newEntity[prop] != null) || newEntity[prop].toString() !== origEntity[prop].toString()) {
                 // The user has made a change
                 if (index >= 0) { //  i.e., if this is not a new client
                     $("#intakeForm #backToResults").css("display", "none");
@@ -496,9 +502,15 @@ $(function() {
         }
     }
 
-    function revertChanges() {
+    function revertChanges(dataset) {
+        var index = $("#intakeForm #entityIndex").val();
         var newEntity = getEntityFromInputValues();
-        var origEntity = sampleData[newEntity.index];
+        var origEntity = new Entity();
+        dataset.forEach( function (client){
+            if (client["personalId"] == index){
+                origEntity = client;
+            }
+        });
         for (prop in newEntity) {
             $("#intakeForm #" + prop).val(origEntity[prop]);
         }
