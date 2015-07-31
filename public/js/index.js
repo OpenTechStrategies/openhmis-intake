@@ -281,7 +281,9 @@ $(function() {
 
     function getSummaryDiv(hit) {
         var summaryDiv = $("<div class='hit'></div>");
-        var picture = $("<div class='picture'><img src=\"img/" + hit.picture + "\"></div>");
+        if (hit.picture){
+            var picture = $("<div class='picture'><img src=\"img/" + hit.picture + "\"></div>");
+        }
         var text = $("<div class='text'></div>");
         var fullName = $("<div class='summaryElement'><span>" + hit.firstName + " " + hit.lastName + "</span></div>");
         var clear = $("<div class='clear'></div>");
@@ -356,8 +358,9 @@ $(function() {
         }
 
         // Fill in the picture
-        $("#intakeForm #pictureFrame").append($("<img src=\"img/" + entity.picture + "\">"));
-
+        if (entity.picture){
+            $("#intakeForm #pictureFrame").append($("<img src=\"img/" + entity.picture + "\">"));
+        }
         // Fill in the readonly DOB and age
         refreshFormattedDOB();
         if (personalId < 0) {
