@@ -398,7 +398,7 @@ $(function() {
         var DOB = $("#intakeForm #dob").val();
         if (DOB && DOB.length > 0) {
             $("#intakeForm #formattedDOB").html(getFormattedDOB(DOB) + "&nbsp;&nbsp(age "+ getYearsOld(DOB) + ")");
-            $("#dob_value").val(DOB);
+            $("#dob").val(DOB);
         }
         else {
             $("#intakeForm #formattedDOB").html("&nbsp;");
@@ -454,7 +454,7 @@ $(function() {
         }
         client['firstName'] = $("#intakeForm #firstName").val();
         client['lastName'] = $("#intakeForm #lastName").val();
-        client['dob'] = $("#dob_value").val();
+        client['dob'] = $("#dob").val();
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
         client['ssn'] = $("#intakeForm #ssn").val();
@@ -472,6 +472,7 @@ $(function() {
                 always:  console.log("finished post")
             });
         }
+        $("#dob").removeAttr("value");
         switchToSearch(false);
     }
 
