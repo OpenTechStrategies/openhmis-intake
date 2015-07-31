@@ -18,8 +18,8 @@ try {
   console.log(chalk.red("IMPORTANT: You have not set up your local configuration in /config/env/local.js"));
 }
 module.exports = _.extend(
-  local,
-  require('./env/all')
+  require('./env/all'),
+  local
 );
 
 /**
