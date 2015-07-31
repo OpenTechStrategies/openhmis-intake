@@ -22,6 +22,7 @@ $(function() {
                 method: "GET",
                 dataType: "json"
             }).done(function(data) {
+                $("#index").data("full-data", data);
                 $("#searchForm #searchField").keyup(function() {
                     var userString = $("#searchForm #searchField").val();
                     if (userString.length >= minSearchLength) {
@@ -359,7 +360,6 @@ $(function() {
 
         // Fill in the readonly DOB and age
         refreshFormattedDOB();
-        console.log("check for cancel:" + personalId);
         if (personalId < 0) {
             $("#intakeForm #backToResults").css("display", "none");
             $("#intakeForm #revertChanges").css("display", "none");
@@ -378,6 +378,7 @@ $(function() {
     }
 
     function assignDOB() {
+        var dataset = $("#index").data("full-data");
         var entityIndex = $("#intakeForm #entityIndex").val();
         // "this" refers to the pikaday object
         var DOB = this.getMoment().format('YYYY-MM-DD');
@@ -387,7 +388,6 @@ $(function() {
         // user-friendliness and is set up in "refreshFormattedDOB".
         $("#intakeForm #DOB").val(DOB);
         refreshFormattedDOB();
-        var dataset = null; //placeholder
         checkForChanges(dataset);
     }
 
