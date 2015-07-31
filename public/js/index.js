@@ -318,6 +318,8 @@ $(function() {
     function exportAll() {
         console.log("DEBUG: calling exportAll()");
 
+        // Export all clients.
+        console.log("DEBUG: exporting clients");
         $.ajax("/clients", {
             method: "GET",
             dataType: "json"
@@ -329,6 +331,22 @@ $(function() {
                 console.log("       client: " + JSON.stringify(clients[i]));
             };
         });
+        console.log("DEBUG: done exporting clients");
+
+        // Export all enrollments.
+        console.log("DEBUG: exporting enrollments");
+        $.ajax("/enrollments", {
+            method: "GET",
+            dataType: "json"
+        }).done(function(enrollments) {
+            console.log("DEBUG: fetched enrollments for export: " + JSON.stringify(enrollments));
+            var num_enrollments = enrollments.length;
+            console.log("       num enrollments: " + num_enrollments);
+            for (var i = 0; i < num_enrollments; i++) {
+                console.log("       enrollment: " + JSON.stringify(enrollments[i]));
+            };
+        });
+        console.log("DEBUG: done exporting enrollments");
     }
 
     function switchToIntake(personalId, data_length, dataset) {

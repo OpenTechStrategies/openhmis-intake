@@ -56,6 +56,49 @@ exports.addClient = function(req, res) {
 
 };
 
+exports.getEnrollments = function(req, res) {
+
+  // TODO: Two things:
+  //
+  // 1. This function preserves the 2-spaces-per-indentation-level
+  //    style that prevailed in this file at the time this function
+  //    was added, even though we're planning to re-indent later.
+  //
+  // 2. At the time it was added, this function was exactly the same
+  //    as getClients(), except for using the word "enrollments"
+  //    instead of "clients".  This suggests some easy refactoring,
+  //    and to look elsewhere in the file for other commonalities.
+
+  // Eventually we need authentication
+
+  // An object of options to indicate where to post to
+  var get_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/services/enrollments/',
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }
+  };
+
+  // Set up the request
+  var get_req = http.request(get_options, function(res_get) {
+      res_get.setEncoding('utf8');
+      var data = []
+      res_get.on('data', function (chunk) {
+          data.push(chunk);
+      });
+      res_get.on('end', function() {
+        res.send(data.join(''));
+      });
+  });
+
+  // post the data
+  get_req.end()
+
+};
+
 exports.getClients = function(req, res) {
 
   // Eventually we need authentication
