@@ -34,7 +34,7 @@ exports.addClient = function(req, res) {
   var post_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/clients/addClient',
+      path: '/openhmis/services/clients/',
       method: 'POST',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
