@@ -91,7 +91,7 @@ $(function() {
     var noCaveatText = "Add New Client";
     var revertText = "Revert Changes";
     var backText = "Back to Results";
-    var exportAllText = "Export All";
+    var exportAllText = "Example Export -- All Clients and Enrollments";
 
     /*
      * Takes a user-entered string and returns the number of matching
