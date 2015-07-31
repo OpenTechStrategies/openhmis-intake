@@ -8,7 +8,7 @@ module.exports = {
   },
   port: 3000,
 
-  // Inser the location of the API you will access here
+  // Insert the location of the API you will access here
   api: {
     host: 'localhost',
     port: 8080
