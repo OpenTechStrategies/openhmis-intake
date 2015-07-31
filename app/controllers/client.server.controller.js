@@ -43,10 +43,14 @@ exports.addClient = function(req, res) {
   };
 
   // Set up the request
-  var post_req = http.request(post_options, function(res) {
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) {
+  var post_req = http.request(post_options, function(res_post) {
+      res_post.setEncoding('utf8');
+      var data = []
+      res_post.on('data', function (chunk) {
           console.log('DEBUG: Response: ' + chunk);
+      });
+      res_post.on('end', function() {
+        res.send(data.join(''));
       });
   });
 
@@ -156,10 +160,14 @@ exports.editClient = function(req, res) {
   };
     
   // Set up the request
-  var put_req = http.request(put_options, function(res) {
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) {
+  var put_req = http.request(put_options, function(res_put) {
+      res_put.setEncoding('utf8');
+      var data = []
+      res_put.on('data', function (chunk) {
           console.log('DEBUG: Response: ' + chunk);
+      });
+      res_put.on('end', function() {
+        res.send(data.join(''));
       });
   });
 
