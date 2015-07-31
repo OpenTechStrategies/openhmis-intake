@@ -448,14 +448,17 @@ $(function() {
             client['nativeHIOtherPacific'] = 1;
             client['raceNone'] = 0;
         }
-        client['personalId'] = entityIndex;
+        client['personalId'] = "";
+        if (entityIndex > 0){
+            client['personalId'] = entityIndex;
+        }
         client['firstName'] = $("#intakeForm #firstName").val();
         client['lastName'] = $("#intakeForm #lastName").val();
         client['dob'] = $("#dob_value").val();
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
         client['ssn'] = $("#intakeForm #ssn").val();
-        if (entityIndex != ""){
+        if (entityIndex > 0 ){
             $.ajax("/clients/" + entityIndex, {
                 method: "PUT",
                 data: client,
@@ -523,5 +526,5 @@ $(function() {
         $("#intakeForm #cancel").css("display", "none");
         $("#intakeForm #saveChanges").prop("disabled", true);
     }
+}); //end wrapper function
 
-});
