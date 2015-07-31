@@ -444,6 +444,33 @@ $(function() {
             // JSON, not CSV, and the JSON is still pretty opaque --
             // it's just "[object Object]" over and over.  We'll
             // unpack it when we're really creating CSV, of course.
+
+            // UDE columns to export to CSV (in progress):
+            //
+            //   3.13 PersonalID (3.13.1)
+            //   3.1 Name
+            //       3.1.1 First Name (null ok)
+            //       3.1.2 Middle Name (null ok)
+            //       3.1.3 Last Name (null ok)
+            //       3.1.4 Name Suffix (null ok)
+            //   3.2 Social Security Number (null ok) (string, double-quotes padded w/ leading zeros)
+            //   3.3 Date of Birth (null ok)
+            //   3.4 Race
+            //       3.4.1 AmIndAKNative (1 = American Indian or Alaska Native)
+            //       3.4.1 Asian (1 = Asian)
+            //       3.4.1 BlackAfAmerican (1 = Black or African American)
+            //       3.4.1 NativeHIOtherPacific (1 = Native Hawaiian or Other Pacific Islander)
+            //       3.4.1 White (1 = White)
+            //       3.4.1 RaceNone (null ok) (Non-null only if all other Race fields = 0 or 99)
+            //   3.5 Ethnicity (3.5.1)
+            //   3.6 Gender
+            //       3.6.1 Gender
+            //       3.6.A OtherGender (null ok)
+            //   3.7 Veteran Status (Export 99 (Data not collected)
+            //                      for all clients, including minors, for whom there is
+            //                      no Veteran Status data.
+            //   4.41 Veteran Information
+            
             var clients_downloadable = new Blob(clients, {type: "text/plain;charset=utf-8"});
             // We use the HUD 2014 standard name for this file,
             // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
