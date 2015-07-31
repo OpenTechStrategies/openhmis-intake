@@ -111,6 +111,9 @@ body {
   margin-top: 15px;
 }
 
+#searchForm #exportAll {
+  margin-top: 15px;
+}
 button:disabled {
   color: #ccc;
 }

@@ -56,6 +56,9 @@ $(function() {
                 $("#searchForm #addNewClient").click(function() {
                     switchToIntake(-1, data.length, data);
                 });
+                $("#searchForm #exportAll").click(function() {
+                    exportAll();
+                });
                 $("#intakeForm input").keyup(function(e) {
                     checkForChanges(data);
                 });
@@ -88,6 +91,7 @@ $(function() {
     var noCaveatText = "Add New Client";
     var revertText = "Revert Changes";
     var backText = "Back to Results";
+    var exportAllText = "Export All";
 
     /*
      * Takes a user-entered string and returns the number of matching
@@ -304,10 +308,27 @@ $(function() {
             $("#searchForm #searchField").val("");
             $("#searchForm #results").empty();
             $("#addNewClient").text(noCaveatText);
+            $("#exportAll").text(exportAllText);
             $("#searchForm #addNewClient").prop("disabled", true);
         }
         $("#search").css("display", "block");
         $("#intake").css("display", "none");
+    }
+
+    function exportAll() {
+        console.log("DEBUG: calling exportAll()");
+
+        $.ajax("/clients", {
+            method: "GET",
+            dataType: "json"
+        }).done(function(clients) {
+            console.log("DEBUG: fetched clients for export: " + JSON.stringify(clients));
+            var num_clients = clients.length;
+            console.log("       num clients: " + num_clients);
+            for (var i = 0; i < num_clients; i++) {
+                console.log("       client: " + JSON.stringify(clients[i]));
+            };
+        });
     }
 
     function switchToIntake(personalId, data_length, dataset) {
