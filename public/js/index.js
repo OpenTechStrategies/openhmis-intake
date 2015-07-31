@@ -318,6 +318,116 @@ $(function() {
     function exportAll() {
         console.log("DEBUG: calling exportAll()");
 
+        /* For now we implement the downloadable-file functionality
+         * entirely on the browser side, even though in the long-term
+         * doing it in the intermediary node server is probably right.
+         *
+         * This IRC transcript (edited for clarity) explains why:
+         *
+         *   <kfogel> So here's the deal: obviously, we want exports to
+         *            "download" to the user's local machine, meaning it's
+         *            like when a browser visits "http://blahblah/foo.blob"
+         *            and gets "Content-type: application/octet-stream" in
+         *            the headers -- then a fully portable, browser-native
+         *            download windowlet pops up and The Rest Is History.
+         *   
+         *            Now, I could assemble the file on the browser-client
+         *            side and use something like
+         *            https://github.com/eligrey/FileSaver.js to simulate
+         *            that behavior, but paroneayea points out this is not
+         *            the most portable thing.  The most portable thing is to
+         *            actually assemble the file "server-side" (by which I
+         *            mean, in this case, the intermediary node server) and
+         *            have the client get it from that URL.
+         *   
+         *            So the code I've written on the '14-export-clients'
+         *            branch so far, which is all about fetching all the data
+         *            (the data needed for the CSV files) all the way to the
+         *            browser-client, is then not quite right.  Instead, I
+         *            should assemble the file in the intermediate server,
+         *            and have a designated route (e.g.,
+         *            "/downloads/REST/OF/PATH/LOOKS/LIKE/AN/API/CALL") for
+         *            getting those.
+         *   
+         *            My question is, does the above summary and conclusion
+         *            sound right to you?
+         *   
+         *            (I like the FileSaver.js solution because of
+         *            code-wise cleanliness, but if it's not
+         *            portability-wise the right thing, I could do the
+         *            other way.)
+         *   
+         *   <slifty> My gut reaction was the same as your first thought
+         *            (something like
+         *            http://jsfiddle.net/hybrid13i/JXrwM/)
+         *   
+         *            Do we have a sense of whether that wouldn't be
+         *            portable (there are no libraries, it's just a
+         *            straight up data:text/csv uri)?
+         *   
+         *   <kfogel> So the comment in the code in that fiddle, down
+         *            near the end where it does the actual download
+         *            provisioning, even says it's questionable
+         *            portability.
+         *   
+         *            My instinct is, *if* doing it fully browser-side,
+         *            then using a library like FileSaver.js is the way
+         *            to go.  Because whatever portability issues there
+         *            are, he's already doing his best to solve them for
+         *            us
+         *   
+         *   <slifty> Right.  One reason I like the server side solution
+         *            is that it can be used in other contexts.  maybe
+         *            we want an application that generates a nightly
+         *            report, for instance.
+         *   
+         *            So that's two benefits of server side -- I think
+         *            the complexity can be encapsulated nicely so
+         *            overall it's elegant (maybe it is a service that
+         *            takes JSON objects rather than retrieving them)
+         *            (and spits back a file path)
+         *   
+         *   <kfogel> Good point, although likely that nightly process
+         *            would be running on some different server anyway.
+         *            I mean, the fact that we have a "server"
+         *            intermediary here is just an accident of
+         *            implementation and browser security policy.
+         *            *However*, the fact that server can provide URLs
+         *            like "/download/FOO" is interesting, I see what
+         *            you mean.
+         *   
+         *   <slifty> Sure, my point is more that there is no reason
+         *            that report generation app and client app are the
+         *            same they could be different apps some day!
+         *   
+         *   <kfogel> Agreed.  they probably will be
+         *   
+         *   <slifty> Point being, client side csv generation is only
+         *            useful for this demo really
+         *   
+         *   <kfogel> I'm only putting the functionality into our client
+         *            intake demo because that's the hat rack we have to
+         *            hang hats on right now
+         *   
+         *   <slifty> Server side csv generation is going to be useful
+         *            in more places
+         *   
+         *   <kfogel> So I think that makes sense, thanks.
+         *   
+         *   <slifty> (That said, you could start with client side since
+         *            the logic will be similar... and that will be
+         *            super fast to implement)
+         *   
+         *   <kfogel> hmrmrm, true.  Might do that.  Anyway, I
+         *            understand the big picture now
+         *
+         * In addition to the above reasons to do it on the
+         * intermediary-server-side, there's also the fact that
+         * assembling a big downloadable in memory is not wise.  Much
+         * better to assemble a file on disk on the server and then
+         * server it to the client.
+         */  
+
         // Export all clients.
         console.log("DEBUG: exporting clients");
         $.ajax("/clients", {
@@ -330,6 +440,20 @@ $(function() {
             for (var i = 0; i < num_clients; i++) {
                 console.log("       client: " + JSON.stringify(clients[i]));
             };
+            // Create a downloadable for clients.  Note it's still
+            // JSON, not CSV, and the JSON is still pretty opaque --
+            // it's just "[object Object]" over and over.  We'll
+            // unpack it when we're really creating CSV, of course.
+            var clients_downloadable = new Blob(clients, {type: "text/plain;charset=utf-8"});
+            // We use the HUD 2014 standard name for this file,
+            // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+            // Pages 17(bottom)-19
+            //
+            // NOTE: For some reason, this saveAs() can blank your
+            // console log in the Firefox Inspect Element window.  If
+            // you comment out the saveAs(), you'll see all the
+            // preceding console.log() output again.
+            saveAs(clients_downloadable, "Client.csv"); 
         });
         console.log("DEBUG: done exporting clients");
 
@@ -345,6 +469,20 @@ $(function() {
             for (var i = 0; i < num_enrollments; i++) {
                 console.log("       enrollment: " + JSON.stringify(enrollments[i]));
             };
+            // Create a downloadable for enrollments.  Note it's still
+            // JSON, not CSV, and the JSON is still pretty opaque --
+            // it's just "[object Object]" over and over.  We'll
+            // unpack it when we're really creating CSV, of course.
+            var enrollments_downloadable = new Blob(enrollments, {type: "text/plain;charset=utf-8"});
+            // We use the HUD 2014 standard name for this file,
+            // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+            // Pages 19(bottom)-23(top)
+            //
+            // NOTE: For some reason, this saveAs() can blank your
+            // console log in the Firefox Inspect Element window.  If
+            // you comment out the saveAs(), you'll see all the
+            // preceding console.log() output again.
+            saveAs(enrollments_downloadable, "Enrollment.csv"); 
         });
         console.log("DEBUG: done exporting enrollments");
     }
