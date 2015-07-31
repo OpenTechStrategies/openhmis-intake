@@ -59,6 +59,12 @@ $(function() {
                 $("#intakeForm input").keyup(function(e) {
                     checkForChanges(data);
                 });
+                $("#intakeForm select").on("change", function(e) {
+                    checkForChanges(data);
+                });
+                $("#intakeForm input:checkbox").on("change", function(e) {
+                    checkForChanges(data);
+                });
                 $("#intakeForm #backToResults").click(function() {
                     switchToSearch(true);
                 });
@@ -473,6 +479,7 @@ $(function() {
             });
         }
         $("#dob").removeAttr("value");
+        location.reload();
         switchToSearch(false);
     }
 
