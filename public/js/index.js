@@ -78,7 +78,7 @@ $(function() {
     });
 
     // This is the list of all the properties that define an entity.
-    var propertyList = ["firstName", "lastName", "ssn", "DOB", "gender", "ethnicity", "race"];
+    var propertyList = ["firstName", "lastName", "ssn", "dob", "gender", "ethnicity", "race"];
     var propertyListLength = propertyList.length;
 
     // These are the properties we will try to match to user input.
@@ -287,8 +287,8 @@ $(function() {
         var text = $("<div class='text'></div>");
         var fullName = $("<div class='summaryElement'><span>" + hit.firstName + " " + hit.lastName + "</span></div>");
         var clear = $("<div class='clear'></div>");
-        var dob = $("<div class='summaryElement'><span class='label'>DOB: </span><span>" + getFormattedDOB(hit.DOB) + "</span></div>");
-        var age = $("<div class='summaryElement'><span class='label'>age: </span><span>" + getYearsOld(hit.DOB) + "</span></div>");
+        var dob = $("<div class='summaryElement'><span class='label'>DOB: </span><span>" + hit.dob + "</span></div>");
+        var age = $("<div class='summaryElement'><span class='label'>age: </span><span>" + getYearsOld(hit.dob) + "</span></div>");
         summaryDiv.append(picture);
         text.append(fullName);
         text.append(clear);
@@ -389,13 +389,13 @@ $(function() {
         // field. This is what corresponds to DOB in the client
         // database. What the user sees on the screen is formatted for
         // user-friendliness and is set up in "refreshFormattedDOB".
-        $("#intakeForm #DOB").val(DOB);
+        $("#intakeForm #dob").val(DOB);
         refreshFormattedDOB();
         checkForChanges(dataset);
     }
 
     function refreshFormattedDOB() {
-        var DOB = $("#intakeForm #DOB").val();
+        var DOB = $("#intakeForm #dob").val();
         if (DOB && DOB.length > 0) {
             $("#intakeForm #formattedDOB").html(getFormattedDOB(DOB) + "&nbsp;&nbsp(age "+ getYearsOld(DOB) + ")");
             $("#dob_value").val(DOB);
@@ -412,7 +412,7 @@ $(function() {
         entity.firstName = $("#intakeForm #firstName").val();
         entity.lastName = $("#intakeForm #lastName").val();
         entity.ssn = $("#intakeForm #ssn").val();
-        entity.dob = $("#intakeForm #DOB").val();
+        entity.dob = $("#intakeForm #dob").val();
         entity.gender = $("#intakeForm #gender").val();
         entity.ethnicity = $("#intakeForm #ethnicity").val();
         return entity;    
