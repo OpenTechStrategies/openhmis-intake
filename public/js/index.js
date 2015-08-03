@@ -228,7 +228,7 @@ $(function() {
         // Then split the user's string on non-alphanumeric sequences. This
         // eliminates a dot after a middle initial, a comma if name is
         // entered as "Doe, John" (or as "Doe , John"), etc. 
-        userSubstrings = userString.split(/[^\w]+/);
+        userSubstrings = userString.split(/\s+[^\w]+\s*|\s*[^\w]+\s+|\s+/);
 
         // Store the first and second user substrings into some hidden form
         // fields. They might be used later if a new client is created.
