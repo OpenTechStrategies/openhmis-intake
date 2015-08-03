@@ -83,13 +83,23 @@ $(function() {
         switchToSearch(false);
     });
 
-    // This is the list of all the properties that define an entity.
-    var propertyList = ["firstName", "lastName", "ssn", "dob", "gender", "ethnicity", "race"];
+    // This is the list of all the properties that define a client
+    // (later called an "Entity").  These properties have names that
+    // match exactly to the API fields, though do not cover all the
+    // API fields.
+    // Should this include personalId?
+    var propertyList = ["firstName", "lastName", "ssn", "dob",
+                        "gender", "ethnicity", "amIndAKNative",
+                        "asian","blackAfAmerican",
+                        "nativeHIOtherPacific","white"];
     var propertyListLength = propertyList.length;
 
     // These are the properties we will try to match to user input.
     var matchingTerms = ["firstName", "lastName"];
+    
 
+    //button text
+    
     var caveatText = "None Of The Above -- Add New Client";
     var noCaveatText = "Add New Client";
     var revertText = "Revert Changes";
@@ -415,12 +425,9 @@ $(function() {
         var entity = {};
         var entityIndex = $("#intakeForm #entityIndex").val();
         entity.personalId = entityIndex;
-        entity.firstName = $("#intakeForm #firstName").val();
-        entity.lastName = $("#intakeForm #lastName").val();
-        entity.ssn = $("#intakeForm #ssn").val();
-        entity.dob = $("#intakeForm #dob").val();
-        entity.gender = $("#intakeForm #gender").val();
-        entity.ethnicity = $("#intakeForm #ethnicity").val();
+        for (var i=0; i<propertyListLength; i++) {
+            entity[propertyList[i]] = $("#intakeForm #" + propertyList[i]).val();
+        }
         return entity;    
     }
 
@@ -526,7 +533,17 @@ $(function() {
             }
         });
         for (prop in newEntity) {
-            $("#intakeForm #" + prop).val(origEntity[prop]);
+            if ($("#intakeForm #" + prop).attr("type") == "checkbox") {
+                if (origEntity[prop] == true) {
+                    $("#intakeForm #" + prop).prop("checked", true);
+                }
+                else {
+                    $("#intakeForm #" + prop).prop("checked", false);
+                }
+            }
+            else {
+                $("#intakeForm #" + prop).val(origEntity[prop]);
+            }
         }
         refreshFormattedDOB();
         $("#intakeForm #backToResults").css("display", "inline-block");
