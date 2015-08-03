@@ -330,6 +330,7 @@ $(function() {
         // Reset all form fields.
         $("#intakeForm input[type='input']").val("");
         $("#intakeForm select option:first-of-type").prop("selected", true);
+        $("#intakeForm input[type='checkbox']").prop("checked", false);
         $("#intakeForm #pictureFrame").empty();
 
         var entity = null;
@@ -365,7 +366,10 @@ $(function() {
                     else if (elem.is("select")) {
                         elem.children("option").each(function() {
                             if ($(this).val() == entity[prop]) {
-                                $(this).attr("selected", true);
+                                $(this).prop("selected", true);
+                            }
+                            else{
+                                $(this).prop("selected", false);
                             }
                         });
                     }
