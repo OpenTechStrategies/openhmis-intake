@@ -10,10 +10,17 @@ $(function() {
             maxDate: rightNow.toDate(),
             onSelect: assignDOB,
             onOpen: function() {
-                // Remove the style showing the previously selected date and
-                // move the view to today.
+                var set_dob = $("#intakeForm #dob").val();
+                // Remove the style showing the previously selected date
                 $(this.el).find(".is-selected").removeClass("is-selected");
-                this.gotoToday();
+                // If no dob specified, move the view to today.
+                if (set_dob == ""){
+                    this.gotoToday();
+                }
+                else{
+                // Else, go to selected DOB
+                    this.setDate(set_dob);
+                }
             }
         });
 
