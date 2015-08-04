@@ -59,6 +59,10 @@ $(function() {
                 $("#searchForm #exportAll").click(function() {
                     exportAll();
                 });
+                $("#importAll").click(function() {
+                    importAll();
+                });
+
                 $("#intakeForm input").keyup(function(e) {
                     checkForChanges(data);
                 });
@@ -514,6 +518,25 @@ $(function() {
             saveAs(enrollments_downloadable, "Enrollment.csv"); 
         });
         console.log("DEBUG: done exporting enrollments");
+    }
+
+    function importAll() {
+        // get file
+        var formData = new FormData();
+        formData.append('file', $('input[type=file]')[0].files[0]);
+        $.ajax("/upload", {
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function(response) {
+            console.log(response);
+            // read each line of file
+            // for each line, check whether ssn exists via API
+            // if it does, put that line in a list of duplicates
+            // if it doesn't, POST that line to the API
+            // display any duplicates to the user
+        });
     }
 
     function switchToIntake(personalId, data_length, dataset) {
