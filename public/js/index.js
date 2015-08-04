@@ -84,6 +84,15 @@ $(function() {
                 $("#intakeForm #saveChanges").click(function() {
                     saveChanges();
                 });
+                $("#intakeForm #missing").on("change", function() {
+                    manageCheckboxes('missing');
+                });
+                $("#intakeForm #unknown").on("change", function() {
+                    manageCheckboxes('unknown');
+                });
+                $("#intakeForm #refused").on("change", function() {
+                    manageCheckboxes('refused');
+                });
                 switchToSearch(false);
             });
 
@@ -333,11 +342,26 @@ $(function() {
         $("#intake").css("display", "none");
     }
 
+    function manageCheckboxes(checkbox_id){
+        //if checked
+        var elem = $("#intakeForm #" + checkbox_id);
+        if ( elem.prop("checked") == true) {
+            $(".race").not(elem).prop("checked", false);
+            $(".race").not(elem).prop("disabled", true);
+        }
+        //if unchecked, re-enable
+        else {
+            $(".race").prop("disabled", false);
+        }
+    }
+                    
     function switchToIntake(personalId, data_length, dataset) {
         // Reset all form fields.
         $("#intakeForm input[type='input']").val("");
-        $("#intakeForm select").prop("selectedIndex", "99");
+        // It's not clear whether this line is doing anything
+        $("#intakeForm select option:first-of-type").prop("selected", true);
         $("#intakeForm input[type='checkbox']").prop("checked", false);
+        $("#intakeForm input[type='checkbox']").prop("disabled", false);        
         $("#intakeForm #pictureFrame").empty();
 
         var entity = null;

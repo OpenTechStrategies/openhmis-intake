@@ -54,6 +54,7 @@ html(lang="en")
             .label.pct50 ethnicity
             .selectBox.pct50
               select#gender(name='gender')
+                option(value='99') Data not collected
                 option(value='1') Male
                 option(value='0') Female
                 option(value='2') Transgender Male to Female
@@ -61,40 +62,56 @@ html(lang="en")
                 option(value='4') Other
                 option(value='8') Client doesn't know
                 option(value='9') Client Refused
-                option(value='99') Data not collected
             .selectBox.pct50
               select#ethnicity(name='ethnicity')
+                option(value='99') Data not collected
                 option(value='105') Hispanic/Latino
                 option(value='104') Non-Hispanic/Non-Latino
                 option(value='8') Client doesn't know
                 option(value='9') Client Refused
-                option(value='99') Data not collected
           input#index(name='index', type='hidden')
           input#picture(name='picture', type='hidden')
           input#dob(name='DOB', type='hidden')
           .label.pct100 race
-          div.pct100
+          div.pct50
             label
             input.race#asian(name='race[]' value='5' type='checkbox' )
             | Asian
-            br
-            label
-            input.race#blackAfAmerican(name='race[]' value='6' type='checkbox' )
-            | Black or African American
             br
             label
             input.race#amIndAKNative(name='race[]' value='7' type='checkbox' )
             | American Indian or Alaska Native
             br
             label
+            input.race#nativeHIOtherPacific(name='race[]' value='9' type='checkbox' )
+            | Native Hawaiian or Other Pacific Islander
+            br
+            label
+            input.race.single_checkbox#missing(name='race[]' value='99' type='checkbox' )
+            | Data not collected
+            br
+          div.pct50
+            label
+            input.race#blackAfAmerican(name='race[]' value='6' type='checkbox' )
+            | Black or African American
+            br
+            label
             input.race#white(name='race[]' value='8' type='checkbox' )
             | White
             br
             label
-            input.race#nativeHIOtherPacific(name='race[]' value='9' type='checkbox' )
-            | Native Hawaiian or Other Pacific Islander
+            input.race#other(name='race[]' value='14' type='checkbox' )
+            | Other
             br
-          input#entityIndex(name='entityIndex', type='hidden')
+            label
+            input.race.single_checkbox#unknown(name='race[]' value='15' type='checkbox' )
+            | Client doesn't know
+            br
+            label
+            input.race.single_checkbox#refused(name='race[]' value='16' type='checkbox' )
+            | Client refused
+            br
+            input#entityIndex(name='entityIndex', type='hidden')
           div.buttonBox
             button#backToResults(type='button') Back to Results
             button#revertChanges(type='button') Revert Changes
