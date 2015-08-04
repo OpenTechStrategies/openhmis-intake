@@ -25,6 +25,9 @@ html(lang="en")
         img(src='img/OpenHMIS-logo.jpg')
       div#search
         h1 Client Search
+        form(action="/upload", method="post", enctype="multipart/form-data")
+          input#import_file(type='file' name="import.csv")
+          button#importAll(type='submit')
         form#searchForm
           div.form-group
             input#searchField.form-control(name='searchField', type='text', placeholder='search by first or last name')

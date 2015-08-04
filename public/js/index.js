@@ -92,6 +92,7 @@ $(function() {
     var revertText = "Revert Changes";
     var backText = "Back to Results";
     var exportAllText = "Example Export -- All Clients and Enrollments";
+    var importAllText = "Example Import";
 
     /*
      * Takes a user-entered string and returns the number of matching
@@ -309,6 +310,7 @@ $(function() {
             $("#searchForm #results").empty();
             $("#addNewClient").text(noCaveatText);
             $("#exportAll").text(exportAllText);
+            $("#importAll").text(importAllText);
             $("#searchForm #addNewClient").prop("disabled", true);
         }
         $("#search").css("display", "block");
