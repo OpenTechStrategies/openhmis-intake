@@ -522,6 +522,7 @@ $(function() {
 
     function importAll() {
         // get file
+        // need to check to make sure that it is a csv file, here
         var formData = new FormData();
         formData.append('file', $('input[type=file]')[0].files[0]);
         $.ajax("/upload", {
@@ -530,12 +531,14 @@ $(function() {
             processData: false,
             contentType: false
         }).done(function(response) {
-            console.log(response);
             // read each line of file
+            var result = Papa.parse(response);
+            console.log("DEBUG: " + result);
+            // loop through array
             // for each line, check whether ssn exists via API
-            // if it does, put that line in a list of duplicates
-            // if it doesn't, POST that line to the API
-            // display any duplicates to the user
+            // if it does, put that record in a list of possible duplicates
+            // if it doesn't, POST that record to the API
+            // display the list of possible duplicates to the user
         });
     }
 
