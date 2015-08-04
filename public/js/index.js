@@ -336,7 +336,7 @@ $(function() {
     function switchToIntake(personalId, data_length, dataset) {
         // Reset all form fields.
         $("#intakeForm input[type='input']").val("");
-        $("#intakeForm select option:first-of-type").prop("selected", true);
+        $("#intakeForm select").prop("selectedIndex", "99");
         $("#intakeForm input[type='checkbox']").prop("checked", false);
         $("#intakeForm #pictureFrame").empty();
 
