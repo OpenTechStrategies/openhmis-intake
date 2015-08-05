@@ -322,8 +322,6 @@ $(function() {
     }
 
     function exportAll() {
-        console.log("DEBUG: calling exportAll()");
-
         /* For now we implement the downloadable-file functionality
          * entirely on the browser side, even though in the long-term
          * doing it in the intermediary node server is probably right.
@@ -435,22 +433,11 @@ $(function() {
          */  
 
         // Export all clients.
-        console.log("DEBUG: exporting clients");
         $.ajax("/clients", {
             method: "GET",
             dataType: "json"
         }).done(function(clients) {
             console.log("DEBUG: fetched clients for export: " + JSON.stringify(clients));
-            var num_clients = clients.length;
-            console.log("       num clients: " + num_clients);
-            for (var i = 0; i < num_clients; i++) {
-                console.log("       client: " + JSON.stringify(clients[i]));
-            };
-            // Create a downloadable for clients.  Note it's still
-            // JSON, not CSV, and the JSON is still pretty opaque --
-            // it's just "[object Object]" over and over.  We'll
-            // unpack it when we're really creating CSV, of course.
-
             // UDE columns to export to CSV (in progress):
             //
             //   3.13 PersonalID (3.13.1)
@@ -477,47 +464,79 @@ $(function() {
             //                      no Veteran Status data.
             //   4.41 Veteran Information
             
-            var clients_downloadable = new Blob(clients, {type: "text/plain;charset=utf-8"});
+            // Initialize the CSV with a header row.
+            var clients_csv =
+                '"OrganizationID",' + 
+                '"PersonalIdentificationNumber",' +
+                '"LegalFirstName",' +
+                '"LegalMiddleName",' +
+                '"LegalLastName",' +
+                '"LegalSuffix",' +
+                '"SocialSecurityNumber",' +
+                '"SocialSecNumberQualityCode",' +
+                '"DateOfBirth",' +
+                '"DateOfBirthQualityCode",' +
+                '"PrimaryRace",' +
+                '"SecondaryRace",' +
+                '"Ethnicity",' +
+                '"Gender",' +
+                '"DateAdded",' +
+                '"DateUpdated",' +
+                '"UpdateOrDelete",' +
+                '"IdentityVerification",' +
+                '"ReleaseOfInformation",' +
+                '"ExportIDStr"\n';
+            for (var i = 0; i < clients.length; i++) {
+                c = clients[i];
+                // Assemble the row.  Note our dates come out as
+                // YYYY-MM-DD, which is correct according to
+                // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+                // page 9 top, even though some existing HMIS software
+                // exports (and presumably imports) M/D/YYYY. 
+                var this_row = ""
+                    +       "99"                                       + ','  // OrganizationID
+                    +       (c.personalId ? c.personalId : "")         + ','  // PersonalIdentificationNumber
+                    + '"' + (c.firstName ? c.firstName : "")           + '",' // LegalFirstName
+                    + '"' + (c.middleName ? c.middleName : "")         + '",' // LegalMiddleName
+                    + '"' + (c.lastName ? c.lastName : "")             + '",' // LegalLastName
+                    + '"' + (c.nameSuffix ? c.nameSuffix : "")         + '",' // LegalSuffix
+                    + '"' + (c.ssn ? c.ssn : "")                       + '",' // SocialSecurityNumber
+                    + '"' + (c.ssnDataQuality ? c.ssnDataQuality : "") + '",' // SocialSecNumberQualityCode
+                    + '"' + (c.dob ? c.dob : "")                       + '",' // DateOfBirth
+                    + '"' + (c.dobDataQuality ? c.dobDataQuality : "") + '",' // DateOfBirthQualityCode
+                    + '"' + ""                                         + '",' // PrimaryRace 
+                    + '"' + ""                                         + '",' // SecondaryRace 
+                    + '"' + (c.ethnicity ? c.ethnicity : "")           + '",' // Ethnicity
+                    + '"' + (c.gender ? c.gender : "")                 + '",' // Gender
+                    + '"' + (c.dateCreated ? c.dateCreated : "")       + '",' // DateAdded
+                    + '"' + (c.dateUpdated ? c.dateUpdated : "")       + '",' // DateUpdated
+                    + '"' + ""                                         + '",' // UpdateOrDelete 
+                    +       ""                                         + ','  // IdentityVerification 
+                    +       ""                                         + ','  // ReleaseOfInformation 
+                    +       "1729"                                     + '';  // ExportIDStr
+                clients_csv += this_row + "\n";
+                // Some other fields, from a JSON represntation of a
+                // client, that we may need to properly construct the
+                // PrimaryRace and SecondaryRace CSV fields.
+                // 
+                //   "amIndAKNative":0,
+                //   "asian":0,
+                //   "blackAfAmerican":0,
+                //   "nativeHIOtherPacific":0,
+                //   "white":1,
+                //   "raceNone":8
+            };
+
+            // Build and export the zipfile.
+            var zipper = new JSZip();
+            var folder = zipper.folder("HMIS_Data");
             // We use the HUD 2014 standard name for this file,
             // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
             // Pages 17(bottom)-19
-            //
-            // NOTE: For some reason, this saveAs() can blank your
-            // console log in the Firefox Inspect Element window.  If
-            // you comment out the saveAs(), you'll see all the
-            // preceding console.log() output again.
-            saveAs(clients_downloadable, "Client.csv"); 
+            folder.file("Client.csv", clients_csv);
+            var zipfile = zipper.generate({type:"blob"});
+            saveAs(zipfile, "HMIS_Data.zip");
         });
-        console.log("DEBUG: done exporting clients");
-
-        // Export all enrollments.
-        console.log("DEBUG: exporting enrollments");
-        $.ajax("/enrollments", {
-            method: "GET",
-            dataType: "json"
-        }).done(function(enrollments) {
-            console.log("DEBUG: fetched enrollments for export: " + JSON.stringify(enrollments));
-            var num_enrollments = enrollments.length;
-            console.log("       num enrollments: " + num_enrollments);
-            for (var i = 0; i < num_enrollments; i++) {
-                console.log("       enrollment: " + JSON.stringify(enrollments[i]));
-            };
-            // Create a downloadable for enrollments.  Note it's still
-            // JSON, not CSV, and the JSON is still pretty opaque --
-            // it's just "[object Object]" over and over.  We'll
-            // unpack it when we're really creating CSV, of course.
-            var enrollments_downloadable = new Blob(enrollments, {type: "text/plain;charset=utf-8"});
-            // We use the HUD 2014 standard name for this file,
-            // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
-            // Pages 19(bottom)-23(top)
-            //
-            // NOTE: For some reason, this saveAs() can blank your
-            // console log in the Firefox Inspect Element window.  If
-            // you comment out the saveAs(), you'll see all the
-            // preceding console.log() output again.
-            saveAs(enrollments_downloadable, "Enrollment.csv"); 
-        });
-        console.log("DEBUG: done exporting enrollments");
     }
 
     function importAll() {
