@@ -30,6 +30,7 @@ html(lang="en")
         form(action="/upload", method="post", enctype="multipart/form-data" id="importForm")
           input#import_file(type='file' name="import.csv")
           button#importAll(type='button')
+          div#duplicate_notification
         form#searchForm
           div.form-group
             input#searchField.form-control(name='searchField', type='text', placeholder='search by first or last name')

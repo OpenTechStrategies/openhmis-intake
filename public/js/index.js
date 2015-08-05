@@ -1003,23 +1003,55 @@ $(function() {
                 ssn_array.push(dataset[client]['ssn']);
             }
             // loop through array
-            var line_counter = 1;
+            var line_counter = 0;
+            var duplicate_lines = "";
             for (var line in data_array){
-                if (data_array.hasOwnProperty(line)) {
+                //skip header row
+                if (line_counter != 0 && data_array.hasOwnProperty(line)) {
                     // for each line, check whether ssn exists via API
                     // if it does, put that record in a list of possible duplicates
                     if (ssn_array.indexOf(data_array[line][ssn_index]) > 0) {
-                        console.log("DEBUG: line " + line_counter + " already exists");
+                        duplicate_lines += "Line " + line_counter + " has a duplicate SSN<br>";
                     }
                     // if it doesn't, POST that record to the API
                     else {
-                        console.log("DEBUG: ready to import line: " + line_counter);
- 
+                        // get line into correct format for POSTing
+                        var new_client = {};
+                        new_client['personalId'] = data_array[line][1];
+                        new_client['firstName'] = data_array[line][2];
+                        new_client['middleName'] = data_array[line][3];
+                        new_client['lastName'] = data_array[line][4];
+                        new_client['nameSuffix'] = data_array[line][5];
+                        new_client['nameDataQuality'] = data_array[line][6];
+                        new_client['ssn'] = data_array[line][7];
+                        new_client['ssnDataQuality'] = data_array[line][8];
+                        new_client['dob'] = data_array[line][9];
+                        new_client['dobDataQuality'] = data_array[line][10];
+                        new_client['amIndAKNative'] = data_array[line][11];
+                        new_client['asian'] = data_array[line][12];
+                        new_client['blackAfAmerican'] = data_array[line][13];
+                        new_client['nativeHIOtherPacific'] = data_array[line][14];
+                        new_client['white'] = data_array[line][15];
+                        new_client['raceNone'] = data_array[line][16];
+                        new_client['ethnicity'] = data_array[line][17];
+                        new_client['gender'] = data_array[line][18];
+                        new_client['otherGender'] = data_array[line][19];
+                        new_client['veteranStatus'] = data_array[line][20];
+                        new_client['dateCreated'] = data_array[line][21];
+                        new_client['dateUpdated'] = data_array[line][22];
+                        // do the POST!
+                        $.ajax("/clients/", {
+                            method: "POST",
+                            data: new_client,
+                            always:  console.log("finished post")
+                        });
+
                     }
                 }
                 line_counter++;
             }
             // display the list of possible duplicates to the user
+            $("#duplicate_notification").text(duplicate_lines);
         });
     }
 
