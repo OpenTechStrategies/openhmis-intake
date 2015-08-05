@@ -615,7 +615,7 @@ $(function() {
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
                     + '"' + c.ssnDataQuality                           + '",'
-                //          DateOfBirth (3.3.1:
+                //          DateOfBirth (3.3.1):
                 //            Null, or Date in YYYY-MM-DD format
                     + '"' + (c.dob ? c.dob : "")                       + '",'
                 //          DateOfBirthQualityCode (3.3.2):
@@ -845,13 +845,13 @@ $(function() {
                     //            4  ==  Other relative
                     //            5  ==  Unrelated household member
                         +       e.relationshipToHoH                        + ','
-                    //          DateAdded (3.):
+                    //          DateAdded:
                     //            Date in YYYY-MM-DD hh:mm:ss format
                     //            TBD: Can the received data ever be null?  
                     //                 Is the exported field allowed to be null?
                     //                 Note the API doesn't provide hh:mm:ss in this case.
                         + '"' + e.dateCreated                              + '",'
-                    //          DateUpdated (3.):
+                    //          DateUpdated:
                     //            Date in YYYY-MM-DD hh:mm:ss format
                     //            TBD: Can the received data ever be null?  
                     //                 Is the exported field allowed to be null?
@@ -886,7 +886,7 @@ $(function() {
                     //          PersonalIdentificationNumber (3.13):
                     //            String of up to 32 chars
                         + '"' + e.personalId                               + '",'
-                    //          EnrollmentID (?):
+                    //          EnrollmentID:
                     //            TBD: Does this even belong here?  Well,
                     //            let's include it since we don't really
                     //            have a ProjectID or OrganizationID yet.
@@ -948,7 +948,7 @@ $(function() {
                     //                 Is the exported field allowed to be null?
                     //                 Note the API doesn't provide hh:mm:ss in this case.
                         + '"' + e.dateCreated                              + '",'
-                    //          DateUpdated (3.):
+                    //          DateUpdated:
                     //            Date in YYYY-MM-DD (with hh:mm:ss?) format
                     //            TBD: Can the received data ever be null?  
                     //                 Is the exported field allowed to be null?
