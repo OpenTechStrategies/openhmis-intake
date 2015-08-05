@@ -438,33 +438,84 @@ $(function() {
             dataType: "json"
         }).done(function(clients) {
             console.log("DEBUG: fetched clients for export: " + JSON.stringify(clients));
-            // UDE columns to export to CSV (in progress):
+            // The Universal Data Elements (UDE) export set here is
+            // defined by "HMIS-Data-Dictionary final Aug 2014.pdf",
+            // which appears to be a revision of
+            // https://www.hudexchange.info/resources/documents/HMIS-Data-Dictionary.pdf.
             //
-            //   3.13 PersonalID (3.13.1)
-            //   3.1 Name
-            //       3.1.1 First Name (null ok)
-            //       3.1.2 Middle Name (null ok)
-            //       3.1.3 Last Name (null ok)
-            //       3.1.4 Name Suffix (null ok)
-            //   3.2 Social Security Number (null ok) (string, double-quotes padded w/ leading zeros)
-            //   3.3 Date of Birth (null ok)
-            //   3.4 Race
-            //       3.4.1 AmIndAKNative (1 = American Indian or Alaska Native)
-            //       3.4.1 Asian (1 = Asian)
-            //       3.4.1 BlackAfAmerican (1 = Black or African American)
-            //       3.4.1 NativeHIOtherPacific (1 = Native Hawaiian or Other Pacific Islander)
-            //       3.4.1 White (1 = White)
-            //       3.4.1 RaceNone (null ok) (Non-null only if all other Race fields = 0 or 99)
-            //   3.5 Ethnicity (3.5.1)
-            //   3.6 Gender
-            //       3.6.1 Gender
-            //       3.6.A OtherGender (null ok)
-            //   3.7 Veteran Status (Export 99 (Data not collected)
-            //                      for all clients, including minors, for whom there is
-            //                      no Veteran Status data.
-            //   4.41 Veteran Information
+            // The former lists UDE in the tables of contents on p. 1,
+            // pointing to a detailed description starting on p. 27.
+            //
+            // The latter lists UDE in the table of contents on p. 2,
+            // pointing to a detailed description starting on p. 22.
+            //
+            // However, for UDE at least, the two documents agree
+            // perfectly on the set of elements included.
             
-            // Initialize the CSV with a header row.
+            var rightNow = moment();
+            var exportIdString = rightNow.format("YYYY-MM-DDThh:mm:ss.SSSSS")
+
+            // ::: Export.csv :::
+            // Every export contains an Export.csv file with exactly one row.
+            // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+            // p. 13.  The fields are:
+            //
+            //    ExportID (S32),
+            //    SourceID (S32, NULL OK),
+            //    SourceName (S50, NULL OK),
+            //    SourceContactFirst (S50, NULL OK),
+            //    SourceContactLast (S50, NULL OK),
+            //    SourceContactPhone (S10, NULL OK),
+            //    SourceContactExtension (S5, NULL OK),
+            //    SourceContactEmail (S70, NULL OK),
+            //    ExportDate (YYYY-MM-DD HH:mm:ss),
+            //    ExportStartDate (YYYY-MM-DD),
+            //    ExportEndDate (YYYY-MM-DD),
+            //    SoftwareName (S50),
+            //    SoftwareVersion (S50, NULL OK),
+            //    ExportPeriodType (1 == Updated; 2 == Effective; 3 == Reporting period; 4 == Other),
+            //    ExportDirective (1 == Delta refresh; 2 == Full refresh; NULL OK)
+            //
+            // Start with header row.
+            var export_csv =
+                '"ExportID",' +
+                '"SourceID",' +
+                '"SourceName",' +
+                '"SourceContactFirst",' +
+                '"SourceContactLast",' +
+                '"SourceContactPhone",' +
+                '"SourceContactExtension",' +
+                '"SourceContactEmail",' +
+                '"ExportDate",' +
+                '"ExportStartDate",' +
+                '"ExportEndDate",' +
+                '"SoftwareName",' +
+                '"SoftwareVersion",' +
+                '"ExportPeriodType",' +
+                '"ExportDirective"';
+            export_csv += "\n"
+            // Add the one data row.
+            export_csv +=
+                '"' + exportIdString + '",' +
+                ',' + // SourceID
+                '"' + "OpenHMIS Sample Data" + '",' +
+                ',' + // SourceContactFirst
+                ',' + // SourceContactLast
+                ',' + // SourceContactPhone
+                ',' + // SourceContactExtension
+                ',' + // SourceContactEmail
+                '"' + rightNow.format("YYYY-MM-DD HH:mm:ss") + '",' +
+                '"' + "1970-01-01" + '",' +
+                '"' + rightNow.format("YYYY-MM-DD") + '",' +
+                '"' + "OpenHMIS API Server" + '",' +
+                '"' + "0.0" + '",' +
+                '"' + "2" + '",' + // picking "2" for "Effective", somewhat randomly
+                '"' + "2" + '"'  + // picking "2" for "Full refresh", also randomly
+                "\n";
+
+            // ::: Client.csv :::
+            // Fields will be described inline in the data-production portion.
+            // Start with header row.
             var clients_csv =
                 '"OrganizationID",' + 
                 '"PersonalIdentificationNumber",' +
@@ -476,8 +527,12 @@ $(function() {
                 '"SocialSecNumberQualityCode",' +
                 '"DateOfBirth",' +
                 '"DateOfBirthQualityCode",' +
-                '"PrimaryRace",' +
-                '"SecondaryRace",' +
+                '"RaceAmericanIndianOrAlaskaNative",' +
+                '"RaceAsian",' +
+                '"RaceBlackOrAfricanAmerican",' +
+                '"RaceNativeHawaiianOrOtherPacificIslander",' +
+                '"RaceWhite",' +
+                '"RaceNone",' +
                 '"Ethnicity",' +
                 '"Gender",' +
                 '"DateAdded",' +
@@ -488,51 +543,142 @@ $(function() {
                 '"ExportIDStr"\n';
             for (var i = 0; i < clients.length; i++) {
                 c = clients[i];
+                // fooo
+                // "project.csv, funder.csv, organization.csv, inventory.csv, site.csv"
+                //
                 // Assemble the row.  Note our dates come out as
                 // YYYY-MM-DD, which is correct according to
                 // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
                 // page 9 top, even though some existing HMIS software
                 // exports (and presumably imports) M/D/YYYY. 
-                var this_row = ""
-                    +       "99"                                       + ','  // OrganizationID
-                    +       (c.personalId ? c.personalId : "")         + ','  // PersonalIdentificationNumber
-                    + '"' + (c.firstName ? c.firstName : "")           + '",' // LegalFirstName
-                    + '"' + (c.middleName ? c.middleName : "")         + '",' // LegalMiddleName
-                    + '"' + (c.lastName ? c.lastName : "")             + '",' // LegalLastName
-                    + '"' + (c.nameSuffix ? c.nameSuffix : "")         + '",' // LegalSuffix
-                    + '"' + (c.ssn ? c.ssn : "")                       + '",' // SocialSecurityNumber
-                    + '"' + (c.ssnDataQuality ? c.ssnDataQuality : "") + '",' // SocialSecNumberQualityCode
-                    + '"' + (c.dob ? c.dob : "")                       + '",' // DateOfBirth
-                    + '"' + (c.dobDataQuality ? c.dobDataQuality : "") + '",' // DateOfBirthQualityCode
-                    + '"' + ""                                         + '",' // PrimaryRace 
-                    + '"' + ""                                         + '",' // SecondaryRace 
-                    + '"' + (c.ethnicity ? c.ethnicity : "")           + '",' // Ethnicity
-                    + '"' + (c.gender ? c.gender : "")                 + '",' // Gender
-                    + '"' + (c.dateCreated ? c.dateCreated : "")       + '",' // DateAdded
-                    + '"' + (c.dateUpdated ? c.dateUpdated : "")       + '",' // DateUpdated
-                    + '"' + ""                                         + '",' // UpdateOrDelete 
-                    +       ""                                         + ','  // IdentityVerification 
-                    +       ""                                         + ','  // ReleaseOfInformation 
-                    +       "1729"                                     + '';  // ExportIDStr
-                clients_csv += this_row + "\n";
-                // Some other fields, from a JSON represntation of a
-                // client, that we may need to properly construct the
-                // PrimaryRace and SecondaryRace CSV fields.
-                // 
-                //   "amIndAKNative":0,
-                //   "asian":0,
-                //   "blackAfAmerican":0,
-                //   "nativeHIOtherPacific":0,
-                //   "white":1,
-                //   "raceNone":8
+                
+                var c_date_created_str = null;
+                if (c.dateCreated) {
+                    c_date_created_str = moment(c.dateCreated).format("YYYY-MM-DD hh:mm:ss");
+                }
+                var c_date_updated_str = null;
+                if (c.dateUpdated) {
+                    c_date_updated_str = moment(c.dateUpdated).format("YYYY-MM-DD hh:mm:ss");
+                }
+                clients_csv += ""
+                //          OrganizationID:
+                //            TBD: We're making this up for now.
+                    +       "1729"                                     + ','
+                //          PersonalIdentificationNumber (3.13):
+                //            String of up to 32 chars
+                    +       (c.personalId ? c.personalId : "")         + ','
+                //          LegalFirstName (3.1.1):
+                //            Null, or String of up to 50 chars
+                    + '"' + (c.firstName ? c.firstName : "")           + '",'
+                //          LegalMiddleName (3.1.2):
+                //            Null, or String of up to 50 chars
+                    + '"' + (c.middleName ? c.middleName : "")         + '",'
+                //          LegalLastName (3.1.3):
+                //            Null, or String of up to 50 chars
+                    + '"' + (c.lastName ? c.lastName : "")             + '",'
+                //          LegalSuffix (3.1.4):
+                //            Null, or String of up to 50 chars
+                    + '"' + (c.nameSuffix ? c.nameSuffix : "")         + '",'
+                //          NameDataQualityCode (3.1.5):
+                //            Integer, one of the following values:
+                //             1  ==  Full name reported
+                //             2  ==  Partial, street name, or code name reported
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    + '"' + (c.nameSuffix ? c.nameSuffix : "")         + '",'
+                //          Null, or SocialSecurityNumber (3.2.1):
+                //            String of up to 9 chars (so no hyphens)
+                    + '"' + (c.ssn ? c.ssn : "")                       + '",'
+                //          SocialSecNumberQualityCode (3.2.2):
+                //            Integer, one of the following values:
+                //             1  ==  Full SSN reported
+                //             2  ==  Approximate or partial SSN reported
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    + '"' + (c.ssnDataQuality ? c.ssnDataQuality : "") + '",'
+                //          DateOfBirth (3.3.1:
+                //            Null, or Date in YYYY-MM-DD format
+                    + '"' + (c.dob ? c.dob : "")                       + '",'
+                //          DateOfBirthQualityCode (3.3.2):
+                //            Integer, one of the following values:
+                //             1  ==  Full DOB reported
+                //             2  ==  Approximate or Partial DOB reported
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    + '"' + (c.dobDataQuality ? c.dobDataQuality : "") + '",'
+                //          Race - American Indian or Alaska Native (3.4.1.1):
+                //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
+                    + ''  + c.amIndAKNative                            + ','
+                //          Race - Asian (3.4.1.2):
+                //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
+                    + ''  + c.asian                                    + ','
+                //          Race - Black or African American (3.4.1.3):
+                //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
+                    + ''  + c.blackAfAmerican                          + ','
+                //          Race - Native Hawaiian or Other Pacific Islander (3.4.1.4):
+                //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
+                    + ''  + c.nativeHIOtherPacific                     + ','
+                //          Race - White (3.4.1.5):
+                //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
+                    + ''  + c.white                                    + ','
+                //          Race - None (3.4.1.6):
+                //            Non-null only if all other Race fields are 0 or 99.
+                //            If non-null, then Integer, one of the following values:
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    + ''  + (c.raceNone ? c.raceNone : "")             + ','
+                //          Ethnicity (3.5.1) 
+                //           Integer, one of the following values:
+                //             0  ==  Non-Hispanic/Non-Latino
+                //             1  ==  Hispanic/Latino
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                //
+                    + '"' + (c.ethnicity ? c.ethnicity : "")           + '",'
+                //          Gender (3.):
+                //           Integer, one of the following values:
+                //             0  ==  Female
+                //             1  ==  Male
+                //             2  ==  Transgender male to female
+                //             3  ==  Transgender female to male
+                //             4  ==  Other
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    + '"' + (c.gender ? c.gender : "")                 + '",'
+                //          DateAdded (3.):
+                //            Date in YYYY-MM-DD hh:mm:ss format
+                    + '"' + (c.dateCreated ? c_date_created_str : "")  + '",'
+                //          DateUpdated (3.):
+                //            Date in YYYY-MM-DD hh:mm:ss format
+                    + '"' + (c.dateUpdated ? c_date_updated_str : "")  + '",'
+                //          UpdateOrDelete:
+                //            TBD
+                    + '"' + ""                                         + '",'
+                //          IdentityVerification:
+                //            TBD
+                    +       ""                                         + ','
+                //          ReleaseOfInformation:
+                //            TBD
+                    +       ""                                         + ','
+                //          ExportIdStr:
+                //            Must be same as the ExportId from Export.csv.
+                    + '"' + exportIdString                             + '"'
+                    + "\n";
             };
 
             // Build and export the zipfile.
             var zipper = new JSZip();
             var folder = zipper.folder("HMIS_Data");
-            // We use the HUD 2014 standard name for this file,
+            // We use the HUD 2014 standard names for the files inside.
             // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
             // Pages 17(bottom)-19
+            folder.file("Export.csv", export_csv);
             folder.file("Client.csv", clients_csv);
             var zipfile = zipper.generate({type:"blob"});
             saveAs(zipfile, "HMIS_Data.zip");
