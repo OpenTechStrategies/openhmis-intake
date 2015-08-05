@@ -432,6 +432,67 @@ $(function() {
          * server it to the client.
          */  
 
+        var rightNow = moment();
+        var exportIdString = rightNow.format("YYYY-MM-DDThh:mm:ss.SSSSS")
+
+        // ::: Export.csv :::
+        // Every export contains an Export.csv file with exactly one row.
+        // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+        // p. 13.  The fields are:
+        //
+        //    ExportID (S32),
+        //    SourceID (S32, NULL OK),
+        //    SourceName (S50, NULL OK),
+        //    SourceContactFirst (S50, NULL OK),
+        //    SourceContactLast (S50, NULL OK),
+        //    SourceContactPhone (S10, NULL OK),
+        //    SourceContactExtension (S5, NULL OK),
+        //    SourceContactEmail (S70, NULL OK),
+        //    ExportDate (YYYY-MM-DD HH:mm:ss),
+        //    ExportStartDate (YYYY-MM-DD),
+        //    ExportEndDate (YYYY-MM-DD),
+        //    SoftwareName (S50),
+        //    SoftwareVersion (S50, NULL OK),
+        //    ExportPeriodType (1 == Updated; 2 == Effective; 3 == Reporting period; 4 == Other),
+        //    ExportDirective (1 == Delta refresh; 2 == Full refresh; NULL OK)
+        //
+        // Start with header row.
+        var export_csv =
+            '"ExportID",' +
+            '"SourceID",' +
+            '"SourceName",' +
+            '"SourceContactFirst",' +
+            '"SourceContactLast",' +
+            '"SourceContactPhone",' +
+            '"SourceContactExtension",' +
+            '"SourceContactEmail",' +
+            '"ExportDate",' +
+            '"ExportStartDate",' +
+            '"ExportEndDate",' +
+            '"SoftwareName",' +
+            '"SoftwareVersion",' +
+            '"ExportPeriodType",' +
+            '"ExportDirective"';
+        export_csv += "\n"
+        // Add the one data row.
+        export_csv +=
+            '"' + exportIdString + '",' +
+            ',' + // SourceID
+            '"' + "OpenHMIS Sample Data" + '",' +
+            ',' + // SourceContactFirst
+            ',' + // SourceContactLast
+            ',' + // SourceContactPhone
+            ',' + // SourceContactExtension
+            ',' + // SourceContactEmail
+            '"' + rightNow.format("YYYY-MM-DD HH:mm:ss") + '",' +
+            '"' + "1970-01-01" + '",' +
+            '"' + rightNow.format("YYYY-MM-DD") + '",' +
+            '"' + "OpenHMIS API Server" + '",' +
+            '"' + "0.0" + '",' +
+            '"' + "2" + '",' + // picking "2" for "Effective", somewhat randomly
+            '"' + "2" + '"'  + // picking "2" for "Full refresh", also randomly
+            "\n";
+
         // Export all clients.
         $.ajax("/clients", {
             method: "GET",
@@ -452,67 +513,6 @@ $(function() {
             // However, for UDE at least, the two documents agree
             // perfectly on the set of elements included.
             
-            var rightNow = moment();
-            var exportIdString = rightNow.format("YYYY-MM-DDThh:mm:ss.SSSSS")
-
-            // ::: Export.csv :::
-            // Every export contains an Export.csv file with exactly one row.
-            // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
-            // p. 13.  The fields are:
-            //
-            //    ExportID (S32),
-            //    SourceID (S32, NULL OK),
-            //    SourceName (S50, NULL OK),
-            //    SourceContactFirst (S50, NULL OK),
-            //    SourceContactLast (S50, NULL OK),
-            //    SourceContactPhone (S10, NULL OK),
-            //    SourceContactExtension (S5, NULL OK),
-            //    SourceContactEmail (S70, NULL OK),
-            //    ExportDate (YYYY-MM-DD HH:mm:ss),
-            //    ExportStartDate (YYYY-MM-DD),
-            //    ExportEndDate (YYYY-MM-DD),
-            //    SoftwareName (S50),
-            //    SoftwareVersion (S50, NULL OK),
-            //    ExportPeriodType (1 == Updated; 2 == Effective; 3 == Reporting period; 4 == Other),
-            //    ExportDirective (1 == Delta refresh; 2 == Full refresh; NULL OK)
-            //
-            // Start with header row.
-            var export_csv =
-                '"ExportID",' +
-                '"SourceID",' +
-                '"SourceName",' +
-                '"SourceContactFirst",' +
-                '"SourceContactLast",' +
-                '"SourceContactPhone",' +
-                '"SourceContactExtension",' +
-                '"SourceContactEmail",' +
-                '"ExportDate",' +
-                '"ExportStartDate",' +
-                '"ExportEndDate",' +
-                '"SoftwareName",' +
-                '"SoftwareVersion",' +
-                '"ExportPeriodType",' +
-                '"ExportDirective"';
-            export_csv += "\n"
-            // Add the one data row.
-            export_csv +=
-                '"' + exportIdString + '",' +
-                ',' + // SourceID
-                '"' + "OpenHMIS Sample Data" + '",' +
-                ',' + // SourceContactFirst
-                ',' + // SourceContactLast
-                ',' + // SourceContactPhone
-                ',' + // SourceContactExtension
-                ',' + // SourceContactEmail
-                '"' + rightNow.format("YYYY-MM-DD HH:mm:ss") + '",' +
-                '"' + "1970-01-01" + '",' +
-                '"' + rightNow.format("YYYY-MM-DD") + '",' +
-                '"' + "OpenHMIS API Server" + '",' +
-                '"' + "0.0" + '",' +
-                '"' + "2" + '",' + // picking "2" for "Effective", somewhat randomly
-                '"' + "2" + '"'  + // picking "2" for "Full refresh", also randomly
-                "\n";
-
             // ::: Client.csv :::
             // Fields will be described inline in the data-production portion.
             // Start with header row.
