@@ -543,15 +543,12 @@ $(function() {
                 '"ExportIDStr"\n';
             for (var i = 0; i < clients.length; i++) {
                 c = clients[i];
-                // fooo
-                // "project.csv, funder.csv, organization.csv, inventory.csv, site.csv"
-                //
+
                 // Assemble the row.  Note our dates come out as
                 // YYYY-MM-DD, which is correct according to
                 // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
                 // page 9 top, even though some existing HMIS software
                 // exports (and presumably imports) M/D/YYYY. 
-                
                 var c_date_created_str = null;
                 if (c.dateCreated) {
                     c_date_created_str = moment(c.dateCreated).format("YYYY-MM-DD hh:mm:ss");
