@@ -37,8 +37,16 @@ To run the web service:
 
 2. Start the application
 
+  * Note: some unix based systems have a name conflict and you must type `nodejs` rather than `node`.
+
   ```shell
     $> node server.js
   ```
 
-  * Note: some unix based systems have a name conflict and you must type `nodejs server.js` rather than node.
+  or maybe:
+
+  ```shell
+    $> node_modules/.bin/forever -da start --watchDirectory . -l forever.log -o out.log -e err.log server.js
+  ```
+
+  (in the latter case, use `node_modules/.bin/forever stopall` later to stop the application).
