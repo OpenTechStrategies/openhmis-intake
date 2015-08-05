@@ -1,0 +1,70 @@
+[
+  {
+    "projectId": "1",
+    "projectName": "Example Project",
+    "projectCoCs": [
+      {
+        "projectCoCId": "1",
+        "projectId": "1",
+        "coCCode": "EXMPL",
+        "inventories": [
+          {
+            "inventoryId": "1",
+            "projectCoCId": "1",
+            "informationDate": "2015-08-04",
+            "householdType": 0,
+            "bedType": 1,
+            "availability": 1,
+            "unitInventory": 10,
+            "bedInventory": 10,
+            "chBedInventory": 10,
+            "vetBedInventory": 10,
+            "youthBedInventory": 10,
+            "youthAgeGroup": 1,
+            "inventoryStartDate": "2015-08-04",
+            "inventoryEndDate": "2015-08-04",
+            "hmisParticipatingBeds": 10,
+            "dateCreated": "2015-08-04",
+            "dateUpdated": "2015-08-04"
+          }
+        ],
+        "sites": [
+          {
+            "siteId": "1",
+            "projectCoCId": "1",
+            "principalSite": 1,
+            "geocode": "11.1'11.1",
+            "address": "123 Fake St",
+            "city": "Fakesville",
+            "state": "GA",
+            "zip": "12345",
+            "dateCreated": "2015-08-04",
+            "dateUpdated": null
+          }
+        ],
+        "dateCreated": "2015-08-04",
+        "dateUpdated": "2015-08-04"
+      }
+    ],
+    "continuumProject": 1,
+    "projectType": 1,
+    "residentialAffiliation": 1,
+    "resProjectId": "0",
+    "trackingMethod": 3,
+    "funders": [
+      {
+        "funderId": "1",
+        "projectId": "1",
+        "funder": 1,
+        "grantId": "1234",
+        "startDate": "2015-08-04",
+        "endDate": "2015-08-04",
+        "dateCreated": "2015-08-04",
+        "dateUpdated": "2015-08-04"
+      }
+    ],
+    "targetPopulation": 1,
+    "dateCreated": "2015-08-04",
+    "dateUpdated": "2015-08-04"
+  }
+]

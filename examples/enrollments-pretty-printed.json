@@ -1,0 +1,4566 @@
+[
+  {
+    "enrollmentId": "46521",
+    "personalId": "336788",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-06-07",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-06-08",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "46932",
+    "personalId": "336825",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-06-14",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-06-15",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "47381",
+    "personalId": "516827",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-06-20",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-06-21",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "48041",
+    "personalId": "518207",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-06-27",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-06-28",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "57385",
+    "personalId": "518207",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-09-30",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-10-01",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "57471",
+    "personalId": "537807",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-10-02",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-10-03",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "57691",
+    "personalId": "538291",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-10-03",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-10-04",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "57692",
+    "personalId": "538293",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-10-03",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-10-04",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "57693",
+    "personalId": "538294",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2005-10-03",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2005-10-04",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "71188",
+    "personalId": "518207",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-01-17",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-01-18",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "73107",
+    "personalId": "537807",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-01-31",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-02-01",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "73108",
+    "personalId": "537807",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-01-31",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-02-01",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "73109",
+    "personalId": "538291",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-01-31",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-02-01",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "73111",
+    "personalId": "538293",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-01-31",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-02-01",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "73259",
+    "personalId": "537807",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-02-01",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-02-02",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "92640",
+    "personalId": "595827",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2006-06-27",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2006-06-28",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "232908",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2008-03-18",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2008-03-21",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "238405",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2008-04-10",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2008-04-11",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "238411",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2008-04-10",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2008-04-11",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "267402",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2008-08-17",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2008-08-18",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "292754",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2008-11-11",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233173,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233173,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233173,
+    "dateOfPathStatus": 1438763233173,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233173,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233173,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233173,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2008-11-12",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "403733",
+    "personalId": "432713",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2011-12-18",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2011-12-19",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "403734",
+    "personalId": "432713",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2011-12-18",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2011-12-19",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "420778",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2013-12-29",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2013-12-30",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "420779",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2013-12-29",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2014-01-06",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "452637",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2014-09-10",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2014-09-12",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "452793",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2014-12-03",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2014-12-04",
+    "dateUpdated": "2015-05-08"
+  },
+  {
+    "enrollmentId": "452917",
+    "personalId": "715839",
+    "projectExit": {
+      "exitId": null,
+      "enrollmentId": null,
+      "projectExitDate": null,
+      "destinationTypeCode": null,
+      "otherDestination": null,
+      "assessmentDisposition": null,
+      "otherDisposition": null,
+      "housingAssessment": null,
+      "subsidyInformation": null,
+      "connectionWithSoar": null,
+      "employedInformationDate": null,
+      "employed": null,
+      "employmentType": null,
+      "notEmployedReason": null,
+      "generalHealthStatus": null,
+      "dentalHealthStatus": null,
+      "mentalHealthStatus": null,
+      "writtenAftercarePlan": null,
+      "assistanceMainstreamBenefits": null,
+      "permanentHousingPlacement": null,
+      "temporaryShelterPlacement": null,
+      "exitCounciling": null,
+      "furtherFollowupServices": null,
+      "scheduledFollowupContacts": null,
+      "resourcePackage": null,
+      "otherAftercarePlanOrAction": null,
+      "projectCompletionStatus": null,
+      "earlyExitReason": null,
+      "earlyExpulsionReason": null,
+      "familyReunificationCode": null
+    },
+    "disablingCondition": 99,
+    "residencePrior": 99,
+    "otherResidence": "",
+    "residencePriorLengthOfStay": 99,
+    "entryDate": "2015-04-23",
+    "householdId": "",
+    "relationshipToHoH": 99,
+    "clientLocationInformationDate": 1438763233174,
+    "cocCode": "",
+    "continuouslyHomelessOneYear": 99,
+    "timesHomelessInPastThreeYears": 99,
+    "monthsHomelessPastThreeYears": 99,
+    "monthsHomelessThisTime": 0,
+    "statusDocumentedCode": 99,
+    "housingStatus": 99,
+    "incomeSources": [
+      
+    ],
+    "nonCashBenefits": [
+      
+    ],
+    "healthInsurances": [
+      
+    ],
+    "physicalDisabilities": [
+      
+    ],
+    "developmentalDisabilities": [
+      
+    ],
+    "chronicHealthConditions": [
+      
+    ],
+    "hivAidsStatuses": [
+      
+    ],
+    "mentalHealthProblems": [
+      
+    ],
+    "substanceAbuses": [
+      
+    ],
+    "domesticAbuses": [
+      
+    ],
+    "contacts": [
+      
+    ],
+    "dateOfEngagement": null,
+    "services": [
+      
+    ],
+    "financialAssistances": [
+      
+    ],
+    "referrals": [
+      
+    ],
+    "residentialMoveInDate": 1438763233174,
+    "inPermanentHousing": 99,
+    "permanentHousingMoveDate": 1438763233174,
+    "dateOfPathStatus": 1438763233174,
+    "clientEnrolledInPath": 99,
+    "reasonNotEnrolled": 99,
+    "dateOfBcpStatus": 1438763233174,
+    "fysbYouth": 99,
+    "reasonNoServices": 99,
+    "sexualOrientation": 99,
+    "lastGradeCompleted": 99,
+    "schoolStatus": 99,
+    "employedInformationDate": 1438763233174,
+    "employed": 99,
+    "employmentType": 99,
+    "notEmployedReason": 99,
+    "generalHealthStatus": 99,
+    "dentalHealthStatus": 99,
+    "mentalHealthStatus": 99,
+    "pregnancyStatusCode": 99,
+    "pregnancyDueDate": 1438763233174,
+    "formerlyChildWelfare": 99,
+    "childWelfareYears": 99,
+    "childWelfareMonths": 0,
+    "formerWardJuvenileJustice": 99,
+    "juvenileJusticeYears": 99,
+    "juvenileJusticeMonths": 0,
+    "householdDynamics": 99,
+    "sexualOrientationGenderIdYouth": 99,
+    "sexualOrientationGenderIdFam": 99,
+    "housingIssuesYouth": 99,
+    "housingIssuesFam": 99,
+    "schoolEducationalIssuesYouth": 99,
+    "schoolEducationalIssuesFam": 99,
+    "unemploymentYouth": 99,
+    "unemploymentFam": 99,
+    "mentalHealthIssuesYouth": 99,
+    "mentalHealthIssuesFam": 99,
+    "healthIssuesYouth": 99,
+    "healthIssuesFam": 99,
+    "physicalDisabilityYouth": 99,
+    "physicalDisabilityFam": 99,
+    "mentalDisabilityYouth": 99,
+    "mentalDisabilityFam": 99,
+    "abuseAndNeglectYouth": 99,
+    "abuseAndNeglectFam": 99,
+    "alcoholDrugAbuseYouth": 99,
+    "alcoholDrugAbuseFam": 99,
+    "insufficientIncome": 99,
+    "activeMilitaryParent": 99,
+    "incarceratedParent": 99,
+    "incarceratedParentStatus": 99,
+    "referralSource": 99,
+    "countOUtreachReferralApproaches": 0,
+    "exchangeForSexPastThreeMonths": 99,
+    "countOfExchangeForSex": 99,
+    "askedOrForcedToExchangeForSex": 99,
+    "medicalAssistances": [
+      
+    ],
+    "worstHousingSituation": 99,
+    "percentAmi": 99,
+    "lastPermanentStreet": "",
+    "lastPermanentCity": "",
+    "lastPermanentState": "",
+    "lastPermanentZip": "",
+    "addressDataQuality": 99,
+    "dateCreated": "2015-04-24",
+    "dateUpdated": "2015-05-08"
+  }
+]
