@@ -528,6 +528,7 @@ $(function() {
                 '"LegalMiddleName",' +
                 '"LegalLastName",' +
                 '"LegalSuffix",' +
+                '"NameDataQuality",' +
                 '"SocialSecurityNumber",' +
                 '"SocialSecNumberQualityCode",' +
                 '"DateOfBirth",' +
@@ -602,7 +603,7 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    + '"' + (c.nameSuffix ? c.nameSuffix : "")         + '",'
+                    +       c.nameDataQuality                          + ','
                 //          Null, or SocialSecurityNumber (3.2.1):
                 //            String of up to 9 chars (so no hyphens)
                     + '"' + (c.ssn ? c.ssn : "")                       + '",'
@@ -613,7 +614,7 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    + '"' + (c.ssnDataQuality ? c.ssnDataQuality : "") + '",'
+                    + '"' + c.ssnDataQuality                           + '",'
                 //          DateOfBirth (3.3.1:
                 //            Null, or Date in YYYY-MM-DD format
                     + '"' + (c.dob ? c.dob : "")                       + '",'
@@ -624,7 +625,7 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    + '"' + (c.dobDataQuality ? c.dobDataQuality : "") + '",'
+                    + '"' + c.dobDataQuality                           + '",'
                 //          Race - American Indian or Alaska Native (3.4.1.1):
                 //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
                     +       c.amIndAKNative                            + ','
@@ -654,7 +655,7 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    +       (c.ethnicity ? c.ethnicity : "")           + ','
+                    +       c.ethnicity                                + ','
                 //          Gender (3.6.1):
                 //           Integer, one of the following values:
                 //             0  ==  Female
@@ -665,7 +666,7 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    +       (c.gender ? c.gender : "")                 + ','
+                    +       c.gender                                   + ','
                 //          VeteranStatus (3.7.1):
                 //           Integer, one of the following values:
                 //             0  ==  No
@@ -676,10 +677,10 @@ $(function() {
                     +       c.veteranStatus                            + ','
                 //          DateAdded:
                 //            Date in YYYY-MM-DD hh:mm:ss format
-                    +       (c.dateCreated ? '"' + c_date_created_str + '"' : "")  + ','
+                    +       c.dateCreated                              + ','
                 //          DateUpdated:
                 //            Date in YYYY-MM-DD hh:mm:ss format
-                    +       (c.dateUpdated ? '"' + c_date_updated_str + '"' : "")  + ','
+                    +       c.dateUpdated                              + ','
                 //          UpdateOrDelete:
                 //            TBD
                     + '"' + ""                                         + '",'
