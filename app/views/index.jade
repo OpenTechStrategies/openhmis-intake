@@ -27,10 +27,6 @@ html(lang="en")
         img(src='img/OpenHMIS-logo.jpg')
       div#search
         h1 Client Search
-        form(action="/upload", method="post", enctype="multipart/form-data" id="importForm")
-          input#import_file(type='file' name="import.csv")
-          button#importAll(type='button')
-          div#duplicate_notification
         form#searchForm
           div.form-group
             input#searchField.form-control(name='searchField', type='text', placeholder='search by first or last name')
@@ -40,6 +36,9 @@ html(lang="en")
           div.buttonBox
             button#addNewClient(type='button')
             button#exportAll(type='button')
+            form(action="/upload", method="post", enctype="multipart/form-data" id="importForm")
+              input#import_file(type='file' name="import.csv" style="opacity:0; height: 5px;")
+              button#importAll(type='button')
       div#intake
         h1 Client Intake
         form#intakeForm

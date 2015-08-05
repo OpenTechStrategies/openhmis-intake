@@ -24,6 +24,7 @@ $(function() {
             }).done(function(data) {
                 $("#index").data("full-data", data);
                 $("#searchForm #searchField").keyup(function() {
+                    $("#duplicate_box").remove();
                     var userString = $("#searchForm #searchField").val();
                     if (userString.length >= minSearchLength) {
                         var dataLength = data.length;
@@ -60,7 +61,10 @@ $(function() {
                     exportAll();
                 });
                 $("#importAll").click(function() {
-                    importAll();
+                    $("#import_file").trigger('click');
+                    $('#import_file').change(function(click) {
+                        importAll();
+                    });
                 });
 
                 $("#intakeForm input").keyup(function(e) {
@@ -1004,14 +1008,16 @@ $(function() {
             }
             // loop through array
             var line_counter = 0;
-            var duplicate_lines = "";
+            var duplicate_lines = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
+            var duplicate_flag = false;
             for (var line in data_array){
                 //skip header row
                 if (line_counter != 0 && data_array.hasOwnProperty(line)) {
                     // for each line, check whether ssn exists via API
                     // if it does, put that record in a list of possible duplicates
                     if (ssn_array.indexOf(data_array[line][ssn_index]) > 0) {
-                        duplicate_lines += "Line " + line_counter + " has a duplicate SSN<br>";
+                        duplicate_flag = true;
+                        duplicate_lines += "Line " + line_counter + " (" + data_array[line][2] + " " + data_array[line][4] + ") may be a duplicate. <br>";
                     }
                     // if it doesn't, POST that record to the API
                     else {
@@ -1051,7 +1057,10 @@ $(function() {
                 line_counter++;
             }
             // display the list of possible duplicates to the user
-            $("#duplicate_notification").text(duplicate_lines);
+            duplicate_lines += "</div>";
+            if (duplicate_flag){
+                $("#results").html(duplicate_lines);
+            }
         });
     }
 
