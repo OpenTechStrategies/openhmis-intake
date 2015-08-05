@@ -535,12 +535,18 @@ $(function() {
                 '"RaceNone",' +
                 '"Ethnicity",' +
                 '"Gender",' +
+                '"VeteranStatus",' +
+                // TBD: VeteranInformation (4.41) also belongs in Client.csv, according to 
+                // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+                // p.18 (top).  However, VeteranInformation is not in UDE, so we're not including 
+                // it here for now.
                 '"DateAdded",' +
                 '"DateUpdated",' +
                 '"UpdateOrDelete",' +
+                '"UserId",' +
                 '"IdentityVerification",' +
                 '"ReleaseOfInformation",' +
-                '"ExportIDStr"\n';
+                '"ExportIdStr"\n';
             for (var i = 0; i < clients.length; i++) {
                 c = clients[i];
 
@@ -608,26 +614,26 @@ $(function() {
                     + '"' + (c.dobDataQuality ? c.dobDataQuality : "") + '",'
                 //          Race - American Indian or Alaska Native (3.4.1.1):
                 //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
-                    + ''  + c.amIndAKNative                            + ','
+                    +       c.amIndAKNative                            + ','
                 //          Race - Asian (3.4.1.2):
                 //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
-                    + ''  + c.asian                                    + ','
+                    +       c.asian                                    + ','
                 //          Race - Black or African American (3.4.1.3):
                 //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
-                    + ''  + c.blackAfAmerican                          + ','
+                    +       c.blackAfAmerican                          + ','
                 //          Race - Native Hawaiian or Other Pacific Islander (3.4.1.4):
                 //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
-                    + ''  + c.nativeHIOtherPacific                     + ','
+                    +       c.nativeHIOtherPacific                     + ','
                 //          Race - White (3.4.1.5):
                 //            Integer: 0 = No; 1 = Yes; 99 = Data not collected
-                    + ''  + c.white                                    + ','
+                    +       c.white                                    + ','
                 //          Race - None (3.4.1.6):
                 //            Non-null only if all other Race fields are 0 or 99.
                 //            If non-null, then Integer, one of the following values:
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    + ''  + (c.raceNone ? c.raceNone : "")             + ','
+                    +       (c.raceNone ? c.raceNone : "")             + ','
                 //          Ethnicity (3.5.1) 
                 //           Integer, one of the following values:
                 //             0  ==  Non-Hispanic/Non-Latino
@@ -635,9 +641,8 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                //
-                    + '"' + (c.ethnicity ? c.ethnicity : "")           + '",'
-                //          Gender (3.):
+                    +       (c.ethnicity ? c.ethnicity : "")           + ','
+                //          Gender (3.6.1):
                 //           Integer, one of the following values:
                 //             0  ==  Female
                 //             1  ==  Male
@@ -647,7 +652,15 @@ $(function() {
                 //             8  ==  Client doesn't know
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
-                    + '"' + (c.gender ? c.gender : "")                 + '",'
+                    +       (c.gender ? c.gender : "")                 + ','
+                //          VeteranStatus (3.7.1):
+                //           Integer, one of the following values:
+                //             0  ==  No
+                //             1  ==  Yes
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    +       c.veteranStatus                            + ','
                 //          DateAdded (3.):
                 //            Date in YYYY-MM-DD hh:mm:ss format
                     + '"' + (c.dateCreated ? c_date_created_str : "")  + '",'
@@ -657,6 +670,11 @@ $(function() {
                 //          UpdateOrDelete:
                 //            TBD
                     + '"' + ""                                         + '",'
+                //          UserId:
+                //            TBD.  Typically the UserId associated
+                //            with the most recent update (i.e., as
+                //            of DateUpdated).
+                    +       ""                                         + ','
                 //          IdentityVerification:
                 //            TBD
                     +       ""                                         + ','
