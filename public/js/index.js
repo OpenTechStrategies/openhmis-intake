@@ -433,7 +433,7 @@ $(function() {
          */  
 
         var rightNow = moment();
-        var exportIdString = rightNow.format("YYYY-MM-DDThh:mm:ss.SSSSS");
+        var exportIdString = rightNow.format("YYYYMMDD-hhmmss.SSSSS");
 
         // Each of these will be the content of the corresponding CSV file.
         var export_csv = "";
@@ -717,6 +717,7 @@ $(function() {
                     '"EnrollmentID",' +
                     '"DisablingCondition",' +
                     '"ResidencePrior",' +
+                    '"OtherResidencePrior",' +
                     '"ResidencePriorLengthOfStay",' +
                     '"ProjectEntryDate",' +
                     '"HouseholdID",' +
@@ -810,7 +811,12 @@ $(function() {
                     //             9  ==  Client refused
                     //            99  ==  Data not collected
                         +       (e.residencePrior ? e.residencePrior : "") + ','
-                    //          residencePriorLengthOfStay (3.9.2):
+                    //          OtherResidencePrior (3.9.2.A)
+                    //            If ResidencePrior is 17 ("Other"), then this is S50; otherwise, it is null.
+                    //            TBD: But we don't check that condition here, because this is an exporter, 
+                    //                 not a data quality assurance tool.
+                        +       (e.otherResidence ? '"' + e.otherResidence + '"' : "")  + ','
+                    //          ResidencePriorLengthOfStay (3.9.2):
                     //           Integer, one of the following values:
                     //            10  ==  One day or less
                     //            11  ==  Two days to one week
@@ -824,7 +830,7 @@ $(function() {
                         +       (e.residencePriorLengthOfStay ? e.residencePriorLengthOfStay : "") + ','
                     //          ProjectEntryDate (3.10.1)
                     //           Date in YYYY-MM-DD format
-                    //           (TBD: Note that exitDate (3.11.1) is in Exit.csv)
+                    //           (Note that exitDate (3.11.1) is in Exit.csv)
                         + '"' + e.entryDate                                + '",'
                     //          HouseholdID (3.14.1)
                     //            String of up to 32 chars.
@@ -887,8 +893,10 @@ $(function() {
                         + '"' + e.enrollmentId                             + '",'
                     //          projectExit Date (3.11.1):
                     //           Date in YYYY-MM-DD format
-                    //           (TBD: Note that entryDate (3.10.1) is in Enrollment.csv)
-                        +       e.projectExit.projectExitDate              + ','
+                    //           (Note that entryDate (3.10.1) is in Enrollment.csv)
+                    //           TBD: According the spec this cannot be null, but it
+                    //                is null in our sample data, so we check here.
+                        +       (e.projectExit.projectExitDate ? '"' + e.projectExit.projectExitDate + '"' : "") + ','
                     //          DestinationType (3.12.1)
                     //           24  ==  Deceased
                     //            1  ==  Emergency shelter, including hotel or motel paid
