@@ -433,7 +433,19 @@ $(function() {
          */  
 
         var rightNow = moment();
-        var exportIdString = rightNow.format("YYYY-MM-DDThh:mm:ss.SSSSS")
+        var exportIdString = rightNow.format("YYYY-MM-DDThh:mm:ss.SSSSS");
+
+        // Each of these will be the content of the corresponding CSV file.
+        var export_csv = "";
+        var client_csv = "";
+        var enrollment_csv = "";
+        var exit_csv = "";
+
+        // We're not done until this has all the CSV file strings.
+        //
+        // TBD: There is surely a more Javascripty (promise-y?) way
+        //      to ensure completion than this kludge.
+        var completed = [];
 
         // ::: Export.csv :::
         // Every export contains an Export.csv file with exactly one row.
@@ -457,7 +469,7 @@ $(function() {
         //    ExportDirective (1 == Delta refresh; 2 == Full refresh; NULL OK)
         //
         // Start with header row.
-        var export_csv =
+        export_csv +=
             '"ExportID",' +
             '"SourceID",' +
             '"SourceName",' +
@@ -473,7 +485,7 @@ $(function() {
             '"SoftwareVersion",' +
             '"ExportPeriodType",' +
             '"ExportDirective"';
-        export_csv += "\n"
+        export_csv += "\n";
         // Add the one data row.
         export_csv +=
             '"' + exportIdString + '",' +
@@ -492,13 +504,13 @@ $(function() {
             '"' + "2" + '",' + // picking "2" for "Effective", somewhat randomly
             '"' + "2" + '"'  + // picking "2" for "Full refresh", also randomly
             "\n";
+        completed.push(export_csv);
 
         // Export all clients.
         $.ajax("/clients", {
             method: "GET",
             dataType: "json"
         }).done(function(clients) {
-            console.log("DEBUG: fetched clients for export: " + JSON.stringify(clients));
             // The Universal Data Elements (UDE) export set here is
             // defined by "HMIS-Data-Dictionary final Aug 2014.pdf",
             // which appears to be a revision of
@@ -516,7 +528,7 @@ $(function() {
             // ::: Client.csv :::
             // Fields will be described inline in the data-production portion.
             // Start with header row.
-            var clients_csv =
+            client_csv +=
                 '"OrganizationID",' + 
                 '"PersonalIdentificationNumber",' +
                 '"LegalFirstName",' +
@@ -543,10 +555,10 @@ $(function() {
                 '"DateAdded",' +
                 '"DateUpdated",' +
                 '"UpdateOrDelete",' +
-                '"UserId",' +
+                '"UserID",' +
                 '"IdentityVerification",' +
                 '"ReleaseOfInformation",' +
-                '"ExportIdStr"\n';
+                '"ExportID"\n';
             for (var i = 0; i < clients.length; i++) {
                 c = clients[i];
 
@@ -563,13 +575,21 @@ $(function() {
                 if (c.dateUpdated) {
                     c_date_updated_str = moment(c.dateUpdated).format("YYYY-MM-DD hh:mm:ss");
                 }
-                clients_csv += ""
+                client_csv += ""
                 //          OrganizationID:
-                //            TBD: We're making this up for now.
+                //            TBD: We're making this up for now.  It's
+                //            not clear that it even belongs in
+                //            Client.csv (the HMIS CSV spec does not
+                //            mention it there), but the example
+                //            Client.csv we received had it.  Perhaps
+                //            it really belongs in Export.csv instead?
+                //            But it's hard to know for sure whether
+                //            it's meant to be a per-export thing or a
+                //            per-client thing.  For now, make it up.
                     +       "1729"                                     + ','
                 //          PersonalIdentificationNumber (3.13):
                 //            String of up to 32 chars
-                    +       (c.personalId ? c.personalId : "")         + ','
+                    + '"' + c.personalId                               + '",'
                 //          LegalFirstName (3.1.1):
                 //            Null, or String of up to 50 chars
                     + '"' + (c.firstName ? c.firstName : "")           + '",'
@@ -661,17 +681,17 @@ $(function() {
                 //             9  ==  Client refused
                 //            99  ==  Data not collected
                     +       c.veteranStatus                            + ','
-                //          DateAdded (3.):
+                //          DateAdded:
                 //            Date in YYYY-MM-DD hh:mm:ss format
-                    + '"' + (c.dateCreated ? c_date_created_str : "")  + '",'
-                //          DateUpdated (3.):
+                    +       (c.dateCreated ? '"' + c_date_created_str + '"' : "")  + ','
+                //          DateUpdated:
                 //            Date in YYYY-MM-DD hh:mm:ss format
-                    + '"' + (c.dateUpdated ? c_date_updated_str : "")  + '",'
+                    +       (c.dateUpdated ? '"' + c_date_updated_str + '"' : "")  + ','
                 //          UpdateOrDelete:
                 //            TBD
                     + '"' + ""                                         + '",'
-                //          UserId:
-                //            TBD.  Typically the UserId associated
+                //          UserID:
+                //            TBD.  Typically the UserID associated
                 //            with the most recent update (i.e., as
                 //            of DateUpdated).
                     +       ""                                         + ','
@@ -681,23 +701,280 @@ $(function() {
                 //          ReleaseOfInformation:
                 //            TBD
                     +       ""                                         + ','
-                //          ExportIdStr:
-                //            Must be same as the ExportId from Export.csv.
+                //          ExportID:
+                //            Must be same as the ExportID from Export.csv.
+                    + '"' + exportIdString                             + '"'
+                    + "\n";
+            }
+            completed.push(client_csv);
+        });
+        
+        // Export enrollements.
+        $.ajax("/enrollments", {
+            method: "GET",
+            dataType: "json"
+        }).done(function(enrollments) {
+            // TBD: The example file we received was named
+            // ProgramParticipation.csv, but HMIS CSV spec says there
+            // should be an Enrollment.csv file, and that's what
+            // ProgramParticipation.csv sems most similar to.
+
+            // ::: Enrollment.csv :::
+            // Start with header row.
+            enrollment_csv +=
+                '"PersonalIdentificationNumber",' +
+                '"EnrollmentID",' +
+                '"DisablingCondition",' +
+                '"ResidencePrior",' +
+                '"ResidencePriorLengthOfStay",' +
+                '"ProjectEntryDate",' +
+                '"HouseholdID",' +
+                '"RelationshipToHoH",' +
+                '"DateCreated",' +
+                '"DateUpdated",' +
+                '"ExportID"\n';
+
+            // ::: Exit.csv :::
+            // Start with header row.
+            exit_csv +=
+                '"PersonalIdentificationNumber",' +
+                '"EnrollmentID",' +
+                '"ProjectExitDate",' +
+                '"DestinationType",' +
+                '"OtherDestination",' +
+                '"DateCreated",' +
+                '"DateUpdated",' +
+                '"ExportID"\n';
+
+            for (var i = 0; i < enrollments.length; i++) {
+                e = enrollments[i];
+
+                // The order of fields here starts on p. 21 of
+                // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+                enrollment_csv += ""
+                //          ProjectEntryID (5.6)
+                //            TBD: This does not seem to be fully
+                //            defined in the HMIS CSV spec, and
+                //            the example CSVs provided do not
+                //            contain it either.  For now, we punt.
+                //
+                //          OrganizationID:
+                //            TBD: The only field currently available
+                //            from "/enrollments" that might get us to
+                //            this is "enrollmentId", but looking
+                //            through the DTOs and especially through
+                //            the endpoints provided at
+                //            https://github.com/PCNI/OpenHMIS
+                //            (see e.g., tree/feature-compass_schema/\
+                //            src/main/java/org/openhmis/webservice),
+                //            I don't currently see a path to getting
+                //            the OrganizationID.  For now, we punt.
+                //
+                //          PersonalIdentificationNumber (3.13):
+                //            String of up to 32 chars
+                    + '"' + e.personalId                               + '",'
+                //          EnrollmentID (?):
+                //            TBD: Does this even belong here?  Well,
+                //            let's include it since we don't really
+                //            have a ProjectID or OrganizationID yet.
+                //            Let's call it a String of up to 32 chars
+                    + '"' + e.enrollmentId                             + '",'
+                //          DisablingCondition (3.8.1):
+                //           Integer, one of the following values:
+                //             0  ==  No
+                //             1  ==  Yes
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    +       (e.disablingCondition ? e.disablingCondition : "") + ','
+                //          residencePrior (3.9.1):
+                //           Integer, one of the following values:
+                //             1  ==  Emergency shelter, including hotel or motel paid for
+                //                    with emergency shelter voucher
+                //            15  ==  Foster care home or foster care group home
+                //             6  ==  Hospital or other residential non-psychiatric medical facility
+                //            14  ==  Hotel or motel paid for without emergency shelter voucher
+                //             7  ==  Jail, prison or juvenile detention facility
+                //            24  ==  Long-term care facility or nursing home
+                //            23  ==  Owned by client, no ongoing housing subsidy
+                //            21  ==  Owned by client, with ongoing housing subsidy
+                //             3  ==  Permanent housing for formerly homeless persons
+                //                    (such as: a CoC project; HUD legacy programs; or HOPWA PH)
+                //            16  ==  Place not meant for habitation (e.g., a vehicle, an abandoned
+                //                    building, bus/train/subway station/airport or anywhere outside)
+                //             4  ==  Psychiatric hospital or other psychiatric facility
+                //            22  ==  Rental by client, no ongoing housing subsidy
+                //            19  ==  Rental by client, with VASH subsidy
+                //            25  ==  Rental by client, with GPD TIP subsidy
+                //            20  ==  Rental by client, with other ongoing housing subsidy
+                //            26  ==  Residential project or halfway house with no homeless criteria
+                //            18  ==  Safe Haven
+                //            12  ==  Staying or living in a family member’s room, apartment or house
+                //            13  ==  Staying or living in a friend’s room, apartment or house
+                //             5  ==  Substance abuse treatment facility or detox center
+                //             2  ==  Transitional housing for homeless persons 
+                //                    (including homeless youth)
+                //            17  ==  Other
+                //             8  ==  Client doesn't know
+                //             9  ==  Client refused
+                //            99  ==  Data not collected
+                    +       (e.residencePrior ? e.residencePrior : "") + ','
+                //          residencePriorLengthOfStay (3.9.2):
+                //           Integer, one of the following values:
+                //            10  ==  One day or less
+                //            11  ==  Two days to one week
+                //             2  ==  More than one week, but less than one month
+                //             3  ==  One to three months
+                //             4  ==  More than three months, but less than one year
+                //             5  ==  One year or longer
+                //             8  ==  Client doesn't know
+                //             9  == Client refused
+                //            99 == Data not collected
+                    +       (e.residencePriorLengthOfStay ? e.residencePriorLengthOfStay : "") + ','
+                //          ProjectEntryDate (3.10.1)
+                //           Date in YYYY-MM-DD format
+                //           (TBD: Note that exitDate (3.11.1) is in Exit.csv)
+                    + '"' + e.entryDate                                + '",'
+                //          HouseholdID (3.14.1)
+                //            String of up to 32 chars.
+                //            According to the HMIS CSV spec, this can't be null.
+                //            I find that hard to believe, and wonder if the spec is just mistaken.
+                    + '"' + e.householdId                              + '",'
+                //          RelationshipToHoH (3.15.1)
+                //            1  ==  Self (head of household)
+                //            2  ==  Child
+                //            3  ==  Spouse or partner
+                //            4  ==  Other relative
+                //            5  ==  Unrelated household member
+                    +       e.relationshipToHoH                        + ','
+                //          DateAdded (3.):
+                //            Date in YYYY-MM-DD hh:mm:ss format
+                //            TBD: Can the received data ever be null?  
+                //                 Is the exported field allowed to be null?
+                //                 Note the API doesn't provide hh:mm:ss in this case.
+                    + '"' + e.dateCreated                              + '",'
+                //          DateUpdated (3.):
+                //            Date in YYYY-MM-DD hh:mm:ss format
+                //            TBD: Can the received data ever be null?  
+                //                 Is the exported field allowed to be null?
+                //                 Note the API doesn't provide hh:mm:ss in this case.
+                    + '"' + e.dateUpdated                              + '",'
+                //          ExportID:
+                //            Must be same as the ExportID from Export.csv.
+                    + '"' + exportIdString                             + '"'
+                    + "\n";
+
+                // The order of fields here starts on the bottom of p. 23 of
+                // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+                exit_csv += ""
+                //          ProjectEntryID (5.6)
+                //            TBD: This does not seem to be fully
+                //            defined in the HMIS CSV spec, and
+                //            the example CSVs provided do not
+                //            contain it either.  For now, we punt.
+                //
+                //          OrganizationID:
+                //            TBD: The only field currently available
+                //            from "/enrollments" that might get us to
+                //            this is "enrollmentId", but looking
+                //            through the DTOs and especially through
+                //            the endpoints provided at
+                //            https://github.com/PCNI/OpenHMIS
+                //            (see e.g., tree/feature-compass_schema/\
+                //            src/main/java/org/openhmis/webservice),
+                //            I don't currently see a path to getting
+                //            the OrganizationID.  For now, we punt.
+                //
+                //          PersonalIdentificationNumber (3.13):
+                //            String of up to 32 chars
+                    + '"' + e.personalId                               + '",'
+                //          EnrollmentID (?):
+                //            TBD: Does this even belong here?  Well,
+                //            let's include it since we don't really
+                //            have a ProjectID or OrganizationID yet.
+                //            Let's call it a String of up to 32 chars
+                    + '"' + e.enrollmentId                             + '",'
+                //          projectExit Date (3.11.1):
+                //           Date in YYYY-MM-DD format
+                //           (TBD: Note that entryDate (3.10.1) is in Enrollment.csv)
+                    +       e.projectExit.projectExitDate              + ','
+                //          DestinationType (3.12.1)
+                //           24  ==  Deceased
+                //            1  ==  Emergency shelter, including hotel or motel paid
+                //                   for pwith emergency shelter voucher
+                //           15  ==  Foster care home or foster care group home
+                //            6  ==  Hospital or other residential non-psychiatric medical facility
+                //           14  ==  Hotel or motel paid for without emergency shelter voucher
+                //            7  ==  Jail, prison or juvenile detention facility
+                //           25  ==  Long-term care facility or nursing home
+                //           26  ==  Moved from one HOPWA funded project to HOPWA PH
+                //           27  ==  Moved from one HOPWA funded project to HOPWA TH
+                //           11  ==  Owned by client, no ongoing housing subsidy
+                //           21  ==  Owned by client, with ongoing housing subsidy
+                //            3  ==  Permanent housing for formerly homeless persons
+                //                   (such as: CoC project; or HUD legacy programs; or HOPWA PH)
+                //           16  ==  Place not meant for habitation (e.g., a vehicle, an abandoned
+                //                   building, bus/train/subway station/airport or anywhere outside)
+                //            4  ==  Psychiatric hospital or other psychiatric facility
+                //           10  ==  Rental by client, no ongoing housing subsidy
+                //           19  ==  Rental by client, with VASH housing subsidy
+                //           28  ==  Rental by client, with GPD TIP housing subsidy
+                //           20  ==  Rental by client, with other ongoing housing subsidy
+                //           29  ==  Residential project or halfway house with no homeless criteria
+                //           18  ==  Safe Haven
+                //           22  ==  Staying or living with family, permanent tenure
+                //           12  ==  Staying or living with family, temporary tenure
+                //                   (e.g., room, apartment or house)
+                //           23  ==  Staying or living with friends, permanent tenure
+                //           13  ==  Staying or living with friends, temporary tenure
+                //                   (e.g., room apartment or house)
+                //            5  ==  Substance abuse treatment facility or detox center
+                //            2  ==  Transitional housing for homeless persons
+                //                   (including homeless youth)
+                //           17  ==  Other
+                //           30  ==  No exit interview completed
+                //            8  ==  Client doesn't know
+                //            9  ==  Client refused
+                //           99  ==  Data not collected
+                    +       (e.projectExit.destinationTypeCode ? e.projectExit.destinationTypeCode : "")  + ','
+                //          OtherDestination (3.12.2)
+                //           If destinationTypeCode is 17 ("Other"), then this is S50; otherwise, it is null.
+                //           TBD: But we don't check that condition here, because this is an exporter, 
+                //                not a data quality assurance tool.
+                    +       (e.projectExit.otherDestination ? '"' + e.projectExit.otherDestination + '"' : "")  + ','
+                //          DateAdded:
+                //            Date in YYYY-MM-DD (with hh:mm:ss?) format.  
+                //            TBD: Can the received data ever be null?  
+                //                 Is the exported field allowed to be null?
+                //                 Note the API doesn't provide hh:mm:ss in this case.
+                    + '"' + e.dateCreated                              + '",'
+                //          DateUpdated (3.):
+                //            Date in YYYY-MM-DD (with hh:mm:ss?) format
+                //            TBD: Can the received data ever be null?  
+                //                 Is the exported field allowed to be null?
+                //                 Note the API doesn't provide hh:mm:ss in this case.
+                    + '"' + e.dateUpdated                              + '",'
+                //          ExportID:
+                //            Must be same as the ExportID from Export.csv.
                     + '"' + exportIdString                             + '"'
                     + "\n";
             };
-
-            // Build and export the zipfile.
-            var zipper = new JSZip();
-            var folder = zipper.folder("HMIS_Data");
-            // We use the HUD 2014 standard names for the files inside.
-            // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
-            // Pages 17(bottom)-19
-            folder.file("Export.csv", export_csv);
-            folder.file("Client.csv", clients_csv);
-            var zipfile = zipper.generate({type:"blob"});
-            saveAs(zipfile, "HMIS_Data.zip");
+            completed.push(enrollment_csv);
+            completed.push(exit_csv);
         });
+
+        // Build and export the zipfile.
+        var zipper = new JSZip();
+        var folder = zipper.folder("HMIS_Data");
+        // We use the HUD 2014 standard names for the files inside.
+        // http://www.hudhdx.info/Resources/Vendors/4_0/HMISCSVSpecifications4_0FINAL.pdf
+        // Pages 17(bottom)-19
+        folder.file("Export.csv", export_csv);
+        folder.file("Client.csv", client_csv);
+        folder.file("Enrollment.csv", enrollment_csv);
+        folder.file("Exit.csv", exit_csv);
+        var zipfile = zipper.generate({type:"blob"});
+        saveAs(zipfile, "HMIS_Data.zip");
     }
 
     function importAll() {
