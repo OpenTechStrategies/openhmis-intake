@@ -989,11 +989,36 @@ $(function() {
         }).done(function(response) {
             // read each line of file
             var result = Papa.parse(response);
-            console.log("DEBUG: " + result);
+            // set the data as its own array
+            var data_array = result['data'];
+            // check whether there even is an ssn column (assumes there
+            // is a header row)
+            var data_header = data_array[0];
+            var ssn_index = data_header.indexOf("SocialSecurityNumber");
+            // get all existing ssn's
+            // full set of data retrieved via API
+            var dataset = $("#index").data("full-data");
+            var ssn_array = [];
+            for (var client in dataset){
+                ssn_array.push(dataset[client]['ssn']);
+            }
             // loop through array
-            // for each line, check whether ssn exists via API
-            // if it does, put that record in a list of possible duplicates
-            // if it doesn't, POST that record to the API
+            var line_counter = 1;
+            for (var line in data_array){
+                if (data_array.hasOwnProperty(line)) {
+                    // for each line, check whether ssn exists via API
+                    // if it does, put that record in a list of possible duplicates
+                    if (ssn_array.indexOf(data_array[line][ssn_index]) > 0) {
+                        console.log("DEBUG: line " + line_counter + " already exists");
+                    }
+                    // if it doesn't, POST that record to the API
+                    else {
+                        console.log("DEBUG: ready to import line: " + line_counter);
+ 
+                    }
+                }
+                line_counter++;
+            }
             // display the list of possible duplicates to the user
         });
     }
