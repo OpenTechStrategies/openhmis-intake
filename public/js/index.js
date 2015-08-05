@@ -95,7 +95,7 @@ $(function() {
     var noCaveatText = "Add New Client";
     var revertText = "Revert Changes";
     var backText = "Back to Results";
-    var exportAllText = "Example Export -- All Clients and Enrollments";
+    var exportAllText = "Example Export -- All Clients (UDE)";
     var importAllText = "Example Import";
 
     /*
