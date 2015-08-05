@@ -14,7 +14,11 @@ html(lang="en")
     script(type='text/javascript', src='js/lib/bootstrap.min.js')
     script(type='text/javascript', src='js/lib/moment.js')
     script(type='text/javascript', src='js/lib/pikaday.js')
+    script(type='text/javascript', src='js/lib/FileSaver.js/FileSaver.min.js')
+    script(type='text/javascript', src='js/lib/Blob.js/Blob.min.js')
+    script(type='text/javascript', src='js/lib/jszip/dist/jszip.min.js')
     script(type='text/javascript', src='js/lib/sampleData.js')
+    script(type='text/javascript', src='js/papaparse.js')
     script(type='text/javascript', src='js/index.js')
 
   body
@@ -23,6 +27,9 @@ html(lang="en")
         img(src='img/OpenHMIS-logo.jpg')
       div#search
         h1 Client Search
+        form(action="/upload", method="post", enctype="multipart/form-data" id="importForm")
+          input#import_file(type='file' name="import.csv")
+          button#importAll(type='button')
         form#searchForm
           div.form-group
             input#searchField.form-control(name='searchField', type='text', placeholder='search by first or last name')
@@ -31,6 +38,7 @@ html(lang="en")
           div#results
           div.buttonBox
             button#addNewClient(type='button')
+            button#exportAll(type='button')
       div#intake
         h1 Client Intake
         form#intakeForm
