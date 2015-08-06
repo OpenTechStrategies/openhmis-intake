@@ -69,8 +69,57 @@ $(function() {
                 });
                 $("#importAll").click(function() {
                     $("#import_file").trigger('click');
-                    $('#import_file').change(function(click) {
-                        importAll();
+                    $('#import_file').change(function(evt) {
+                        var reader = new FileReader();
+                        var ssn_array = [];
+                        // get all existing ssn's
+                        // full set of data retrieved via API
+                        var dataset = $("#index").data("full-data");
+                        for (var client in dataset){
+                            ssn_array.push(dataset[client]['ssn']);
+                        }
+                        var duplicate_lines = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
+                        // assigning handler
+                        reader.onloadend = function(evt) {      
+                            lines = evt.target.result.split(/\r?\n/);
+                            var line_counter = 0;
+                            // Possible values are:
+                            // "ymd" = year month day
+                            // "dmy" = day month year
+                            // "mdy" = month day year
+                            // ""    = inconsistent/undetectable date format
+                            //
+                            // Nobody ever uses other formats, so we don't support them
+                            var detectedDateFormat = null;
+                            // Goal: send dates to server in "ymd" format like so: YYYY-MM-DD
+                            // Lines coming in may have other formats
+                            // First, change "/" to "-", then attempt to detect format
+                            // If we can't detect the format, we assume
+                            // "mdy" because our primary users are in USA
+/*                            lines.forEach(function (line_string) {
+                                var line_object = Papa.parse(line_string);
+                                var line = line_object['data'][0];
+                                var dateFormat = detectDateFormat(line);
+                            });*/
+                            // Now, import the lines with the corrected dates
+                            lines.forEach(function (line) {
+                                var returned_array = importLine(line, line_counter, ssn_array);
+                                if (returned_array[0] == true){
+                                    duplicate_lines += "Line " + line_counter + " (" + returned_array[1] + " " + returned_array[2] + ") may be a duplicate. <br>";
+                                }
+                                line_counter++;
+                            });
+                            duplicate_lines += "</div>";
+                            $("#results").html(duplicate_lines);
+                        };
+
+                        // getting File instance
+                        var file = evt.target.files[0];
+
+                        // start reading
+                        reader.readAsText(file);
+
+
                     });
                 });
 
@@ -1025,88 +1074,111 @@ $(function() {
         });
     }
 
-    function importAll() {
-        // get file
-        // need to check to make sure that it is a csv file, here
-        var formData = new FormData();
-        formData.append('file', $('input[type=file]')[0].files[0]);
-        $.ajax("/upload", {
-            method: "POST",
-            data: formData,
-            processData: false,
-            contentType: false
-        }).done(function(response) {
-            // read each line of file
-            var result = Papa.parse(response);
-            // set the data as its own array
-            var data_array = result['data'];
-            // check whether there even is an ssn column (assumes there
-            // is a header row)
-            var data_header = data_array[0];
-            var ssn_index = data_header.indexOf("SocialSecurityNumber");
-            // get all existing ssn's
-            // full set of data retrieved via API
-            var dataset = $("#index").data("full-data");
-            var ssn_array = [];
-            for (var client in dataset){
-                ssn_array.push(dataset[client]['ssn']);
+    function importLine(line_string, line_counter, ssn_array) {
+        var line_object = Papa.parse(line_string);
+        // return array holds the duplicate flag and first and last name
+        // from this line
+        // We assume this line is not a duplicate record, and has no
+        // first/last name, for now
+        var return_array = [false, null, null];
+        if (line_counter == 0) {
+            return return_array;
+        }
+        // check whether ssn exists
+        // if it does, put that record in a list of possible duplicates
+        var line = line_object['data'][0];
+        // test whether the line is defined
+        if (line) {
+            if (ssn_array.indexOf(line[7]) > 0) {
+                return_array[0] = true; //also pass first and last name
+                return_array[1] = line[2];
+                return_array[2] = line[4];
             }
-            // loop through array
-            var line_counter = 0;
-            var duplicate_lines = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
-            var duplicate_flag = false;
-            for (var line in data_array){
-                //skip header row
-                if (line_counter != 0 && data_array.hasOwnProperty(line)) {
-                    // for each line, check whether ssn exists via API
-                    // if it does, put that record in a list of possible duplicates
-                    if (ssn_array.indexOf(data_array[line][ssn_index]) > 0) {
-                        duplicate_flag = true;
-                        duplicate_lines += "Line " + line_counter + " (" + data_array[line][2] + " " + data_array[line][4] + ") may be a duplicate. <br>";
-                    }
-                    // if it doesn't, POST that record to the API
-                    else {
-                        // get line into correct format for POSTing
-                        var new_client = {};
-                        new_client['personalId'] = data_array[line][1];
-                        new_client['firstName'] = data_array[line][2];
-                        new_client['middleName'] = data_array[line][3];
-                        new_client['lastName'] = data_array[line][4];
-                        new_client['nameSuffix'] = data_array[line][5];
-                        new_client['nameDataQuality'] = data_array[line][6];
-                        new_client['ssn'] = data_array[line][7];
-                        new_client['ssnDataQuality'] = data_array[line][8];
-                        new_client['dob'] = data_array[line][9];
-                        new_client['dobDataQuality'] = data_array[line][10];
-                        new_client['amIndAKNative'] = data_array[line][11];
-                        new_client['asian'] = data_array[line][12];
-                        new_client['blackAfAmerican'] = data_array[line][13];
-                        new_client['nativeHIOtherPacific'] = data_array[line][14];
-                        new_client['white'] = data_array[line][15];
-                        new_client['raceNone'] = data_array[line][16];
-                        new_client['ethnicity'] = data_array[line][17];
-                        new_client['gender'] = data_array[line][18];
-                        new_client['otherGender'] = data_array[line][19];
-                        new_client['veteranStatus'] = data_array[line][20];
-                        new_client['dateCreated'] = data_array[line][21];
-                        new_client['dateUpdated'] = data_array[line][22];
-                        // do the POST!
-                        $.ajax("/clients/", {
-                            method: "POST",
-                            data: new_client,
-                            always:  console.log("finished post")
-                        });
+            //
+            // if it doesn't, POST that record to the API
+            else {
+                // get line into correct format for POSTing
+                var new_client = {};
+                new_client['personalId'] = line[1];
+                new_client['firstName'] = line[2];
+                return_array[1] = new_client['firstName'];
+                new_client['middleName'] = line[3];
+                new_client['lastName'] = line[4];
+                return_array[2] = new_client['lastName'];
+                new_client['nameSuffix'] = line[5];
+                new_client['nameDataQuality'] = line[6];
+                new_client['ssn'] = line[7];
+                new_client['ssnDataQuality'] = line[8];
+                // Timesaving device: For now, if the date contains "/", assume
+                // that the format is mm/dd/yy (Excel format) and convert
+                // accordingly.
+                new_client['dob'] = quickConvertDate(line[9]);
+                new_client['dobDataQuality'] = line[10];
+                new_client['amIndAKNative'] = line[11];
+                new_client['asian'] = line[12];
+                new_client['blackAfAmerican'] = line[13];
+                new_client['nativeHIOtherPacific'] = line[14];
+                new_client['white'] = line[15];
+                new_client['raceNone'] = line[16];
+                new_client['ethnicity'] = line[17];
+                new_client['gender'] = line[18];
+                new_client['otherGender'] = line[19];
+                new_client['veteranStatus'] = line[20];
+                new_client['dateCreated'] = quickConvertDate(line[21]);
+                new_client['dateUpdated'] = quickConvertDate(line[22]);
+                // do the POST!
+                $.ajax("/clients/", {
+                    method: "POST",
+                    data: new_client,
+                    always:  console.log("finished post")
+                });
 
-                    }
-                }
-                line_counter++;
             }
-            // display the list of possible duplicates to the user
-            duplicate_lines += "</div>";
-            if (duplicate_flag){
-                $("#results").html(duplicate_lines);
-            }
-        });
+        }
+        return return_array;
+    }
+
+    /*
+      * Takes a 
+    */
+    function detectDateFormat(date){
+        // Data arrives in standard format, so
+        // we know that these are the relevant
+        // array elements:
+        var dob = line[9];
+        var dateCreated = line[21];
+        var dateUpdated = line[22];
+        // First, change "/" to "-", then attempt to detect format
+        // If we can't detect the format, we assume
+        // "mdy" because our primary users are in USA
+        dob = dob.split("/").join("-");
+        var dob_elements = dob.split("-");
+        if (dob_elements[1]){
+            //test whether any have 4 digits (assume year)
+            // test whether any are >12 (assume day)
+            dob_elements.forEach(
+                
+            )
+        }
+    }
+
+    /* Takes a date string in mm/dd/yyyy or yyyy-mm-dd format and returns
+     * it in YYYY-MM-DD format.  This is a quick function that will go
+     * away in later commits.
+     */
+    
+    function quickConvertDate(date){
+        var date_components = date.split("/");
+        var new_date = ""; //date string to be returned
+        if (date_components[1]){
+            // then we assume this date is in mm/dd/yyyy format
+            new_date = date_components[2] + "-" + date_components[0] + "-" + date_components[1];
+        }
+        else{
+            // then we assume this date is already in yyyy-mm-dd format
+            new_date = date;
+        }
+        return new_date;
     }
 
     function switchToIntake(personalId, data_length, dataset) {
