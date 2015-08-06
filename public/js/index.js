@@ -111,7 +111,7 @@ $(function() {
                             });
                             if (duplicate_lines != ""){
                                 duplicate_lines += "</div>";
-                                var warning_header = "<b>Warning: possible duplicates detected</b><br>";
+                                var warning_header = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
                                 var duplicate_warning = warning_header.concat(duplicate_lines);
                                 $("#results").html(duplicate_warning);
                             }
@@ -123,7 +123,13 @@ $(function() {
                         // start reading
                         reader.readAsText(file);
 
-
+                        //reset data with newly imported clients
+                        $.ajax("/clients", {
+                            method: "GET",
+                            dataType: "json"
+                        }).done(function(data) {
+                            $("#index").data("full-data", data);
+                        });
                     });
                 });
 
