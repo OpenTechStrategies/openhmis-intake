@@ -78,7 +78,7 @@ $(function() {
                         for (var client in dataset){
                             ssn_array.push(dataset[client]['ssn']);
                         }
-                        var duplicate_lines = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
+                        var duplicate_lines = "";
                         // assigning handler
                         reader.onloadend = function(evt) {      
                             lines = evt.target.result.split(/\r?\n/);
@@ -109,8 +109,12 @@ $(function() {
                                 }
                                 line_counter++;
                             });
-                            duplicate_lines += "</div>";
-                            $("#results").html(duplicate_lines);
+                            if (duplicate_lines != ""){
+                                duplicate_lines += "</div>";
+                                var warning_header = "<b>Warning: possible duplicates detected</b><br>";
+                                var duplicate_warning = warning_header.concat(duplicate_lines);
+                                $("#results").html(duplicate_warning);
+                            }
                         };
 
                         // getting File instance
