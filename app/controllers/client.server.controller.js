@@ -34,7 +34,7 @@ exports.addClient = function(req, res) {
   var post_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/services/clients/',
+      path: '/openhmis/api/v3/clients/',
       method: 'POST',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -79,7 +79,7 @@ exports.getEnrollments = function(req, res) {
   var get_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/services/enrollments/',
+      path: '/openhmis/api/v3/enrollments/',
       method: 'GET',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -111,7 +111,7 @@ exports.getClients = function(req, res) {
   var get_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/services/clients/',
+      path: '/openhmis/api/v3/clients/',
       method: 'GET',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -143,7 +143,7 @@ exports.getClient = function(req, res) {
   var get_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/services/clients/' + req.params.id,
+      path: '/openhmis/api/v3/clients/' + req.params.id,
       method: 'GET',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -194,7 +194,7 @@ exports.editClient = function(req, res) {
   var put_options = {
       host: config.api.host,
       port: config.api.port,
-      path: '/openhmis/services/clients/' + client.personalId,
+      path: '/openhmis/api/v3/clients/' + client.personalId,
       method: 'PUT',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
