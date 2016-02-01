@@ -20,6 +20,7 @@ html(lang="en")
     script(type='text/javascript', src='js/lib/sampleData.js')
     script(type='text/javascript', src='js/papaparse.js')
     script(type='text/javascript', src='js/index.js')
+    script(type='text/javascript', src='https://apis.google.com/js/client:platform.js')
 
   body
     .container
@@ -36,6 +37,7 @@ html(lang="en")
           div.buttonBox
             button#addNewClient(type='button')
             button#exportAll(type='button')
+            button#signinButton(type='button')            
             form(action="/upload", method="post", enctype="multipart/form-data" id="importForm")
               input#import_file(type='file' name="import.csv" style="opacity:0; height: 5px;")
               button#importAll(type='button')

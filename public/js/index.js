@@ -1,5 +1,6 @@
 $(function() {
     $(document).ready(function() {
+        start();
         // minimum search length needed to start looking for matches.
         var minSearchLength = 1;
         var rightNow = moment();  // Used for calculating ages
@@ -23,11 +24,19 @@ $(function() {
                 }
             }
         });
+        $('#signinButton').click(function() {
+            auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
+        });
+ 
+        console.log("DEBUG: about to start the event handlers");
 
         // event handlers
             $.ajax("/clients", {
                 method: "GET",
-                dataType: "json"
+                dataType: "json",
+                headers: {
+                    "Authorization": "__ADD_ID_TOKEN__",
+                }
             }).done(function(data) {
                 $("#index").data("full-data", data);
                 $("#searchForm #searchField").keyup(function() {
@@ -192,7 +201,8 @@ $(function() {
     var backText = "Back to Results";
     var exportAllText = "Example Export -- All Clients (UDE)";
     var importAllText = "Example Import";
-
+    var signinButton = "Sign in with Google"
+    
     /*
      * Takes a user-entered string and returns the number of matching
      * entries.  Along the way it fills in the result divs.
@@ -410,6 +420,7 @@ $(function() {
             $("#addNewClient").text(noCaveatText);
             $("#exportAll").text(exportAllText);
             $("#importAll").text(importAllText);
+            $("#signinButton").text(signinButton);
             $("#searchForm #addNewClient").prop("disabled", true);
         }
         $("#search").css("display", "block");
@@ -1422,5 +1433,41 @@ $(function() {
         $("#intakeForm #cancel").css("display", "none");
         $("#intakeForm #saveChanges").prop("disabled", true);
     }
+
+    function start() {
+        gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+                client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+            });
+        });
+    }
+
+    function signInCallback(authResult) {
+        console.log("Doing the sign in callback");
+        if (authResult['code']) {
+
+            // Show the new code
+            console.log(authResult);
+
+            $.ajax({
+                type: 'POST',
+                url: '__HMIS_SERVER_INSTANCE__',
+                contentType: 'application/octet-stream; charset=utf-8',
+                success: function(result) {
+                    console.log("Success!");
+                    console.log(result);
+                },
+                error: function(response) {
+                    console.log(response)
+                },
+                processData: false,
+                data: authResult['code']
+            });
+        } else {
+            console.log("There was an error.");
+        }
+    };
+
+
 }); //end wrapper function
 
