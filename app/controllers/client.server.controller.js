@@ -104,18 +104,18 @@ exports.getEnrollments = function(req, res) {
 };
 
 exports.getClients = function(req, res) {
-
-  // Eventually we need authentication
-
+    // adding auth
+    var header_obj = {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': req.query.id_token
+    };
   // An object of options to indicate where to post to
   var get_options = {
       host: config.api.host,
       port: config.api.port,
       path: '/openhmis/api/v3/clients/',
       method: 'GET',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-      }
+      headers: header_obj
   };
 
   // Set up the request
@@ -217,6 +217,43 @@ exports.editClient = function(req, res) {
     // put the data
     put_req.write(client_string);
     put_req.end()
+
+};
+
+exports.signIn = function (req, res) {
+    
+    // We only need to send the auth code
+    var code =  req.body.code;
+  // Put together the data
+  var post_data = JSON.stringify(code);
+
+
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/api/v3/authenticate/google',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/octet-stream; charset=utf-8',
+      }
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res_post) {
+      res_post.setEncoding('utf8');
+      var data = []
+      res_post.on('data', function (chunk) {
+          console.log('DEBUG: Response: ' + chunk);
+      });
+      res_post.on('end', function() {
+        res.send(data.join(''));
+      });
+  });
+
+  // post the data
+  post_req.write(post_data);
+  post_req.end()
 
 };
 

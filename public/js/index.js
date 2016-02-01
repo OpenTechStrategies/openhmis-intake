@@ -31,6 +31,7 @@ $(function() {
                 var GoogleUser = GoogleAuth.currentUser.get();
                 var auth_response = GoogleUser.getAuthResponse();
                 var id_token = auth_response['id_token'];
+                $("#token").val(id_token);
                 auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then( function (result) {
                     return signInCallback(result, id_token);
                 });
@@ -38,7 +39,15 @@ $(function() {
         });
  
         console.log("DEBUG: about to start the event handlers");
-
+        var stored_id_token = $("#token").val();
+        if (stored_id_token) {
+            console.log("stored id is: " + stored_id_token);
+            defineEventHandlers(stored_id_token, minSearchLength);
+        }
+        else {
+            console.log("DEBUG: The token was not stored.");
+        }
+       
 
         switchToSearch(false);
     });
@@ -69,15 +78,20 @@ $(function() {
     var signinButton = "Sign in with Google"
 
         /* add a doc string here */
-        function defineEventHandlers(id_token) {
+    function defineEventHandlers(id_token, minSearchLength) {
             console.log("defining handlers")
             console.log(id_token);
+            if (! id_token) {
+                $("#token").val(id_token);
+            }
             // event handlers
             $.ajax("/clients", {
                 method: "GET",
                 dataType: "json",
-                headers: {
-                    "Authorization": id_token
+                data: { id_token },
+                error: function(response) {
+                    console.log("Error");
+                    console.log(response);
                 }
             }).done(function(data) {
                 $("#index").data("full-data", data);
@@ -1459,25 +1473,25 @@ $(function() {
 
     function signInCallback(authResult, id_token) {
         console.log("Doing the sign in callback");
-        defineEventHandlers(id_token);
+        // store the id_token here
+        $("#token").val(id_token);
+        defineEventHandlers(id_token, 1);
         if (authResult['code']) {
 
             // Show the new code
             console.log(authResult);
 
-            $.ajax({
+            $.ajax("signIn/", {
                 type: 'POST',
-                url: 'http://localhost:8080/openhmis/api/v3/authenticate/google',
-                contentType: 'application/octet-stream; charset=utf-8',
+                data: {code: authResult['code']},
                 success: function(result) {
                     console.log("Success!");
                     console.log(result);
                 },
                 error: function(response) {
-                    console.log(response)
-                },
-                processData: false,
-                data: authResult['code']
+                    console.log("Error");
+                    console.log(response);
+                }
             });
         } else {
             console.log("There was an error.");

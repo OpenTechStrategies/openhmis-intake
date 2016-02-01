@@ -8,4 +8,5 @@ module.exports = function(app) {
   app.route('/enrollments').get(client.getEnrollments);
   app.route('/clients/:id').get(client.getClient);
   app.route('/clients/:id').put(client.editClient);
+  app.route('/signIn').post(client.signIn);
 };
