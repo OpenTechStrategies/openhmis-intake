@@ -24,18 +24,60 @@ $(function() {
                 }
             }
         });
+
         $('#signinButton').click(function() {
-            auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
+            console.log("signing in");
+            var auth_instance = gapi.auth2.getAuthInstance().then(function (GoogleAuth) {
+                var GoogleUser = GoogleAuth.currentUser.get();
+                var auth_response = GoogleUser.getAuthResponse();
+                var id_token = auth_response['id_token'];
+                auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then( function (result) {
+                    return signInCallback(result, id_token);
+                });
+            });
         });
  
         console.log("DEBUG: about to start the event handlers");
 
-        // event handlers
+
+        switchToSearch(false);
+    });
+
+    // This is the list of all the properties that define a client
+    // (later called an "Entity").  These properties have names that
+    // match exactly to the API fields, though do not cover all the
+    // API fields.
+    // Should this include personalId?
+    var propertyList = ["firstName", "lastName", "ssn", "dob",
+                        "gender", "ethnicity", "amIndAKNative",
+                        "asian","blackAfAmerican",
+                        "nativeHIOtherPacific","white"];
+    var propertyListLength = propertyList.length;
+
+    // These are the properties we will try to match to user input.
+    var matchingTerms = ["firstName", "lastName"];
+    
+
+    //button text
+    
+    var caveatText = "None Of The Above -- Add New Client";
+    var noCaveatText = "Add New Client";
+    var revertText = "Revert Changes";
+    var backText = "Back to Results";
+    var exportAllText = "Example Export -- All Clients (UDE)";
+    var importAllText = "Example Import";
+    var signinButton = "Sign in with Google"
+
+        /* add a doc string here */
+        function defineEventHandlers(id_token) {
+            console.log("defining handlers")
+            console.log(id_token);
+            // event handlers
             $.ajax("/clients", {
                 method: "GET",
                 dataType: "json",
                 headers: {
-                    "Authorization": "__ADD_ID_TOKEN__",
+                    "Authorization": id_token
                 }
             }).done(function(data) {
                 $("#index").data("full-data", data);
@@ -109,7 +151,7 @@ $(function() {
                                 var line_object = Papa.parse(line_string);
                                 var line = line_object['data'][0];
                                 var dateFormat = detectDateFormat(line);
-                            });*/
+                               });*/
                             // Now, import the lines with the corrected dates
                             lines.forEach(function (line) {
                                 var returned_array = importLine(line, line_counter, ssn_array);
@@ -175,34 +217,7 @@ $(function() {
                 switchToSearch(false);
             });
 
-        switchToSearch(false);
-    });
-
-    // This is the list of all the properties that define a client
-    // (later called an "Entity").  These properties have names that
-    // match exactly to the API fields, though do not cover all the
-    // API fields.
-    // Should this include personalId?
-    var propertyList = ["firstName", "lastName", "ssn", "dob",
-                        "gender", "ethnicity", "amIndAKNative",
-                        "asian","blackAfAmerican",
-                        "nativeHIOtherPacific","white"];
-    var propertyListLength = propertyList.length;
-
-    // These are the properties we will try to match to user input.
-    var matchingTerms = ["firstName", "lastName"];
-    
-
-    //button text
-    
-    var caveatText = "None Of The Above -- Add New Client";
-    var noCaveatText = "Add New Client";
-    var revertText = "Revert Changes";
-    var backText = "Back to Results";
-    var exportAllText = "Example Export -- All Clients (UDE)";
-    var importAllText = "Example Import";
-    var signinButton = "Sign in with Google"
-    
+        }
     /*
      * Takes a user-entered string and returns the number of matching
      * entries.  Along the way it fills in the result divs.
@@ -1442,8 +1457,9 @@ $(function() {
         });
     }
 
-    function signInCallback(authResult) {
+    function signInCallback(authResult, id_token) {
         console.log("Doing the sign in callback");
+        defineEventHandlers(id_token);
         if (authResult['code']) {
 
             // Show the new code
@@ -1451,7 +1467,7 @@ $(function() {
 
             $.ajax({
                 type: 'POST',
-                url: '__HMIS_SERVER_INSTANCE__',
+                url: 'http://localhost:8080/openhmis/api/v3/authenticate/google',
                 contentType: 'application/octet-stream; charset=utf-8',
                 success: function(result) {
                     console.log("Success!");
