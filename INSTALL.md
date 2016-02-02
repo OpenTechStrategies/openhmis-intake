@@ -22,6 +22,7 @@ _In order for those endpoints to function correctly, you must also create a loca
     $> cp config/env/local.js.example config/env/local.js
     $> vi config/env/local.js
   ```
+  Generate a Google Client ID as described in the [OpenHMIS INSTALL doc](https://github.com/PCNI/OpenHMIS/blob/master/INSTALL.md) and store it in your new `local.js` file.
 
 3. Install npm dependencies
 

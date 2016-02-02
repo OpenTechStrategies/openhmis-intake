@@ -4,7 +4,8 @@ module.exports = {
   app: {
     title: 'OpenHMIS Intake',
     description: 'Add new clients to an OpenHMIS API compliant system',
-    keywords: 'openhmis, intake'
+    keywords: 'openhmis, intake',
+    client_id: '__YOUR_CLIENT_ID__.apps.googleusercontent.com'
   },
   port: 3000,
 

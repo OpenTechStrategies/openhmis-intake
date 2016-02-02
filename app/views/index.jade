@@ -26,6 +26,7 @@ html(lang="en")
     .container
       div#logo
         img(src='img/OpenHMIS-logo.jpg')
+        input#google_id(name='google_id', type='hidden', value='#{client_id}')
       div#search
         h1 Client Search
         form#searchForm

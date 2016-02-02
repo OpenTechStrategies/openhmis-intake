@@ -1464,9 +1464,11 @@ $(function() {
     }
 
     function start() {
+        // get client id
+        var client_id = $("#google_id").val();
         gapi.load('auth2', function() {
             auth2 = gapi.auth2.init({
-                client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+                client_id: client_id
             });
         });
     }
