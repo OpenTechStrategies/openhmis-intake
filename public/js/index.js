@@ -28,13 +28,17 @@ $(function() {
             $.ajax("/clients", {
                 method: "GET",
                 dataType: "json"
-            }).done(function(data) {
+            }).done(function(result_data) {
+                var data = result_data.data.items;
+                var dataLength = data.length;
+                // TBD: check for error here
+                // so I need to have the user sign in and then pass an
+                // Authorization header with my request, of course.
                 $("#index").data("full-data", data);
                 $("#searchForm #searchField").keyup(function() {
                     $("#duplicate_box").remove();
                     var userString = $("#searchForm #searchField").val();
                     if (userString.length >= minSearchLength) {
-                        var dataLength = data.length;
                         //this calls search() inside itself
                         var numResults = populateResults(userString, dataLength, data);
                         // If "results" is empty, activate the "add new client" button.
