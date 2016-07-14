@@ -19,12 +19,21 @@ html(lang="en")
     script(type='text/javascript', src='js/lib/jszip/dist/jszip.min.js')
     script(type='text/javascript', src='js/lib/sampleData.js')
     script(type='text/javascript', src='js/papaparse.js')
+    //- TBD: don't load external javascript
+    script(type='text/javascript', src='https://apis.google.com/js/client:platform.js?onload=start')
+    script(type='text/javascript', src='js/login.js')
     script(type='text/javascript', src='js/index.js')
 
   body
     .container
       div#logo
         img(src='img/OpenHMIS-logo.jpg')
+      div#login
+        h1 Login
+        form#loginForm
+          div.form-group
+            button#signinButton(type='button')
+            input#id_token(type='hidden')
       div#search
         h1 Client Search
         form#searchForm

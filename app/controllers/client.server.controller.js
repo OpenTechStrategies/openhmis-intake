@@ -220,3 +220,65 @@ exports.editClient = function(req, res) {
 
 };
 
+
+
+exports.getClientId = function(req, res) {
+  var get_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/api/v3/authenticate/google/client_key/',
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }
+  };
+
+  // Set up the request
+  var get_req = http.request(get_options, function(res_get) {
+      res_get.setEncoding('utf8');
+      var data = []
+      res_get.on('data', function (chunk) {
+          data.push(chunk);
+      });
+      res_get.on('end', function() {
+        res.send(data.join(''));
+      });
+  });
+
+  // post the data
+  get_req.end()
+};
+
+exports.authenticateUser = function(req, res) {
+    var post_data = req.body.code;
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/api/v3/authenticate/google/',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': post_data.length
+      }
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res_post) {
+      res_post.setEncoding('utf8');
+      var data = []
+      res_post.on('data', function (chunk) {
+          // TBD: I have to send this back instead of just logging it
+          console.log('DEBUG: Response: ' + chunk);
+          data.push(chunk);
+      });
+      res_post.on('end', function() {
+        res.send(data.join(''));
+      });
+  });
+
+  // post the data
+  post_req.write(post_data);
+  post_req.end()
+
+};

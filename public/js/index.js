@@ -25,6 +25,7 @@ $(function() {
         });
 
         // event handlers
+            // TBD: pass id_token here 
             $.ajax("/clients", {
                 method: "GET",
                 dataType: "json"
@@ -128,6 +129,7 @@ $(function() {
                         reader.readAsText(file);
 
                         //reset data with newly imported clients
+                        // TBD: pass id_token here 
                         $.ajax("/clients", {
                             method: "GET",
                             dataType: "json"
@@ -612,6 +614,7 @@ $(function() {
             "\n";
 
         // Export all clients.
+        // TBD: pass id_token here 
         $.ajax("/clients", {
             method: "GET",
             dataType: "json"
@@ -814,6 +817,7 @@ $(function() {
             }
 
             // Export enrollements.
+            // TBD: pass id_token here 
             $.ajax("/enrollments", {
                 method: "GET",
                 dataType: "json"
@@ -1141,6 +1145,7 @@ $(function() {
                 new_client['dateCreated'] = quickConvertDate(line[21]);
                 new_client['dateUpdated'] = quickConvertDate(line[22]);
                 // do the POST!
+                // TBD: pass id_token here 
                 $.ajax("/clients/", {
                     method: "POST",
                     data: new_client,
@@ -1347,6 +1352,7 @@ $(function() {
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
         client['ssn'] = $("#intakeForm #ssn").val();
         if (entityIndex > 0 ){
+            // TBD: pass id_token here 
             $.ajax("/clients/" + entityIndex, {
                 method: "PUT",
                 data: client,
@@ -1354,6 +1360,7 @@ $(function() {
             });
         }
         else{
+            // TBD: pass id_token here 
             $.ajax("/clients/", {
                 method: "POST",
                 data: client,
