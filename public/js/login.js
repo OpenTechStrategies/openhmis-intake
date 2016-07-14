@@ -29,7 +29,8 @@ function signInCallback(authResult) {
              var result_obj = JSON.parse(result);
              var id_token_var = result_obj.id_token;
              $("#id_token").val(id_token_var);
-             // TODO: may need to reload the page here
+             location.reload();
+             switchToSearch();
           },
           error: function(error) {
               console.log("An error occurred: " + error.responseText);

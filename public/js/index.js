@@ -177,7 +177,6 @@ $(function() {
                 switchToSearch(false);
             });
 
-        switchToSearch(false);
     });
 
     // This is the list of all the properties that define a client
@@ -425,6 +424,7 @@ $(function() {
         }
         $("#search").css("display", "block");
         $("#intake").css("display", "none");
+        $("#login").css("display", "none");
     }
 
     function manageCheckboxes(checkbox_id){
@@ -1325,7 +1325,8 @@ $(function() {
         client['blackAfAmerican'] = 0;
         client['nativeHIOtherPacific'] = 0;
         client['white'] = 0;
-        client['raceNone'] = 1;
+        // TODO: handle the different options for 'raceNone' correctly
+        client['raceNone'] = 9;
         if ($("#asian").is(":checked") == true){
             client['asian'] = 1;
             client['raceNone'] = null;
