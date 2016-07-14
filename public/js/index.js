@@ -1,4 +1,6 @@
 $(function() {
+    var id_token = $("#id_token").val();
+    var token_obj = {'id_token': id_token};
     $(document).ready(function() {
         // minimum search length needed to start looking for matches.
         var minSearchLength = 1;
@@ -23,18 +25,21 @@ $(function() {
                 }
             }
         });
-
+        
         // event handlers
-            // TBD: pass id_token here 
             $.ajax("/clients", {
                 method: "GET",
-                dataType: "json"
+                dataType: "json",
+                data: token_obj
             }).done(function(result_data) {
+                // TODO: check for error here
+                if (typeof(result_data.error) !== 'undefined') {
+                    console.log("DEBUG: uh oh, there was an error.");
+                }
+                // TODO: only if we have data, do this:
+                // if (typeof(result_data.data) !== 'undefined') {}
                 var data = result_data.data.items;
                 var dataLength = data.length;
-                // TBD: check for error here
-                // so I need to have the user sign in and then pass an
-                // Authorization header with my request, of course.
                 $("#index").data("full-data", data);
                 $("#searchForm #searchField").keyup(function() {
                     $("#duplicate_box").remove();
@@ -129,10 +134,10 @@ $(function() {
                         reader.readAsText(file);
 
                         //reset data with newly imported clients
-                        // TBD: pass id_token here 
                         $.ajax("/clients", {
                             method: "GET",
-                            dataType: "json"
+                            dataType: "json",
+                            data: token_obj
                         }).done(function(data) {
                             $("#index").data("full-data", data);
                         });
@@ -614,10 +619,10 @@ $(function() {
             "\n";
 
         // Export all clients.
-        // TBD: pass id_token here 
         $.ajax("/clients", {
             method: "GET",
-            dataType: "json"
+            dataType: "json",
+            data: token_obj
         }).done(function(clients) {
             // The Universal Data Elements (UDE) export set here is
             // defined by "HMIS-Data-Dictionary final Aug 2014.pdf",
@@ -817,10 +822,10 @@ $(function() {
             }
 
             // Export enrollements.
-            // TBD: pass id_token here 
             $.ajax("/enrollments", {
                 method: "GET",
-                dataType: "json"
+                dataType: "json",
+                data: token_obj
             }).done(function(enrollments) {
                 // TBD: The example file we received was named
                 // ProgramParticipation.csv, but HMIS CSV spec says there
@@ -1145,7 +1150,7 @@ $(function() {
                 new_client['dateCreated'] = quickConvertDate(line[21]);
                 new_client['dateUpdated'] = quickConvertDate(line[22]);
                 // do the POST!
-                // TBD: pass id_token here 
+                new_client['id_token'] = id_token;
                 $.ajax("/clients/", {
                     method: "POST",
                     data: new_client,
@@ -1323,23 +1328,23 @@ $(function() {
         client['raceNone'] = 1;
         if ($("#asian").is(":checked") == true){
             client['asian'] = 1;
-            client['raceNone'] = 0;
+            client['raceNone'] = null;
         }
         if ($("#blackAfAmerican").is(":checked") == true){
             client['blackAfAmerican'] = 1;
-            client['raceNone'] = 0;
+            client['raceNone'] = null;
         }
         if ($("#amIndAKNative").is(":checked") == true){
             client['amIndAKNative'] = 1;
-            client['raceNone'] = 0;
+            client['raceNone'] = null;
         }
         if ($("#white").is(":checked") == true){
             client['white'] = 1;
-            client['raceNone'] = 0;
+            client['raceNone'] = null;
         }
         if ($("#nativeHIOtherPacific").is(":checked") == true){
             client['nativeHIOtherPacific'] = 1;
-            client['raceNone'] = 0;
+            client['raceNone'] = null;
         }
         client['personalId'] = "";
         if (entityIndex > 0){
@@ -1351,16 +1356,18 @@ $(function() {
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
         client['ssn'] = $("#intakeForm #ssn").val();
+        client['id_token'] = id_token;
         if (entityIndex > 0 ){
-            // TBD: pass id_token here 
             $.ajax("/clients/" + entityIndex, {
                 method: "PUT",
                 data: client,
+                error: function(error) {
+                    console.log("An error occurred: " + error.responseText);
+                },
                 always:  console.log("finished put")
             });
         }
         else{
-            // TBD: pass id_token here 
             $.ajax("/clients/", {
                 method: "POST",
                 data: client,

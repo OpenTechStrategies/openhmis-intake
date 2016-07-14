@@ -37,8 +37,9 @@ exports.addClient = function(req, res) {
       path: '/openhmis/api/v3/clients/',
       method: 'POST',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': post_data.length
+          'Content-Type': 'application/json',
+          'Content-Length': post_data.length,
+          'Authorization': req.body.id_token
       }
   };
 
@@ -82,7 +83,8 @@ exports.getEnrollments = function(req, res) {
       path: '/openhmis/api/v3/enrollments/',
       method: 'GET',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': req.query.id_token
       }
   };
 
@@ -104,7 +106,6 @@ exports.getEnrollments = function(req, res) {
 };
 
 exports.getClients = function(req, res) {
-
   // Eventually we need authentication
 
   // An object of options to indicate where to post to
@@ -114,7 +115,8 @@ exports.getClients = function(req, res) {
       path: '/openhmis/api/v3/clients/',
       method: 'GET',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': req.query.id_token
       }
   };
 
@@ -146,7 +148,8 @@ exports.getClient = function(req, res) {
       path: '/openhmis/api/v3/clients/' + req.params.id,
       method: 'GET',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': req.query.id_token
       }
   };
 
@@ -171,6 +174,15 @@ exports.editClient = function(req, res) {
   // Eventually we need authentication
 
     // Build an object that we want to send
+
+    // TODO: we shouldn't need to do this workaround, but for some
+    // reason the 'raceNone' value is appearing as the empty string when
+    // it should be null.  The API doesn't accept non-null values for
+    // 'raceNone' when any other race is set, so it needs to be null,
+    // not the empty string, when we send it over.  Thoughts, anyone?
+    if (req.body.raceNone == '') {
+        req.body.raceNone = null;
+    }
     var client = {
         personalId: req.body.personalId,
         firstName: req.body.firstName,
@@ -188,6 +200,7 @@ exports.editClient = function(req, res) {
     }
 
     // Put together the data
+    var wrap_client = { "data": { "item": client}};
     var client_string = JSON.stringify(client);
 
     // An object of options to indicate where to put to
@@ -197,8 +210,9 @@ exports.editClient = function(req, res) {
       path: '/openhmis/api/v3/clients/' + client.personalId,
       method: 'PUT',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': client_string.length
+          'Content-Type': 'application/json',
+          'Content-Length': client_string.length,
+          'Authorization': req.body.id_token
       }
   };
     
@@ -258,7 +272,7 @@ exports.authenticateUser = function(req, res) {
       path: '/openhmis/api/v3/authenticate/google/',
       method: 'POST',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           'Content-Length': post_data.length
       }
   };
@@ -273,7 +287,7 @@ exports.authenticateUser = function(req, res) {
           data.push(chunk);
       });
       res_post.on('end', function() {
-        res.send(data.join(''));
+        res.send(data);
       });
   });
 
