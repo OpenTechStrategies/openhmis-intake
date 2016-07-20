@@ -36,38 +36,39 @@ $(function() {
                 if (typeof(result_data.error) !== 'undefined') {
                     console.log("DEBUG: uh oh, there was an error.");
                 }
-                // TODO: only if we have data, do this:
-                // if (typeof(result_data.data) !== 'undefined') {}
-                var data = result_data.data.items;
-                var dataLength = data.length;
-                $("#index").data("full-data", data);
-                $("#searchForm #searchField").keyup(function() {
-                    $("#duplicate_box").remove();
-                    var userString = $("#searchForm #searchField").val();
-                    if (userString.length >= minSearchLength) {
-                        //this calls search() inside itself
-                        var numResults = populateResults(userString, dataLength, data);
-                        // If "results" is empty, activate the "add new client" button.
-                        if (numResults > 0) {
-                            // We've found some results, but we may still have to add a
-                            // new client (maybe a person with the same name as an
-                            // existing client). The "add new client" button will be
-                            // activated, but with a caveat.
-                            $("#addNewClient").text(caveatText);
+                // only if we have data, show results:
+                //if (typeof(result_data.data) !== 'undefined') {
+                    var data = result_data.data.items;
+                    var dataLength = data.length;
+                    $("#index").data("full-data", data);
+                    $("#searchForm #searchField").keyup(function() {
+                        $("#duplicate_box").remove();
+                        var userString = $("#searchForm #searchField").val();
+                        if (userString.length >= minSearchLength) {
+                            //this calls search() inside itself
+                            var numResults = populateResults(userString, dataLength, data);
+                            // If "results" is empty, activate the "add new client" button.
+                            if (numResults > 0) {
+                                // We've found some results, but we may still have to add a
+                                // new client (maybe a person with the same name as an
+                                // existing client). The "add new client" button will be
+                                // activated, but with a caveat.
+                                $("#addNewClient").text(caveatText);
+                            }
+                            else {
+                                // No need for the caveat.
+                                $("#addNewClient").text(noCaveatText);
+                            }
+                            // If we're over the minimum length, we may add a new client.
+                            $("#searchForm #addNewClient").prop("disabled", false);
                         }
-                        else {
-                            // No need for the caveat.
+                        else if (userString.length == 0) {
+                            $("#searchForm #results").empty();
                             $("#addNewClient").text(noCaveatText);
+                            $("#searchForm #addNewClient").prop("disabled", true);
                         }
-                        // If we're over the minimum length, we may add a new client.
-                        $("#searchForm #addNewClient").prop("disabled", false);
-                    }
-                    else if (userString.length == 0) {
-                        $("#searchForm #results").empty();
-                        $("#addNewClient").text(noCaveatText);
-                        $("#searchForm #addNewClient").prop("disabled", true);
-                    }
-                });
+                    });
+                //}
                 $("#searchForm #results").on("click", ".hit", function(e) {
                     switchToIntake($(e.currentTarget).data("entity-index"), data.length, data);
                 });
@@ -197,11 +198,8 @@ $(function() {
     //button text
     
     var caveatText = "None Of The Above -- Add New Client";
-    var noCaveatText = "Add New Client";
     var revertText = "Revert Changes";
     var backText = "Back to Results";
-    var exportAllText = "Example Export -- All Clients (UDE)";
-    var importAllText = "Example Import";
 
     /*
      * Takes a user-entered string and returns the number of matching
@@ -413,19 +411,7 @@ $(function() {
         return summaryDiv;
     }
 
-    function switchToSearch(keepResults) {
-        if (keepResults == false) {
-            $("#searchForm #searchField").val("");
-            $("#searchForm #results").empty();
-            $("#addNewClient").text(noCaveatText);
-            $("#exportAll").text(exportAllText);
-            $("#importAll").text(importAllText);
-            $("#searchForm #addNewClient").prop("disabled", true);
-        }
-        $("#search").css("display", "block");
-        $("#intake").css("display", "none");
-        $("#login").css("display", "none");
-    }
+
 
     function manageCheckboxes(checkbox_id){
         //if checked
@@ -623,7 +609,8 @@ $(function() {
             method: "GET",
             dataType: "json",
             data: token_obj
-        }).done(function(clients) {
+        }).done(function(result) {
+            var clients = result.data.items;
             // The Universal Data Elements (UDE) export set here is
             // defined by "HMIS-Data-Dictionary final Aug 2014.pdf",
             // which appears to be a revision of
@@ -826,7 +813,8 @@ $(function() {
                 method: "GET",
                 dataType: "json",
                 data: token_obj
-            }).done(function(enrollments) {
+            }).done(function(result) {
+                var enrollments = result.data.items;
                 // TBD: The example file we received was named
                 // ProgramParticipation.csv, but HMIS CSV spec says there
                 // should be an Enrollment.csv file, and that's what
@@ -1080,7 +1068,6 @@ $(function() {
                         + '"' + exportIdString                             + '"'
                         + "\n";
                 };
-                
                 // Build and export the zipfile.
                 var zipper = new JSZip();
                 var folder = zipper.folder("HMIS_Data");
