@@ -5,9 +5,14 @@ $(function() {
         auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
     });
     setInitialVars();
-    if ($("#id_token").val()) {
-        getClients($("#id_token").val());
+
+    id_token = getIdCookie();
+    if (id_token) {
+        getClients(id_token);
         switchToSearch(false);
+    }
+    else {
+        switchToLogin(false);
     }
 
 });
@@ -34,7 +39,7 @@ function signInCallback(authResult) {
             success: function(result) {
                 var result_obj = JSON.parse(result);
                 id_token_var = result_obj.id_token;
-                $("#id_token").val(id_token_var);
+                document.cookie = "id_token=" + id_token_var;
                 if (id_token_var) {
                     getClients(id_token_var);
                     switchToSearch();
@@ -70,7 +75,7 @@ function switchToSearch(keepResults) {
 };
 
 function switchToLogin(msg) {
-    var warningMessage = "Sorry, you are not authorized to access this content.  Please refresh and try logging in again.";
+    var warningMessage = "Sorry, you are not authorized to access this content.  Please log in again.";
     $("#search").css("display", "none");
     $("#intake").css("display", "none");
     $("#login").css("display", "block");
@@ -83,5 +88,16 @@ function switchToLogin(msg) {
     }
 };
 
-
-
+// check for cookie (inspired by
+// http://www.w3schools.com/js/js_cookies.asp)
+function getIdCookie() {
+    var cookie_array = document.cookie.split('; ');
+    var id_token = null;
+    for (var i=0; i < cookie_array.length; i++) {
+        var cookie = cookie_array[i];
+        if (cookie.indexOf('id_token=') == 0) {
+            id_token = cookie.substring(9, cookie.length);
+        }
+    }
+    return id_token;
+}
