@@ -172,6 +172,14 @@ button:disabled {
   overflow-y: scroll;
 }
 
+#showError {
+    border: 1px solid red;
+    border-radius: 4px;
+    font-weight: bold;
+    color: red;
+    display: none;
+}
+
 .hit {
   border: 1px solid  #ccc;
   border-collapse: collapse;

@@ -1320,7 +1320,7 @@ function getClients(token) {
         return entity;    
     };
 
-    function saveChanges() {
+function saveChanges() {
         var entityIndex = $("#intakeForm #entityIndex").val();
         // set race.  By default all are false, except "raceNone."
         var client = {};
@@ -1368,8 +1368,11 @@ function getClients(token) {
                 data: client,
                 error: function(error) {
                     console.log("An error occurred: " + error.responseText);
+                    console.log(error);
                 },
                 always:  console.log("finished put")
+            }).done( function (response) {
+                manageErrors(response);
             });
         }
         else{
@@ -1377,11 +1380,10 @@ function getClients(token) {
                 method: "POST",
                 data: client,
                 always:  console.log("finished post")
+            }).done( function (response) {
+                manageErrors(response);
             });
         }
-        $("#dob").removeAttr("value");
-        location.reload();
-        switchToSearch(false);
     };
 
     function checkForChanges(dataset) {
@@ -1445,3 +1447,19 @@ function getClients(token) {
         $("#intakeForm #cancel").css("display", "none");
         $("#intakeForm #saveChanges").prop("disabled", true);
     };
+
+function manageErrors(response) {
+    var result = JSON.parse(response);
+    if (result.error){
+        // show error to user
+        var message = result.error.errors[0]['message'];
+        var problem = result.error.errors[0]['problem'];
+        $("#showError").css('display', 'block');
+        $("#showError").text(message + ": " + problem);
+    }
+    else {
+        $("#dob").removeAttr("value");
+        location.reload();
+        switchToSearch(false);
+    }
+}

@@ -222,6 +222,7 @@ exports.editClient = function(req, res) {
       var data = []
       res_put.on('data', function (chunk) {
           console.log('DEBUG: Response: ' + chunk);
+          data.push(chunk);
       });
       res_put.on('end', function() {
         res.send(data.join(''));

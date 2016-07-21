@@ -6,6 +6,7 @@ $(function() {
     });
     setInitialVars();
     if ($("#id_token").val()) {
+        getClients($("#id_token").val());
         switchToSearch(false);
     }
 
