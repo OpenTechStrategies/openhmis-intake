@@ -5,6 +5,9 @@ $(function() {
         auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
     });
     setInitialVars();
+    if ($("#id_token").val()) {
+        switchToSearch(false);
+    }
 
 });
 
@@ -29,7 +32,7 @@ function signInCallback(authResult) {
             data: auth_info,
             success: function(result) {
                 var result_obj = JSON.parse(result);
-                var id_token_var = result_obj.id_token;
+                id_token_var = result_obj.id_token;
                 $("#id_token").val(id_token_var);
                 if (id_token_var) {
                     getClients(id_token_var);
@@ -51,9 +54,6 @@ function signInCallback(authResult) {
 
 
 function switchToSearch(keepResults) {
-    var noCaveatText = "Add New Client";
-    var exportAllText = "Example Export -- All Clients (UDE)";
-    var importAllText = "Example Import";
     if (keepResults == false) {
         $("#searchForm #searchField").val("");
         $("#searchForm #results").empty();

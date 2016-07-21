@@ -3,11 +3,13 @@
 */
 
 function setInitialVars() {
-    var id_token = $("#id_token").val();
+    // Set all these as global variables so they can be used in other
+    // functions.
+    id_token = $("#id_token").val();
     // minimum search length needed to start looking for matches.
-    var rightNow = moment();  // Used for calculating ages
-    var thisYear = rightNow.format('YYYY');
-    var picker = new Pikaday({
+    rightNow = moment();  // Used for calculating ages
+    thisYear = rightNow.format('YYYY');
+    picker = new Pikaday({
         field: $('#datepicker')[0],
         yearRange: [1900, thisYear],
         maxDate: rightNow.toDate(),
@@ -31,22 +33,24 @@ function setInitialVars() {
     // match exactly to the API fields, though do not cover all the
     // API fields.
     // Should this include personalId?
-    var propertyList = ["firstName", "lastName", "ssn", "dob",
+    propertyList = ["firstName", "lastName", "ssn", "dob",
                         "gender", "ethnicity", "amIndAKNative",
                         "asian","blackAfAmerican",
                         "nativeHIOtherPacific","white"];
-    var propertyListLength = propertyList.length;
+    propertyListLength = propertyList.length;
 
     // These are the properties we will try to match to user input.
-    var matchingTerms = ["firstName", "lastName"];
+    matchingTerms = ["firstName", "lastName"];
     
 
     //button text
     
-    var caveatText = "None Of The Above -- Add New Client";
-    var revertText = "Revert Changes";
-    var backText = "Back to Results";
-
+    caveatText = "None Of The Above -- Add New Client";
+    revertText = "Revert Changes";
+    backText = "Back to Results";
+    noCaveatText = "Add New Client";
+    exportAllText = "Example Export -- All Clients (UDE)";
+    importAllText = "Example Import";
 };
 
     /*
@@ -54,7 +58,8 @@ function setInitialVars() {
      * functions in the form.
      */
 function getClients(token) {
-        var token_obj = {'id_token': token};
+        // define globally
+        token_obj = {'id_token': token};
         $.ajax("/clients", {
             method: "GET",
             dataType: "json",
