@@ -1,185 +1,31 @@
-$(function() {
+/*
+ * Contains utility functions for HMIS demo client app.
+*/
+
+function setInitialVars() {
     var id_token = $("#id_token").val();
-    var token_obj = {'id_token': id_token};
-    $(document).ready(function() {
-        // minimum search length needed to start looking for matches.
-        var minSearchLength = 1;
-        var rightNow = moment();  // Used for calculating ages
-        var thisYear = rightNow.format('YYYY');
-        var picker = new Pikaday({
-            field: $('#datepicker')[0],
-            yearRange: [1900, thisYear],
-            maxDate: rightNow.toDate(),
-            onSelect: assignDOB,
-            onOpen: function() {
-                var set_dob = $("#intakeForm #dob").val();
-                // Remove the style showing the previously selected date
-                $(this.el).find(".is-selected").removeClass("is-selected");
-                // If no dob specified, move the view to today.
-                if (set_dob == ""){
-                    this.gotoToday();
-                }
-                else{
-                // Else, go to selected DOB
-                    this.setDate(set_dob);
-                }
+    // minimum search length needed to start looking for matches.
+    var rightNow = moment();  // Used for calculating ages
+    var thisYear = rightNow.format('YYYY');
+    var picker = new Pikaday({
+        field: $('#datepicker')[0],
+        yearRange: [1900, thisYear],
+        maxDate: rightNow.toDate(),
+        onSelect: assignDOB,
+        onOpen: function() {
+            var set_dob = $("#intakeForm #dob").val();
+            // Remove the style showing the previously selected date
+            $(this.el).find(".is-selected").removeClass("is-selected");
+            // If no dob specified, move the view to today.
+            if (set_dob == ""){
+                this.gotoToday();
             }
-        });
-        
-        // event handlers
-            $.ajax("/clients", {
-                method: "GET",
-                dataType: "json",
-                data: token_obj
-            }).done(function(result_data) {
-                // TODO: check for error here
-                if (typeof(result_data.error) !== 'undefined') {
-                    console.log("DEBUG: uh oh, there was an error.");
-                }
-                // only if we have data, show results:
-                //if (typeof(result_data.data) !== 'undefined') {
-                    var data = result_data.data.items;
-                    var dataLength = data.length;
-                    $("#index").data("full-data", data);
-                    $("#searchForm #searchField").keyup(function() {
-                        $("#duplicate_box").remove();
-                        var userString = $("#searchForm #searchField").val();
-                        if (userString.length >= minSearchLength) {
-                            //this calls search() inside itself
-                            var numResults = populateResults(userString, dataLength, data);
-                            // If "results" is empty, activate the "add new client" button.
-                            if (numResults > 0) {
-                                // We've found some results, but we may still have to add a
-                                // new client (maybe a person with the same name as an
-                                // existing client). The "add new client" button will be
-                                // activated, but with a caveat.
-                                $("#addNewClient").text(caveatText);
-                            }
-                            else {
-                                // No need for the caveat.
-                                $("#addNewClient").text(noCaveatText);
-                            }
-                            // If we're over the minimum length, we may add a new client.
-                            $("#searchForm #addNewClient").prop("disabled", false);
-                        }
-                        else if (userString.length == 0) {
-                            $("#searchForm #results").empty();
-                            $("#addNewClient").text(noCaveatText);
-                            $("#searchForm #addNewClient").prop("disabled", true);
-                        }
-                    });
-                //}
-                $("#searchForm #results").on("click", ".hit", function(e) {
-                    switchToIntake($(e.currentTarget).data("entity-index"), data.length, data);
-                });
-                $("#searchForm #addNewClient").click(function() {
-                    switchToIntake(-1, data.length, data);
-                });
-                $("#searchForm #exportAll").click(function() {
-                    exportAll();
-                });
-                $("#importAll").click(function() {
-                    $("#import_file").trigger('click');
-                    $('#import_file').change(function(evt) {
-                        var reader = new FileReader();
-                        var ssn_array = [];
-                        // get all existing ssn's
-                        // full set of data retrieved via API
-                        var dataset = $("#index").data("full-data");
-                        for (var client in dataset){
-                            ssn_array.push(dataset[client]['ssn']);
-                        }
-                        var duplicate_lines = "";
-                        // assigning handler
-                        reader.onloadend = function(evt) {      
-                            lines = evt.target.result.split(/\r?\n/);
-                            var line_counter = 0;
-                            // Possible values are:
-                            // "ymd" = year month day
-                            // "dmy" = day month year
-                            // "mdy" = month day year
-                            // ""    = inconsistent/undetectable date format
-                            //
-                            // Nobody ever uses other formats, so we don't support them
-                            var detectedDateFormat = null;
-                            // Goal: send dates to server in "ymd" format like so: YYYY-MM-DD
-                            // Lines coming in may have other formats
-                            // First, change "/" to "-", then attempt to detect format
-                            // If we can't detect the format, we assume
-                            // "mdy" because our primary users are in USA
-/*                            lines.forEach(function (line_string) {
-                                var line_object = Papa.parse(line_string);
-                                var line = line_object['data'][0];
-                                var dateFormat = detectDateFormat(line);
-                            });*/
-                            // Now, import the lines with the corrected dates
-                            lines.forEach(function (line) {
-                                var returned_array = importLine(line, line_counter, ssn_array);
-                                if (returned_array[0] == true){
-                                    duplicate_lines += "Line " + line_counter + " (" + returned_array[1] + " " + returned_array[2] + ") may be a duplicate. <br>";
-                                }
-                                line_counter++;
-                            });
-                            if (duplicate_lines != ""){
-                                duplicate_lines += "</div>";
-                                var warning_header = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
-                                var duplicate_warning = warning_header.concat(duplicate_lines);
-                                $("#results").html(duplicate_warning);
-                            }
-                        };
-
-                        // getting File instance
-                        var file = evt.target.files[0];
-
-                        // start reading
-                        reader.readAsText(file);
-
-                        //reset data with newly imported clients
-                        $.ajax("/clients", {
-                            method: "GET",
-                            dataType: "json",
-                            data: token_obj
-                        }).done(function(data) {
-                            $("#index").data("full-data", data);
-                        });
-                    });
-                });
-
-                $("#intakeForm input").keyup(function(e) {
-                    checkForChanges(data);
-                });
-                $("#intakeForm select").on("change", function(e) {
-                    checkForChanges(data);
-                });
-                $("#intakeForm input:checkbox").on("change", function(e) {
-                    checkForChanges(data);
-                });
-                $("#intakeForm #backToResults").click(function() {
-                    switchToSearch(true);
-                });
-                $("#intakeForm #revertChanges").click(function(e) {
-                    revertChanges(data);
-                });
-                $("#intakeForm #cancel").click(function() {
-                    cancel();
-                });
-                $("#intakeForm #saveChanges").click(function() {
-                    saveChanges();
-                });
-                $("#intakeForm #missing").on("change", function() {
-                    manageCheckboxes('missing');
-                });
-                $("#intakeForm #unknown").on("change", function() {
-                    manageCheckboxes('unknown');
-                });
-                $("#intakeForm #refused").on("change", function() {
-                    manageCheckboxes('refused');
-                });
-                switchToSearch(false);
-            });
-
+            else{
+                // Else, go to selected DOB
+                this.setDate(set_dob);
+            }
+        }
     });
-
     // This is the list of all the properties that define a client
     // (later called an "Entity").  These properties have names that
     // match exactly to the API fields, though do not cover all the
@@ -200,6 +46,172 @@ $(function() {
     var caveatText = "None Of The Above -- Add New Client";
     var revertText = "Revert Changes";
     var backText = "Back to Results";
+
+};
+
+    /*
+     * Gathers all the clients from the database, initializes search
+     * functions in the form.
+     */
+function getClients(token) {
+        var token_obj = {'id_token': token};
+        $.ajax("/clients", {
+            method: "GET",
+            dataType: "json",
+            data: token_obj
+        }).done(function(result_data) {
+            // TODO: check for error here
+            if (typeof(result_data.error) !== 'undefined') {
+                switchToLogin(true);
+            }
+            // only if we have data, show results:
+            if (typeof(result_data.data) !== 'undefined') {
+                var data = result_data.data.items;
+                var dataLength = data.length;
+                $("#index").data("full-data", data);
+                $("#searchForm #searchField").keyup(function() {
+                    $("#duplicate_box").remove();
+                    var userString = $("#searchForm #searchField").val();
+                    var minSearchLength = 1;
+                    if (userString.length >= minSearchLength) {
+                        //this calls search() inside itself
+                        var numResults = populateResults(userString, dataLength, data);
+                        // If "results" is empty, activate the "add new client" button.
+                        if (numResults > 0) {
+                            // We've found some results, but we may still have to add a
+                            // new client (maybe a person with the same name as an
+                            // existing client). The "add new client" button will be
+                            // activated, but with a caveat.
+                            $("#addNewClient").text(caveatText);
+                        }
+                        else {
+                            // No need for the caveat.
+                            $("#addNewClient").text(noCaveatText);
+                        }
+                        // If we're over the minimum length, we may add a new client.
+                        $("#searchForm #addNewClient").prop("disabled", false);
+                    }
+                    else if (userString.length == 0) {
+                        $("#searchForm #results").empty();
+                        $("#addNewClient").text(noCaveatText);
+                        $("#searchForm #addNewClient").prop("disabled", true);
+                    }
+                });
+            }
+            else {
+                switchToLogin(false);
+            }
+            $("#searchForm #results").on("click", ".hit", function(e) {
+                switchToIntake($(e.currentTarget).data("entity-index"), data.length, data);
+            });
+            $("#searchForm #addNewClient").click(function() {
+                switchToIntake(-1, data.length, data);
+            });
+            $("#searchForm #exportAll").click(function() {
+                exportAll();
+            });
+            $("#importAll").click(function() {
+                $("#import_file").trigger('click');
+                $('#import_file').change(function(evt) {
+                    var reader = new FileReader();
+                    var ssn_array = [];
+                    // get all existing ssn's
+                    // full set of data retrieved via API
+                    var dataset = $("#index").data("full-data");
+                    for (var client in dataset){
+                        ssn_array.push(dataset[client]['ssn']);
+                    }
+                    var duplicate_lines = "";
+                    // assigning handler
+                    reader.onloadend = function(evt) {      
+                        lines = evt.target.result.split(/\r?\n/);
+                        var line_counter = 0;
+                        // Possible values are:
+                        // "ymd" = year month day
+                        // "dmy" = day month year
+                        // "mdy" = month day year
+                        // ""    = inconsistent/undetectable date format
+                        //
+                        // Nobody ever uses other formats, so we don't support them
+                        var detectedDateFormat = null;
+                        // Goal: send dates to server in "ymd" format like so: YYYY-MM-DD
+                        // Lines coming in may have other formats
+                        // First, change "/" to "-", then attempt to detect format
+                        // If we can't detect the format, we assume
+                        // "mdy" because our primary users are in USA
+                        /*                            lines.forEach(function (line_string) {
+                                                      var line_object = Papa.parse(line_string);
+                                                      var line = line_object['data'][0];
+                                                      var dateFormat = detectDateFormat(line);
+                                                      });*/
+                        // Now, import the lines with the corrected dates
+                        lines.forEach(function (line) {
+                            var returned_array = importLine(line, line_counter, ssn_array);
+                            if (returned_array[0] == true){
+                                duplicate_lines += "Line " + line_counter + " (" + returned_array[1] + " " + returned_array[2] + ") may be a duplicate. <br>";
+                            }
+                            line_counter++;
+                        });
+                        if (duplicate_lines != ""){
+                            duplicate_lines += "</div>";
+                            var warning_header = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
+                            var duplicate_warning = warning_header.concat(duplicate_lines);
+                            $("#results").html(duplicate_warning);
+                        }
+                    };
+
+                    // getting File instance
+                    var file = evt.target.files[0];
+
+                    // start reading
+                    reader.readAsText(file);
+
+                    //reset data with newly imported clients
+                    $.ajax("/clients", {
+                        method: "GET",
+                        dataType: "json",
+                        data: token_obj
+                    }).done(function(data) {
+                        $("#index").data("full-data", data);
+                    });
+                });
+            });
+
+            $("#intakeForm input").keyup(function(e) {
+                checkForChanges(data);
+            });
+            $("#intakeForm select").on("change", function(e) {
+                checkForChanges(data);
+            });
+            $("#intakeForm input:checkbox").on("change", function(e) {
+                checkForChanges(data);
+            });
+            $("#intakeForm #backToResults").click(function() {
+                switchToSearch(true);
+            });
+            $("#intakeForm #revertChanges").click(function(e) {
+                revertChanges(data);
+            });
+            $("#intakeForm #cancel").click(function() {
+                cancel();
+            });
+            $("#intakeForm #saveChanges").click(function() {
+                saveChanges();
+            });
+            $("#intakeForm #missing").on("change", function() {
+                manageCheckboxes('missing');
+            });
+            $("#intakeForm #unknown").on("change", function() {
+                manageCheckboxes('unknown');
+            });
+            $("#intakeForm #refused").on("change", function() {
+                manageCheckboxes('refused');
+            });
+            if (typeof(result_data.data) !== 'undefined') {                
+                switchToSearch(false);
+            }
+        });
+    };
 
     /*
      * Takes a user-entered string and returns the number of matching
@@ -245,7 +257,7 @@ $(function() {
 
         // Return the number of matching entities.
         return $("#searchForm #results > .hit").length;
-    }
+    };
 
     function Entity() {
         // Start by setting all values to the empty string.
@@ -259,7 +271,7 @@ $(function() {
         // Usually they'll be overwritten, but not if this is a new client.
         this.firstName = $("#searchForm #firstName").val();
         this.lastName = $("#searchForm #lastName").val();
-    }
+    };
 
     function Hit(entity) {
         this.index = entity.personalId;
@@ -270,21 +282,21 @@ $(function() {
         this.gender = entity.gender;
         this.dob = entity.dob ? getFormattedDOB(entity.dob) : "";
         this.age = entity.dob ? getYearsOld(entity.dob) : "";
-    }
+    };
 
     function getFormattedDOB(date) {
         return moment(date).format('DD MMM YYYY');
-    }
+    };
 
     function getYearsOld(date) {
         return moment().diff(date, 'years');
-    }
+    };
 
     /* Hit factory holds a dictionary of hits (with entity indices as
        keys) that match user input. */
     function HitFactory() {
         this.hits = {};
-    }
+    };
 
     HitFactory.prototype.getHit = function(entity) {
         var hit = null;
@@ -296,13 +308,13 @@ $(function() {
             this.hits[entity.personalId] = hit;
         }
         return hit;
-    }
+    };
 
     HitFactory.prototype.killHit = function(entity) {
         if (this.hits.hasOwnProperty(entity.index)) {
             delete this.hits[entity.index];
         }
-    }
+    };
 
     HitFactory.prototype.allTheHits = function() {
         var hitList = [];
@@ -310,7 +322,7 @@ $(function() {
             hitList.push(this.hits[index]);
         }
         return hitList;
-    }
+    };
 
     /*
      * Takes a user-entered string and returns the set of matching
@@ -389,7 +401,7 @@ $(function() {
             
         }
         return hitFactory.allTheHits();
-    }
+    };
 
     function getSummaryDiv(hit) {
         var summaryDiv = $("<div class='hit'></div>");
@@ -409,7 +421,7 @@ $(function() {
         summaryDiv.append(text);
         summaryDiv.data("entity-index", hit.index);
         return summaryDiv;
-    }
+    };
 
 
 
@@ -424,7 +436,7 @@ $(function() {
         else {
             $(".race").prop("disabled", false);
         }
-    }
+    };
                     
     function exportAll() {
         /* For now we implement the downloadable-file functionality
@@ -1082,7 +1094,7 @@ $(function() {
                 saveAs(zipfile, "HMIS_Data.zip");
             });
         });
-    }
+    };
 
     function importLine(line_string, line_counter, ssn_array) {
         var line_object = Papa.parse(line_string);
@@ -1147,7 +1159,7 @@ $(function() {
             }
         }
         return return_array;
-    }
+    };
 
     /*
       * Takes a 
@@ -1171,7 +1183,7 @@ $(function() {
                 
             )
         }
-    }
+    };
 
     /* Takes a date string in mm/dd/yyyy or yyyy-mm-dd format and returns
      * it in YYYY-MM-DD format.  This is a quick function that will go
@@ -1190,7 +1202,7 @@ $(function() {
             new_date = date;
         }
         return new_date;
-    }
+    };
 
     function switchToIntake(personalId, data_length, dataset) {
         // Reset all form fields.
@@ -1266,7 +1278,7 @@ $(function() {
 
         $("#search").css("display", "none");
         $("#intake").css("display", "block");
-    }
+    };
 
     function assignDOB() {
         var dataset = $("#index").data("full-data");
@@ -1280,7 +1292,7 @@ $(function() {
         $("#intakeForm #dob").val(DOB);
         refreshFormattedDOB();
         checkForChanges(dataset);
-    }
+    };
 
     function refreshFormattedDOB() {
         var DOB = $("#intakeForm #dob").val();
@@ -1291,7 +1303,7 @@ $(function() {
         else {
             $("#intakeForm #formattedDOB").html("&nbsp;");
         }
-    }
+    };
 
     function getEntityFromInputValues() {
         var entity = {};
@@ -1301,7 +1313,7 @@ $(function() {
             entity[propertyList[i]] = $("#intakeForm #" + propertyList[i]).val();
         }
         return entity;    
-    }
+    };
 
     function saveChanges() {
         var entityIndex = $("#intakeForm #entityIndex").val();
@@ -1365,7 +1377,7 @@ $(function() {
         $("#dob").removeAttr("value");
         location.reload();
         switchToSearch(false);
-    }
+    };
 
     function checkForChanges(dataset) {
         var index = $("#intakeForm #entityIndex").val();
@@ -1392,13 +1404,13 @@ $(function() {
             $("#intakeForm #revertChanges").css("display", "none");
         }
         $("#intakeForm #saveChanges").prop("disabled", true);
-    }
+    };
 
     function cancel() {
         if (confirm("The new client will not be entered into the database. Are you sure?")) {
             switchToSearch(false);
         }
-    }
+    };
 
     function revertChanges(dataset) {
         var index = $("#intakeForm #entityIndex").val();
@@ -1427,6 +1439,4 @@ $(function() {
         $("#intakeForm #revertChanges").css("display", "none");
         $("#intakeForm #cancel").css("display", "none");
         $("#intakeForm #saveChanges").prop("disabled", true);
-    }
-}); //end wrapper function
-
+    };

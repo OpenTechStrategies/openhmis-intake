@@ -4,6 +4,8 @@ $(function() {
     $('#signinButton').click(function() {
         auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
     });
+    setInitialVars();
+
 });
 
 function start() {
@@ -29,7 +31,13 @@ function signInCallback(authResult) {
                 var result_obj = JSON.parse(result);
                 var id_token_var = result_obj.id_token;
                 $("#id_token").val(id_token_var);
-                switchToSearch();
+                if (id_token_var) {
+                    getClients(id_token_var);
+                    switchToSearch();
+                }
+                else {
+                    switchToWarning();
+                }
             },
             error: function(error) {
                 console.log("An error occurred: " + error.responseText);
@@ -42,19 +50,37 @@ function signInCallback(authResult) {
 };
 
 
-    function switchToSearch(keepResults) {
+function switchToSearch(keepResults) {
     var noCaveatText = "Add New Client";
     var exportAllText = "Example Export -- All Clients (UDE)";
     var importAllText = "Example Import";
-        if (keepResults == false) {
-            $("#searchForm #searchField").val("");
-            $("#searchForm #results").empty();
-            $("#addNewClient").text(noCaveatText);
-            $("#exportAll").text(exportAllText);
-            $("#importAll").text(importAllText);
-            $("#searchForm #addNewClient").prop("disabled", true);
-        }
-        $("#search").css("display", "block");
-        $("#intake").css("display", "none");
-        $("#login").css("display", "none");
-    };
+    if (keepResults == false) {
+        $("#searchForm #searchField").val("");
+        $("#searchForm #results").empty();
+        $("#addNewClient").text(noCaveatText);
+        $("#exportAll").text(exportAllText);
+        $("#importAll").text(importAllText);
+        $("#searchForm #addNewClient").prop("disabled", true);
+    }
+    $("#search").css("display", "block");
+    $("#intake").css("display", "none");
+    $("#login").css("display", "none");
+    $("#warning").css("display", "none");
+};
+
+function switchToLogin(msg) {
+    var warningMessage = "Sorry, you are not authorized to access this content.  Please refresh and try logging in again.";
+    $("#search").css("display", "none");
+    $("#intake").css("display", "none");
+    $("#login").css("display", "block");
+    $("#warning").css("display", "none");
+    if (msg) {
+        $("#warningtext").text(warningMessage);
+    }
+    else {
+        $("#warningtext").text("");
+    }
+};
+
+
+
