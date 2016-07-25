@@ -308,7 +308,8 @@ exports.getIdentity = function (req, res) {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
-          'Content-Length': post_data.length
+          'Content-Length': post_data.length,
+          'Authorization': req.body.token
       }
   };
 
