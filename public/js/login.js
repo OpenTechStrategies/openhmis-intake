@@ -69,10 +69,34 @@ function switchToSearch(keepResults) {
         $("#searchForm #addNewClient").prop("disabled", true);
     }
     $("#search").css("display", "block");
+    // fill in account that was used to log in
+    var id_token = getIdCookie();
+    getLoginInfo(id_token);
     $("#intake").css("display", "none");
     $("#login").css("display", "none");
     $("#warning").css("display", "none");
 };
+
+/*
+ * Takes the id token (received from Google) and displays the
+ * human-readable id associated with it (usually a Google email
+ * address).
+*/
+function getLoginInfo(token) {
+    var token_wrapper = {"token": token}
+    $.ajax({
+        type: 'POST',
+        url: '/identify/',
+        data: token_wrapper,
+        success: function (response) {
+            $("#loginInfo").text("Welcome, " + response);
+        },
+        error: function (error) {
+            console.log(error);
+            $("#loginInfo").text("Sorry, there was an error finding your account: " + error);
+        }
+    });
+}
 
 function switchToLogin(msg) {
     var warningMessage = "Sorry, you are not authorized to access this content.  Please log in again.";

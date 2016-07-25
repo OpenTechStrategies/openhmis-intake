@@ -10,4 +10,5 @@ module.exports = function(app) {
   app.route('/clients/:id').put(client.editClient);
   app.route('/client_id').get(client.getClientId);
   app.route('/authenticate').post(client.authenticateUser);
+  app.route('/identify').post(client.getIdentity);
 };

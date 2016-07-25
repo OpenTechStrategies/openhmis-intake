@@ -5,15 +5,31 @@ body {
   background-position: center;
 }
 
+#header {
+    display: flex;
+}
+
 #logo {
-  position: absolute;
-  left: 15px;
-  top: 22px;
+    left: 15px;
+    top: 22px;
+    float: left;
 }
 
 #logo img {
   width: 80px;
   height: 23px;
+}
+
+#account {
+    float: right;
+    display: block;
+    padding-left: 15px;
+}
+
+#loginInfo {
+    font-style: italic;
+    display: block;
+    text-align: right;
 }
 
 .clear {

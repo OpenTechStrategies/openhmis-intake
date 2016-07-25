@@ -297,3 +297,35 @@ exports.authenticateUser = function(req, res) {
   post_req.end()
 
 };
+
+exports.getIdentity = function (req, res) {
+    var post_data = req.body.token;
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/api/v3/authenticate/externalId/',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': post_data.length
+      }
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res_post) {
+      res_post.setEncoding('utf8');
+      var data = []
+      res_post.on('data', function (chunk) {
+          console.log('DEBUG: Response: ' + chunk);
+          data.push(chunk);
+      });
+      res_post.on('end', function() {
+        res.send(data);
+      });
+  });
+
+  // post the data
+  post_req.write(post_data);
+  post_req.end()
+};
