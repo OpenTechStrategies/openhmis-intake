@@ -10,6 +10,8 @@ $(function() {
     if (id_token) {
         getClients(id_token);
         switchToSearch(false);
+        // fill in account that was used to log in
+        getLoginInfo(id_token);
     }
     else {
         switchToLogin(false);
@@ -69,9 +71,6 @@ function switchToSearch(keepResults) {
         $("#searchForm #addNewClient").prop("disabled", true);
     }
     $("#search").css("display", "block");
-    // fill in account that was used to log in
-    var id_token = getIdCookie();
-    getLoginInfo(id_token);
     $("#intake").css("display", "none");
     $("#login").css("display", "none");
     $("#warning").css("display", "none");

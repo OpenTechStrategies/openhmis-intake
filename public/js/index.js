@@ -122,13 +122,14 @@ function getClients(token) {
                     var ssn_array = [];
                     // get all existing ssn's
                     // full set of data retrieved via API
+                    // when does this get refreshed?
                     var dataset = $("#index").data("full-data");
                     for (var client in dataset){
                         ssn_array.push(dataset[client]['ssn']);
                     }
                     var duplicate_lines = "";
                     // assigning handler
-                    reader.onloadend = function(evt) {      
+                    reader.onloadend = function(evt) {
                         lines = evt.target.result.split(/\r?\n/);
                         var line_counter = 0;
                         // Possible values are:
@@ -1116,13 +1117,13 @@ function getClients(token) {
         var line = line_object['data'][0];
         // test whether the line is defined
         if (line) {
+            // check for duplicate SSN
             if (ssn_array.indexOf(line[7]) > 0) {
                 return_array[0] = true; //also pass first and last name
                 return_array[1] = line[2];
                 return_array[2] = line[4];
             }
-            //
-            // if it doesn't, POST that record to the API
+            // if it isn't a dupe, POST the record to the API
             else {
                 // get line into correct format for POSTing
                 var new_client = {};
@@ -1159,6 +1160,22 @@ function getClients(token) {
                     method: "POST",
                     data: new_client,
                     always:  console.log("finished post")
+                }).done( function (response) {
+                    // give user feedback about success of import
+                    var result = JSON.parse(response);
+                    if (result.error){
+                        // TBD: see issue #35's comment about making
+                        // these API errors more human-friendly
+                        var message = result.error.errors[0]['message'];
+                        var problem = result.error.errors[0]['problem'];
+                        // add message to the results display
+                        var failure_line = "Line " + line_counter + " had an import error: " + problem + "<br/>";
+                        $("#results").append(failure_line);
+                    }
+                    else {
+                        var success_line = "Line " + line_counter + " (" + result.data.item.firstName + " " + result.data.item.lastName + ") imported correctly. <br/>";
+                        $("#results").append(success_line);
+                    }
                 });
 
             }

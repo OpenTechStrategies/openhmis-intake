@@ -49,6 +49,7 @@ exports.addClient = function(req, res) {
       var data = []
       res_post.on('data', function (chunk) {
           console.log('DEBUG: Response: ' + chunk);
+          data.push(chunk);
       });
       res_post.on('end', function() {
         res.send(data.join(''));
