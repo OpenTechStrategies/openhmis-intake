@@ -82,17 +82,35 @@ function switchToSearch(keepResults) {
  * address).
 */
 function getLoginInfo(token) {
-    var token_wrapper = {"token": token}
+    var token_wrapper = {"token": token};
+    var account_error_text = "Sorry, there was an error finding your account";
     $.ajax({
         type: 'POST',
         url: '/identify/',
-        data: token_wrapper,
-        success: function (response) {
-            $("#loginInfo").text("Welcome, " + response);
-        },
-        error: function (error) {
-            console.log(error);
-            $("#loginInfo").text("Sorry, there was an error finding your account: " + error);
+        data: token_wrapper
+    }).done (function (response) {
+        // TBD: This is not a very robust conditional.  Let's do a
+        // better check to make sure that we have a user ID here.
+        if (response[0]) {
+            // Make another API call, using the user id, to get the user
+            // info.  Then display username, coc, and organization.
+            var user_obj = {"user_id": response[0], "token": token};
+            $.get('/user_account', {
+                "user_id": response[0],
+                "token": token
+            }).done( function (user) {
+                user_obj = JSON.parse(user);
+                if (user_obj.data) {
+                    $("#loginInfo").html(user_obj.data.item.externalId + "<br/>" + user_obj.data.item.organization + "<br/>" + user_obj.data.item.coC);
+                }
+                else {
+                    $("#loginInfo").text(account_error_text);
+                }
+            });
+        }
+        else {
+            console.log(response);
+            $("#loginInfo").text(account_error_text);
         }
     });
 }

@@ -319,7 +319,6 @@ exports.getIdentity = function (req, res) {
       res_post.setEncoding('utf8');
       var data = []
       res_post.on('data', function (chunk) {
-          console.log('DEBUG: Response: ' + chunk);
           data.push(chunk);
       });
       res_post.on('end', function() {
@@ -330,4 +329,33 @@ exports.getIdentity = function (req, res) {
   // post the data
   post_req.write(post_data);
   post_req.end()
+};
+
+exports.getUserInfo = function(req, res) {
+
+    var get_options = {
+      host: config.api.host,
+      port: config.api.port,
+      path: '/openhmis/api/v3/users/' + req.query.user_id,
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': req.query.token
+      }
+  };
+
+  // Set up the request
+  var get_req = http.request(get_options, function(res_get) {
+      res_get.setEncoding('utf8');
+      var data = []
+      res_get.on('data', function (chunk) {
+          data.push(chunk);
+      });
+      res_get.on('end', function() {
+        res.send(data.join(''));
+      });
+  });
+
+  // get the data
+  get_req.end()
 };
