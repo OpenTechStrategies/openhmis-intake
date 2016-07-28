@@ -6,17 +6,20 @@ $(function() {
     });
     setInitialVars();
 
-    id_token = getIdCookie();
+    id_token = getCookie('id_token=');
     if (id_token) {
         getClients(id_token);
         switchToSearch(false);
-        // fill in account that was used to log in
-        getLoginInfo(id_token);
+        if (! getCookie('user_name=')) {
+            getLoginInfo(id_token);
+        }
     }
     else {
         switchToLogin(false);
     }
-
+    if (getCookie('user_name=')) {
+        $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
+    }
 });
 
 function start() {
@@ -44,6 +47,9 @@ function signInCallback(authResult) {
                 document.cookie = "id_token=" + id_token_var;
                 if (id_token_var) {
                     getClients(id_token_var);
+                    // fill in account that was used to log in
+                    // and store info to a cookie
+                    getLoginInfo(id_token_var);
                     switchToSearch();
                 }
                 else {
@@ -101,7 +107,10 @@ function getLoginInfo(token) {
             }).done( function (user_result) {
                 var user = JSON.parse(user_result);
                 if (user.data) {
-                    $("#loginInfo").html(user.data.item.externalId + "<br/>" + user.data.item.organization + "<br/>" + user.data.item.coC);
+                    document.cookie = "user_name=" + user.data.item.externalId;
+                    document.cookie = "user_org=" + user.data.item.organization;
+                    document.cookie = "user_coc=" + user.data.item.coC;
+                    $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
                 }
                 else {
                     $("#loginInfo").text(account_error_text);
@@ -131,13 +140,13 @@ function switchToLogin(msg) {
 
 // check for cookie (inspired by
 // http://www.w3schools.com/js/js_cookies.asp)
-function getIdCookie() {
+function getCookie(cookie_name) {
     var cookie_array = document.cookie.split('; ');
     var id_token = null;
     for (var i=0; i < cookie_array.length; i++) {
         var cookie = cookie_array[i];
-        if (cookie.indexOf('id_token=') == 0) {
-            id_token = cookie.substring(9, cookie.length);
+        if (cookie.indexOf(cookie_name) == 0) {
+            id_token = cookie.substring(cookie_name.length, cookie.length);
         }
     }
     return id_token;

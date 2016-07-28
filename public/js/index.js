@@ -5,7 +5,7 @@
 function setInitialVars() {
     // Set all these as global variables so they can be used in other
     // functions.
-    id_token = getIdCookie();
+    id_token = getCookie('id_token=');
     // minimum search length needed to start looking for matches.
     rightNow = moment();  // Used for calculating ages
     thisYear = rightNow.format('YYYY');
