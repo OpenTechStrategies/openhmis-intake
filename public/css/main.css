@@ -7,12 +7,14 @@ body {
 
 #header {
     display: flex;
+    width: 100%;
 }
 
 #logo {
     left: 15px;
     top: 22px;
     float: left;
+    width: 50%;
 }
 
 #logo img {
@@ -20,16 +22,13 @@ body {
   height: 23px;
 }
 
-#account {
-    float: right;
-    display: block;
-    padding-left: 15px;
-}
-
 #loginInfo {
     font-style: italic;
     display: block;
     text-align: right;
+    float: right;
+    font-size: 80%;
+    width: 50%;
 }
 
 .clear {

@@ -91,17 +91,17 @@ function getLoginInfo(token) {
     }).done (function (response) {
         // TBD: This is not a very robust conditional.  Let's do a
         // better check to make sure that we have a user ID here.
-        if (response[0]) {
+        if (response[0] && response[0] > 0) {
             // Make another API call, using the user id, to get the user
             // info.  Then display username, coc, and organization.
             var user_obj = {"user_id": response[0], "token": token};
             $.get('/user_account', {
                 "user_id": response[0],
                 "token": token
-            }).done( function (user) {
-                user_obj = JSON.parse(user);
-                if (user_obj.data) {
-                    $("#loginInfo").html(user_obj.data.item.externalId + "<br/>" + user_obj.data.item.organization + "<br/>" + user_obj.data.item.coC);
+            }).done( function (user_result) {
+                var user = JSON.parse(user_result);
+                if (user.data) {
+                    $("#loginInfo").html(user.data.item.externalId + "<br/>" + user.data.item.organization + "<br/>" + user.data.item.coC);
                 }
                 else {
                     $("#loginInfo").text(account_error_text);
