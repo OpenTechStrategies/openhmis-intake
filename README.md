@@ -1,10 +1,3 @@
-# openhmis-intake
+# HMIS API Demo Client App
 
-CAUTION: This app is out of sync with the current version of the
-[OpenHMIS API](https://github.com/PCNI/OpenHMIS).  You can look at it to
-get a basic idea of how the connection should work, but it *will not*
-work with the API right now.
-
-
-A client intake application built to use the OpenHMIS API
-
+A client intake demonstration application that uses the [OpenHMIS API](https://github.com/hmis-tools/hmis-api-server/blob/master/docs/API.md).
