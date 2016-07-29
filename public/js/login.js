@@ -95,32 +95,30 @@ function getLoginInfo(token) {
         url: '/identify/',
         data: token_wrapper
     }).done (function (response) {
-        // TBD: This is not a very robust conditional.  Let's do a
-        // better check to make sure that we have a user ID here.
-        if (response[0] && response[0] > 0) {
-            // Make another API call, using the user id, to get the user
-            // info.  Then display username, coc, and organization.
-            var user_obj = {"user_id": response[0], "token": token};
-            $.get('/user_account', {
-                "user_id": response[0],
-                "token": token
-            }).done( function (user_result) {
-                var user = JSON.parse(user_result);
-                if (user.data) {
-                    document.cookie = "user_name=" + user.data.item.externalId;
-                    document.cookie = "user_org=" + user.data.item.organization;
-                    document.cookie = "user_coc=" + user.data.item.coC;
-                    $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
-                }
-                else {
-                    $("#loginInfo").text(account_error_text);
-                }
-            });
+        var result = JSON.parse(response);
+        if (typeof(result.data) !== 'undefined') {
+            var account = result.data.item;
+            if (account.user != null) {
+                console.log(account.user);
+                document.cookie = "user_name=" + account.user.externalId;
+                document.cookie = "user_org=" + account.user.organization;
+                document.cookie = "user_coc=" + account.user.coC;
+                $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
+            }
+            else {
+                document.cookie = "user_name=" + account.externalId;
+                // unset other cookies
+                document.cookie = "user_org=" + "";
+                document.cookie = "user_coc=" + "";
+                $("#loginInfo").html(getCookie('user_name='));
+            }
         }
         else {
-            console.log(response);
-            $("#loginInfo").text(account_error_text);
+            // show an error
+            console.log(result.error);
+            $("#loginInfo").html(account_error_text);
         }
+
     });
 }
 

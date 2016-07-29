@@ -310,7 +310,8 @@ exports.getIdentity = function (req, res) {
       headers: {
           'Content-Type': 'application/json',
           'Content-Length': post_data.length,
-          'Authorization': req.body.token
+          'Authorization': req.body.token,
+          'Accept': 'application/json'
       }
   };
 
@@ -352,7 +353,8 @@ exports.getUserInfo = function(req, res) {
           data.push(chunk);
       });
       res_get.on('end', function() {
-        res.send(data.join(''));
+          console.log("DEBUG: user info is: " + data);
+          res.send(data.join(''));
       });
   });
 
