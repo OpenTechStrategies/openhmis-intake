@@ -375,6 +375,9 @@ function getClients(token) {
                     if (entity[matchingTermsCopy[j]] !== null){
                         result = entity[matchingTermsCopy[j]].match(userRegex);
                     }
+                    else {
+                        result = null;
+                    }
                     if (result !== null) {
                         // We found a match. Figure out how long it is.
                         matchLength = result[0].length;
