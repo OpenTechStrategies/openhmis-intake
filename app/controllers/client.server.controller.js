@@ -52,7 +52,12 @@ exports.addClient = function(req, res) {
           data.push(chunk);
       });
       res_post.on('end', function() {
-        res.status(res_post.statusCode).send(data.join(''));
+          if (res_post.statusCode == '500') {
+              res.status(res_post.statusCode).send();
+          }
+          else {
+              res.send(res_post.statusCode, data.join(''));
+          }
       });
   });
     

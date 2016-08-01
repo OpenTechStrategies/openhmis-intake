@@ -14,4 +14,6 @@ and definitely add more when you add new functionality.
   - should have latest version of data
 - import
   - should show success/error messages for each line of the csv
-  - should error for non-csvs, not-correctly-formatted csvs, etc.
+    (success, error: API response, or duplicate) 
+  - should error once for non-csvs, not-correctly-formatted csvs, etc.
+  - 

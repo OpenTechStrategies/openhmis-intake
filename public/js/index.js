@@ -122,7 +122,7 @@ function getClients(token) {
                     var ssn_array = [];
                     // get all existing ssn's
                     // full set of data retrieved via API
-                    // when does this get refreshed?
+                    // TBD: when does this get refreshed?
                     var dataset = $("#index").data("full-data");
                     for (var client in dataset){
                         ssn_array.push(dataset[client]['ssn']);
@@ -150,14 +150,30 @@ function getClients(token) {
                                                       var line = line_object['data'][0];
                                                       var dateFormat = detectDateFormat(line);
                                                       });*/
-                        // Now, import the lines with the corrected dates
+                        // Now, import the lines with the corrected
+                        // dates.
+                        //
+                        // Next few lines inspired by:
+                        // http://stackoverflow.com/questions/2641347/how-to-short-circuit-array-foreach-like-calling-break
+                        var BreakException = {};
+                        var invalid_format_text = "Sorry, this file looks like it's in the wrong format.";
+                        try {
                         lines.forEach(function (line) {
                             var returned_array = importLine(line, line_counter, ssn_array);
+                            if (typeof(returned_array[3]) !== 'undefined') {
+                                throw BreakException;
+                            }
                             if (returned_array[0] == true){
                                 duplicate_lines += "Line " + line_counter + " (" + returned_array[1] + " " + returned_array[2] + ") may be a duplicate. <br>";
                             }
                             line_counter++;
                         });
+                        }
+                        catch (e) {
+                            if (e == BreakException) {
+                                $("#results").append(invalid_format_text);
+                            }
+                        }
                         if (duplicate_lines != ""){
                             duplicate_lines += "</div>";
                             var warning_header = "<div id='duplicate_box'><b>Warning: possible duplicates detected</b><br>";
@@ -170,7 +186,14 @@ function getClients(token) {
                     var file = evt.target.files[0];
 
                     // start reading
-                    reader.readAsText(file);
+                    if (file) {
+                        reader.readAsText(file);
+                    }
+                    else {
+                        // send an error
+                        var error_div = $("<div id='duplicate_box'>" + invalid_format_text + "</div>");
+                        $("#results").append(error_div);
+                    }
 
                     //reset data with newly imported clients
                     $.ajax("/clients", {
@@ -1130,7 +1153,6 @@ function getClients(token) {
             else {
                 // get line into correct format for POSTing
                 var new_client = {};
-                new_client['personalId'] = line[1];
                 new_client['firstName'] = line[2];
                 return_array[1] = new_client['firstName'];
                 new_client['middleName'] = line[3];
@@ -1143,7 +1165,16 @@ function getClients(token) {
                 // Timesaving device: For now, if the date contains "/", assume
                 // that the format is mm/dd/yy (Excel format) and convert
                 // accordingly.
-                new_client['dob'] = quickConvertDate(line[9]);
+                if (quickConvertDate(line[9])) {
+                    new_client['dob'] = quickConvertDate(line[9]);
+                }
+                else {
+                    // This will likely catch incorrectly formatted
+                    // files before they get to later calls to
+                    // quickConvertDate().
+                    return_array[3] = true;
+                    return return_array;
+                }
                 new_client['dobDataQuality'] = line[10];
                 new_client['amIndAKNative'] = line[11];
                 new_client['asian'] = line[12];
@@ -1162,20 +1193,25 @@ function getClients(token) {
                 $.ajax("/clients/", {
                     method: "POST",
                     data: new_client,
-                    always:  console.log("finished post")
-                }).done( function (response) {
-                    // give user feedback about success of import
-                    var result = JSON.parse(response);
-                    if (result.error){
-                        // TBD: see issue #35's comment about making
-                        // these API errors more human-friendly
-                        var message = result.error.errors[0]['message'];
-                        var problem = result.error.errors[0]['problem'];
-                        // add message to the results display
-                        var failure_line = "Line " + line_counter + " had an import error: " + problem + "<br/>";
+                    always:  console.log("finished post"),
+                    error: function (error) {
+                        var result = JSON.parse(error.responseText);
+                        if (typeof(result) !== 'undefined') {
+                            // TBD: see issue #35's comment about making
+                            // these API errors more human-friendly
+                            var message = result.error.errors[0]['message'];
+                            var problem = result.error.errors[0]['problem'];
+                            // add message to the results display
+                            var failure_line = "Line " + line_counter + " had an import error: " + message + ": " + problem + "<br/>";
+                        }
+                        else {
+                            var failure_line = "Line " + line_counter + " had an import error.<br/>";
+                        }
                         $("#results").append(failure_line);
-                    }
-                    else {
+                    },
+                    success: function (response) {
+                        // give user feedback about success of import
+                        var result = JSON.parse(response);
                         var success_line = "Line " + line_counter + " (" + result.data.item.firstName + " " + result.data.item.lastName + ") imported correctly. <br/>";
                         $("#results").append(success_line);
                     }
@@ -1215,7 +1251,11 @@ function getClients(token) {
      * away in later commits.
      */
     
-    function quickConvertDate(date){
+function quickConvertDate(date) {
+    if (typeof(date) === 'undefined') {
+        return false;
+    }
+    else {
         var date_components = date.split("/");
         var new_date = ""; //date string to be returned
         if (date_components[1]){
@@ -1227,7 +1267,8 @@ function getClients(token) {
             new_date = date;
         }
         return new_date;
-    };
+    }
+};
 
     function switchToIntake(personalId, data_length, dataset) {
         // Reset all form fields.
