@@ -1155,7 +1155,7 @@ function getClients(token) {
                 new_client['dateCreated'] = quickConvertDate(line[21]);
                 new_client['dateUpdated'] = quickConvertDate(line[22]);
                 // do the POST!
-                new_client['id_token'] = id_token;
+                new_client['id_token'] =  getCookie('id_token=');
                 $.ajax("/clients/", {
                     method: "POST",
                     data: new_client,
@@ -1379,7 +1379,7 @@ function saveChanges() {
         client['gender'] = $("#intakeForm #gender").val();
         client['ethnicity'] = $("#intakeForm #ethnicity").val();
         client['ssn'] = $("#intakeForm #ssn").val();
-        client['id_token'] = id_token;
+        client['id_token'] = getCookie('id_token=');
         if (entityIndex > 0 ){
             $.ajax("/clients/" + entityIndex, {
                 method: "PUT",

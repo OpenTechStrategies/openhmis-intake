@@ -89,7 +89,7 @@ function switchToSearch(keepResults) {
 */
 function getLoginInfo(token) {
     var token_wrapper = {"token": token};
-    var account_error_text = "Sorry, there was an error finding your account";
+    var account_error_text = "Sorry, there was an error finding your account.";
     $.ajax({
         type: 'POST',
         url: '/identify/',
@@ -103,7 +103,7 @@ function getLoginInfo(token) {
                 document.cookie = "user_name=" + account.user.externalId;
                 document.cookie = "user_org=" + account.user.organization;
                 document.cookie = "user_coc=" + account.user.coC;
-                $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
+                $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>CoC: " + getCookie('user_coc='));
             }
             else {
                 document.cookie = "user_name=" + account.externalId;

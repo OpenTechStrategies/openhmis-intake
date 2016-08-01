@@ -52,7 +52,7 @@ exports.addClient = function(req, res) {
           data.push(chunk);
       });
       res_post.on('end', function() {
-        res.send(data.join(''));
+        res.status(res_post.statusCode).send(data.join(''));
       });
   });
     
@@ -97,7 +97,7 @@ exports.getEnrollments = function(req, res) {
           data.push(chunk);
       });
       res_get.on('end', function() {
-        res.send(data.join(''));
+        res.status(res_get.statusCode).send(data.join(''));
       });
   });
 
@@ -129,7 +129,7 @@ exports.getClients = function(req, res) {
           data.push(chunk);
       });
       res_get.on('end', function() {
-        res.send(data.join(''));
+        res.status(res_get.statusCode).send(data.join(''));
       });
   });
 
@@ -162,7 +162,7 @@ exports.getClient = function(req, res) {
           data.push(chunk);
       });
       res_get.on('end', function() {
-        res.send(data.join(''));
+        res.status(res_get.statusCode).send(data.join(''));
       });
   });
 
@@ -226,7 +226,7 @@ exports.editClient = function(req, res) {
           data.push(chunk);
       });
       res_put.on('end', function() {
-        res.send(data.join(''));
+        res.status(res_put.statusCode).send(data.join(''));
       });
   });
 
@@ -257,7 +257,7 @@ exports.getClientId = function(req, res) {
           data.push(chunk);
       });
       res_get.on('end', function() {
-        res.send(data.join(''));
+        res.status(res_get.statusCode).send(data.join(''));
       });
   });
 
@@ -289,7 +289,7 @@ exports.authenticateUser = function(req, res) {
           data.push(chunk);
       });
       res_post.on('end', function() {
-        res.send(data);
+        res.status(res_post.statusCode).send(data);
       });
   });
 
@@ -318,12 +318,12 @@ exports.getIdentity = function (req, res) {
   // Set up the request
   var post_req = http.request(post_options, function(res_post) {
       res_post.setEncoding('utf8');
-      var data = []
+      var data = [];
       res_post.on('data', function (chunk) {
           data.push(chunk);
       });
       res_post.on('end', function() {
-        res.send(data);
+          res.status(res_post.statusCode).send(data);
       });
   });
 
@@ -332,32 +332,4 @@ exports.getIdentity = function (req, res) {
   post_req.end()
 };
 
-exports.getUserInfo = function(req, res) {
 
-    var get_options = {
-      host: config.api.host,
-      port: config.api.port,
-      path: '/openhmis/api/v3/users/' + req.query.user_id,
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': req.query.token
-      }
-  };
-
-  // Set up the request
-  var get_req = http.request(get_options, function(res_get) {
-      res_get.setEncoding('utf8');
-      var data = []
-      res_get.on('data', function (chunk) {
-          data.push(chunk);
-      });
-      res_get.on('end', function() {
-          console.log("DEBUG: user info is: " + data);
-          res.send(data.join(''));
-      });
-  });
-
-  // get the data
-  get_req.end()
-};

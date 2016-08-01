@@ -8,6 +8,7 @@ and definitely add more when you add new functionality.
   - account info shows up at top right
 - search
 - edit
+  - switch to edit screen works
   - search after editing (should show new/changed info)
 - export
   - should have latest version of data
