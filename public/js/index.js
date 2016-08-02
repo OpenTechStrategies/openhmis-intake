@@ -1429,21 +1429,27 @@ function saveChanges() {
                 method: "PUT",
                 data: client,
                 error: function(error) {
-                    console.log("An error occurred: " + error.responseText);
-                    console.log(error);
+                    manageErrors(error);
+                },
+                success: function (response) {
+                    manageErrors(response);
                 },
                 always:  console.log("finished put")
-            }).done( function (response) {
-                manageErrors(response);
-            });
+            }); 
         }
         else{
             $.ajax("/clients/", {
                 method: "POST",
                 data: client,
-                always:  console.log("finished post")
-            }).done( function (response) {
-                manageErrors(response);
+                always:  console.log("finished post"),
+                success: function (response) {
+                    console.log("DEBUG: successful POST");
+                    manageErrors(response);
+                },
+                error: function (error) {
+                    console.log("DEBUG: there was an error");
+                    manageErrors(error);
+                }
             });
         }
     };
@@ -1511,13 +1517,18 @@ function saveChanges() {
     };
 
 function manageErrors(response) {
-    var result = JSON.parse(response);
+    if (typeof(response.responseText) !== 'undefined') {
+        var result = JSON.parse(response.responseText);
+    }
+    else {
+        var result = JSON.parse(response);
+    }
     if (result.error){
         // show error to user
         var message = result.error.errors[0]['message'];
         var problem = result.error.errors[0]['problem'];
         $("#showError").css('display', 'block');
-        $("#showError").text(message + ": " + problem);
+        $("#showError").text(message);
     }
     else {
         $("#dob").removeAttr("value");
