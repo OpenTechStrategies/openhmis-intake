@@ -18,20 +18,10 @@ function switchToSearch(keepResults) {
     $("#addNewClient").text(noCaveatText);
     $("#exportAll").text(exportAllText);
     $("#importAll").text(importAllText);
-    $("#searchForm #addNewClient").prop("disabled", true);
+    if (! keepResults) {
+        $("#searchForm #addNewClient").prop("disabled", true);
+    }
     
-    // make the buttons do something
-    $("#searchForm #addNewClient").click(function() {
-        switchToIntake(-1, data.length, data);
-    });
-    $("#searchForm #exportAll").click(function() {
-        exportAll();
-    });
-    $("#importAll").click(function() {
-        $("#import_file").trigger('click');
-        $('#import_file').change( importFile(evt) );
-    });
-
     // do we need this?
     if (getCookie('user_name=')) {
         $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
@@ -53,7 +43,21 @@ function switchToSearch(keepResults) {
             switchToIntake($(e.currentTarget).data("entity-index"), client_list.length, client_list);
         });
         $("#searchForm #searchField").keyup( function() { findSearchResults(client_list, client_list.length); } );
+
     }
+    // make the buttons do something
+    $("#searchForm #addNewClient").click(function() {
+        switchToIntake(-1, null, null);
+    });
+    
+    $("#searchForm #exportAll").click(function() {
+        exportAll();
+    });
+    $("#importAll").click(function() {
+        $("#import_file").trigger('click');
+        $('#import_file').change( function(evt) { importFile(evt); });
+    });
+
 
     // display the search box, hide everything else
     $("#search").css("display", "block");

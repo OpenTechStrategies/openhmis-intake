@@ -36,7 +36,7 @@ function signInCallback(authResult) {
                     // fill in account that was used to log in
                     // and store info to a cookie
                     getLoginInfo(id_token_var);
-                    switchToSearch();
+                    switchToSearch(false);
                 }
                 else {
                     switchToWarning();
