@@ -1,27 +1,10 @@
-$(function() {
-    $('#signinButton').text('Click to log in');
-    start();
-    $('#signinButton').click(function() {
-        auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
-    });
-    setInitialVars();
+/*
+ * Contains functions governing login.
+ */
 
-    id_token = getCookie('id_token=');
-    if (id_token) {
-        getClients(id_token);
-        switchToSearch(false);
-        if (! getCookie('user_name=')) {
-            getLoginInfo(id_token);
-        }
-    }
-    else {
-        switchToLogin(false);
-    }
-    if (getCookie('user_name=')) {
-        $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
-    }
-});
-
+/*
+ * Load Google auth with the client id corresponding to the HMIS server
+*/
 function start() {
     gapi.load('auth2', function() {
 
@@ -33,6 +16,10 @@ function start() {
     });
 };
 
+/*
+ * Exchange an auth code for an id token, so that we can make API
+ * requests.
+*/
 function signInCallback(authResult) {
     if (authResult['code']) {
         var auth_info = {};
@@ -46,7 +33,6 @@ function signInCallback(authResult) {
                 id_token_var = result_obj.id_token;
                 document.cookie = "id_token=" + id_token_var;
                 if (id_token_var) {
-                    getClients(id_token_var);
                     // fill in account that was used to log in
                     // and store info to a cookie
                     getLoginInfo(id_token_var);
@@ -67,21 +53,6 @@ function signInCallback(authResult) {
 };
 
 
-function switchToSearch(keepResults) {
-    if (keepResults == false) {
-        $("#searchForm #searchField").val("");
-        $("#searchForm #results").empty();
-        $("#addNewClient").text(noCaveatText);
-        $("#exportAll").text(exportAllText);
-        $("#importAll").text(importAllText);
-        $("#searchForm #addNewClient").prop("disabled", true);
-    }
-    $("#search").css("display", "block");
-    $("#intake").css("display", "none");
-    $("#login").css("display", "none");
-    $("#warning").css("display", "none");
-};
-
 /*
  * Takes the id token (received from Google) and displays the
  * human-readable id associated with it (usually a Google email
@@ -95,6 +66,7 @@ function getLoginInfo(token) {
         url: '/identify/',
         data: token_wrapper
     }).done (function (response) {
+        console.log(response);
         var result = JSON.parse(response);
         if (typeof(result.data) !== 'undefined') {
             var account = result.data.item;
@@ -123,6 +95,13 @@ function getLoginInfo(token) {
 }
 
 function switchToLogin(msg) {
+    $('#signinButton').text('Click to log in');
+    start();
+    $('#signinButton').click(function() {
+        auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
+    });
+    setInitialVars();
+
     var warningMessage = "Sorry, you are not authorized to access this content.  Please log in again.";
     $("#search").css("display", "none");
     $("#intake").css("display", "none");
@@ -148,4 +127,5 @@ function getCookie(cookie_name) {
         }
     }
     return id_token;
-}
+};
+
