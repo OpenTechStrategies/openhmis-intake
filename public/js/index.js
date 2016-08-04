@@ -18,13 +18,15 @@ function switchToSearch(keepResults) {
     $("#addNewClient").text(noCaveatText);
     $("#exportAll").text(exportAllText);
     $("#importAll").text(importAllText);
+    $("#logoutButton").css('display', '');
+    $("#logoutButton").text('Log out');
     if (! keepResults) {
         $("#searchForm #addNewClient").prop("disabled", true);
     }
     
     // do we need this?
     if (getCookie('user_name=')) {
-        $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
+        $("#loginInfo").append("<br/>" + getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
     }
 
     // if we aren't getting here by hitting "back to results" from a
@@ -51,13 +53,18 @@ function switchToSearch(keepResults) {
     });
     
     $("#searchForm #exportAll").click(function() {
+        $("#results").html('...processing export');
         exportAll();
     });
     $("#importAll").click(function() {
+        $("#results").html('...processing import');
         $("#import_file").trigger('click');
         $('#import_file').change( function(evt) { importFile(evt); });
     });
 
+    $("#logoutButton").click( function() {
+        logoutUser();
+    });
 
     // display the search box, hide everything else
     $("#search").css("display", "block");

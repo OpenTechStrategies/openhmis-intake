@@ -1,5 +1,5 @@
 /*
- * Contains functions governing login.
+ * Contains functions governing login and logout.
  */
 
 /*
@@ -75,20 +75,20 @@ function getLoginInfo(token) {
                 document.cookie = "user_name=" + account.user.externalId;
                 document.cookie = "user_org=" + account.user.organization;
                 document.cookie = "user_coc=" + account.user.coC;
-                $("#loginInfo").html(getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>CoC: " + getCookie('user_coc='));
+                $("#loginInfo").append("<br/>" + getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>CoC: " + getCookie('user_coc='));
             }
             else {
                 document.cookie = "user_name=" + account.externalId;
                 // unset other cookies
                 document.cookie = "user_org=" + "";
                 document.cookie = "user_coc=" + "";
-                $("#loginInfo").html(getCookie('user_name='));
+                $("#loginInfo").append("<br/>" + getCookie('user_name='));
             }
         }
         else {
             // show an error
             console.log(result.error);
-            $("#loginInfo").html(account_error_text);
+            $("#loginInfo").append("<br/>" + account_error_text);
         }
 
     });
@@ -106,6 +106,7 @@ function switchToLogin(msg) {
     $("#search").css("display", "none");
     $("#intake").css("display", "none");
     $("#login").css("display", "block");
+    $("#logoutButton").css("display", "none");
     $("#warning").css("display", "none");
     if (msg) {
         $("#warningtext").text(warningMessage);
@@ -129,3 +130,20 @@ function getCookie(cookie_name) {
     return id_token;
 };
 
+function logoutUser() {
+    // unset all cookies
+    var date = new Date();
+    var yesterday = date.setTime(date.getTime()+(-1*24*60*60*1000)).toGMTString;
+    var expires = "; expires="+yesterday;
+    document.cookie = "id_token=" + expires;
+    document.cookie = "user_name=" + expires;
+    document.cookie = "user_org=" + expires;
+    document.cookie = "user_coc=" + expires;
+
+    // clear user info from screen
+    var logoutButton = $("#logoutButton");
+    $("#loginInfo").html(logoutButton);
+    
+    // switch to login screen
+    switchToLogin(false);
+}

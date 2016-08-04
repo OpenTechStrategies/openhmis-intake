@@ -1,4 +1,11 @@
-    function exportAll() {
+/*
+ * Export all clients, enrollments, and exits from the HMIS server.
+ * This file just holds one function, exportAll().  It is quite long,
+ * but note that most of it is commentary about HMIS CSV format and
+ * better ways that we could do this export in the future.
+*/
+
+function exportAll() {
         /* For now we implement the downloadable-file functionality
          * entirely on the browser side, even though in the long-term
          * doing it in the intermediary node server is probably right.
@@ -177,6 +184,11 @@
             "\n";
 
         // Export all clients.
+        /*
+         * TBD: I'm not sure we want to fetch the clients again, given
+         * that we already have them sitting in an element on the page
+         * (which is probably a fairly questionable design in itself!).
+         */
         $.ajax("/clients", {
             method: "GET",
             dataType: "json",
@@ -380,7 +392,7 @@
                     + "\n";
             }
 
-            // Export enrollements.
+            // Export enrollments.
             $.ajax("/enrollments", {
                 method: "GET",
                 dataType: "json",
