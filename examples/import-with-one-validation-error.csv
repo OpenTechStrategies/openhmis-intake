@@ -1,0 +1,9 @@
+OrganizationID,PersonalIdentificationNumber,LegalFirstName,LegalMiddleName,LegalLastName,LegalSuffix,NameDataQuality,SocialSecurityNumber,SocialSecNumberQualityCode,DateOfBirth,DateOfBirthQualityCode,RaceAmericanIndianOrAlaskaNative,RaceAsian,RaceBlackOrAfricanAmerican,RaceNativeHawaiianOrOtherPacificIslander,RaceWhite,RaceNone,Ethnicity,Gender,VeteranStatus,DateAdded,DateUpdated,UpdateOrDelete,UserID,IdentityVerification,ReleaseOfInformation,ExportID
+1729,715888,Josalis,,Martinezica,,99,123123123,99,2006-04-01,99,0,0,0,1,0,8,99,99,99,null,2016-07-22,,,,,20160722-052817.2312
+1729,715889,Joe,Vaughn,Martin,,99,123456789,99,1986-11-30,99,0,0,0,0,0,8,8,99,1,2016-04-13,2016-04-13,,,,,20160722-052817.2312
+1729,715890,Tim,Geer,Slaughter,,99,456456456,99,1986-11-30,99,0,0,0,0,0,8,8,99,1,2016-04-13,2016-04-13,,,,,20160722-052817.2312
+1729,715891,Will,,Slaughter,,99,123123123,99,2016-04-13,99,0,0,0,0,0,8,99,99,99,2016-04-14,2016-04-14,,,,,20160722-052817.2312
+1729,715892,Evan,,Seeds,,99,456456456,99,2016-04-01,99,0,0,0,0,0,8,99,99,99,2016-04-14,2016-04-14,,,,,20160722-052817.2312
+1729,715893,James,Geer,Slaughter,,99,456456456,99,1986-10-30,99,0,0,0,0,0,8,8,1,1,2016-04-14,2016-04-14,,,,,20160722-052817.2312
+1729,715894,Sterling,Geer,Rouse,,99,789789789,99,1986-10-30,99,0,0,0,0,0,8,8,1,1,2016-04-14,2016-04-14,,,,,20160722-052817.2312
+1729,715895,TestPost,,Fitzgerald,,99,123456789,99,1940-02-15,99,0,0,0,0,0,8,99,1,99,2016-05-10,2016-05-10,,,,,20160722-052817.2312

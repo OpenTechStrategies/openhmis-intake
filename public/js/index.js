@@ -463,8 +463,23 @@ function manageErrors(response) {
     }
     if (result.error){
         // show error to user
+        // make this more human-readable.
         var message = result.error.errors[0]['message'];
         var problem = result.error.errors[0]['problem'];
+        if (result.error.code == 'INVALID_PARAMETER') {
+            if (problem) {
+                message = "Sorry, one of the values you entered was invalid.  The server says: " + problem;
+            }
+            else {
+                message = "Sorry, one of the values you entered was invalid.";
+            }
+        }
+        else if (result.error.code == 'ACCESS_DENIED') {
+            message = "Sorry, you don't have permission to make this change.";
+        }
+        else if (result.error.code == 'MISSING_PARAMETER') {
+            message = "Sorry, you're missing a required value.  Did you add the SSN?";
+        }
         $("#showError").css('display', 'block');
         $("#showError").text(message);
     }
