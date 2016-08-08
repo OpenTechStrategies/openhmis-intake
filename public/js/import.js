@@ -220,12 +220,4 @@ function importFile(evt) {
             $("#results").append(error_div);
         }
 
-        //reset data with newly imported clients
-        $.ajax("/clients", {
-            method: "GET",
-            dataType: "json",
-            data: token_obj
-        }).done(function(data) {
-            $("#index").data("full-data", data);
-        });
-}
+};

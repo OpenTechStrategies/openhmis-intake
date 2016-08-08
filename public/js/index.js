@@ -22,12 +22,11 @@ function switchToSearch(keepResults) {
     $("#logoutButton").text('Log out');
     if (! keepResults) {
         $("#searchForm #addNewClient").prop("disabled", true);
+        if (getCookie('user_name=')) {
+            $("#loginInfo").append("<br/>" + getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>CoC: " + getCookie('user_coc='));
+        }
     }
     
-    // do we need this?
-    if (getCookie('user_name=')) {
-        $("#loginInfo").append("<br/>" + getCookie('user_name=') + "<br/>" + getCookie('user_org=') + "<br/>" + getCookie('user_coc='));
-    }
 
     // if we aren't getting here by hitting "back to results" from a
     // client page, empty the form and reload the data.  If we are, we
@@ -53,13 +52,15 @@ function switchToSearch(keepResults) {
     });
     
     $("#searchForm #exportAll").click(function() {
-        $("#results").html('...processing export');
+        $("#results").html('...processing export <br/>');
         exportAll();
     });
     $("#importAll").click(function() {
-        $("#results").html('...processing import');
+        $("#results").html('...processing import <br/>');
         $("#import_file").trigger('click');
-        $('#import_file').change( function(evt) { importFile(evt); });
+        $('#import_file').change( function(evt) {
+            importFile(evt);
+        });
     });
 
     $("#logoutButton").click( function() {
