@@ -5,10 +5,7 @@
 - We'll do the following:
   - login
     - show user info at top right
-    - QUESTION FOR KARL: Do we care about this part?
   - start with empty database
-    - QUESTION: are we showing this demo on the live HMIS server?  Will
-      anyone mind if we clear that db?
     - NOTE: remember that you need to redeploy the server after manually clearing the db
   - import clients
     - I'm using the "import-with-one-validation-error.csv" file in the
@@ -38,6 +35,8 @@
         - SECOND:
           - QUESTION: Should I go through the OAuth 2.0 playground
             run-around during the demo, or is it too in the weeds?
+            ANSWER: Too in the weeds, I think.  We can describe if
+            anyone wants to know the details.
           - Add headers:
             Authorization: [my id token]
             Accept: application/json
@@ -73,7 +72,7 @@
         wrong format SSN, not missing SSN
     - Search after adding the person; they should show up right away
   - export (the changed set of) clients
-    - QUESTION: export missed the new person on one occasion, but I
+    - NOTE: export missed the new person on one occasion, but I
       can't reproduce that error so it might have been PEBKAC.
     - NOTE: the export occasionally seems to be getting called twice,
       probably as a result of my refactoring.  Check this out! 
